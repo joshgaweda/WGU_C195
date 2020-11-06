@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 /**
- * Creates Appointment objects that represent the company's appointments
+ * Creates Appointment objects
  */
-public class Appointment {
+public class Appointment 
+{
 
     private int appointmentID;
     private String title;
@@ -43,7 +44,8 @@ public class Appointment {
      * @param userID the user ID of the user that created the appointment
      * @param contactID the contact ID of the company contact associated with the appointment
      */
-    public Appointment(int appointmentID, String title, String description, String location, String type, Instant start, Instant end, String username, String contact, int customerID, int userID, int contactID) {
+    public Appointment(int appointmentID, String title, String description, String location, String type, Instant start, Instant end, String username, String contact, int customerID, int userID, int contactID) 
+    {
         this.appointmentID = appointmentID;
         this.title = title;
         this.description = description;
@@ -61,11 +63,6 @@ public class Appointment {
         startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.of(TimeZone.getDefault().getID())));
         endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.of(TimeZone.getDefault().getID())));
     }
-
-    /**
-     * Default class constructor
-     */
-    public Appointment() { }
 
     /**
      * Gets the appointment ID

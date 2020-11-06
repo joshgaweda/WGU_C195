@@ -97,9 +97,9 @@ public class DBQuery
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(9, getUser().getUsername());
+            ps.setString(9, getUser().getUser_name());
             ps.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(11, getUser().getUsername());
+            ps.setString(11, getUser().getUser_name());
             ps.setString(12, Integer.toString(appointment.getCustomerID()));
             ps.setString(13, Integer.toString(appointment.getUserID()));
             ps.setString(14, Integer.toString(appointment.getContactID()));
@@ -136,7 +136,7 @@ public class DBQuery
             ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(8, getUser().getUsername());
+            ps.setString(8, getUser().getUser_name());
             ps.setString(9, Integer.toString(appointment.getCustomerID()));
             ps.setString(10, Integer.toString(appointment.getUserID()));
             ps.setString(11, Integer.toString(appointment.getContactID()));
@@ -288,9 +288,9 @@ public class DBQuery
             ps.setString(4, customer.getPostalCode());
             ps.setString(5, customer.getPhone());
             ps.setString(6, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(7, getUser().getUsername());
+            ps.setString(7, getUser().getUser_name());
             ps.setString(8, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(9, getUser().getUsername());
+            ps.setString(9, getUser().getUser_name());
             ps.setString(10, Integer.toString(customer.getDivisionID()));
             ps.executeUpdate();
         }
@@ -323,7 +323,7 @@ public class DBQuery
             ps.setString(3, customer.getPostalCode());
             ps.setString(4, customer.getPhone());
             ps.setString(5, LocalDateTime.now().toString()); 
-            ps.setString(6, getUser().getUsername());
+            ps.setString(6, getUser().getUser_name());
             ps.setString(7, Integer.toString(customer.getDivisionID()));
             ps.setString(8, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();

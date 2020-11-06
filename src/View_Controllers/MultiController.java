@@ -245,7 +245,7 @@ public abstract class MultiController implements Initializable {
         for (Customer c : data.getCustomer_List())
             customer.getItems().add(c.getCustomerID());
         for (User u : data.getUser_List())
-            user.getItems().add(u.getUsername());
+            user.getItems().add(u.getUser_name());
         for (Contact c : data.getContact_List())
             contact.getItems().add(c.getName());
     }
@@ -372,8 +372,8 @@ public abstract class MultiController implements Initializable {
 
         int userID = 0, contactID = 0;
         for (User u : data.getUser_List())
-            if (u.getUsername().equals(user.getValue()))
-                userID = u.getID();
+            if (u.getUser_name().equals(user.getValue()))
+                userID = u.getUser_ID();
         for (Contact c : data.getContact_List())
             if (c.getName().equals(contact.getValue()))
                 contactID = c.getID();
