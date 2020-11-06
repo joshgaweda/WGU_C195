@@ -255,7 +255,7 @@ public abstract class MultiController implements Initializable {
      */
     protected void fillCustomerOptions() {
         for (Division d : data.getDivision_List())
-            division.getItems().add(d.getName());
+            division.getItems().add(d.getDiv_name());
         for (Country c : data.getCountry_List())
             country.getItems().add(c.getName());
     }
@@ -286,8 +286,8 @@ public abstract class MultiController implements Initializable {
     protected void updateDivision(ActionEvent event) {
         ObservableList<String> updateOptions = FXCollections.observableArrayList();
         for (Division d : data.getDivision_List())
-            if (country.getValue().equals(d.getCountry()))
-                updateOptions.add(d.getName());
+            if (country.getValue().equals(d.getDiv_country()))
+                updateOptions.add(d.getDiv_name());
         division.setItems(updateOptions);
     }
 
@@ -298,8 +298,8 @@ public abstract class MultiController implements Initializable {
     @FXML
     protected void updateCountry(ActionEvent event) {
         for (Division d : data.getDivision_List())
-            if (d.getName().equals(division.getValue()))
-                country.setValue(d.getCountry());
+            if (d.getDiv_name().equals(division.getValue()))
+                country.setValue(d.getDiv_country());
     }
 
     /**
@@ -421,8 +421,8 @@ public abstract class MultiController implements Initializable {
 
         int divisionID = 0;
         for (Division d : data.getDivision_List())
-            if (d.getName().equals(division.getValue()))
-                divisionID = d.getID();
+            if (d.getDiv_name().equals(division.getValue()))
+                divisionID = d.getDiv_ID();
 
         Customer customer = new Customer(Integer.parseInt(id.getText().trim()), name.getText().trim(), address.getText().trim(), postalCode.getText().trim(), phone.getText().trim(), division.getValue(), country.getValue(), divisionID);
 
