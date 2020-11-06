@@ -1,53 +1,59 @@
 package DBUtils;
-/**
- * Handles opening and closing the database connection
- */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author Josh Gaweda
+ * Open/close the database connection
  */
-public class DBConnection {
-    private static final String DBNAME = "WJ06uqW";
-    private static final String URL = "jdbc:mysql://wgudb.ucertify.com/" + DBNAME;
-    private static final String USER = "U06uqW";
-    private static final String PASS = "53688875766";
+public class DBConnection 
+{
+    private static Connection dbcon;
+    private static final String DB_NAME = "WJ06uqW";
+    private static final String DB_URL = "jdbc:mysql://wgudb.ucertify.com/" + DB_NAME;
+    private static final String USER_NAME = "U06uqW";
+    private static final String DB_PASS = "53688875766";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; 
-    private static Connection conn;
-    
-    public DBConnection() {}
+
+    // Returns database connection
+    public static Connection getDBConnection() 
+    {
+        return dbcon;
+    }
     
     // Connect to database
-    public static void connect() {
-        try {
+    public static void connectDB() 
+    {
+        try
+        {
             Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USER, PASS);
-            System.out.println("Connected to MySQL Database");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class Not Found " + e.getMessage());
-        } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage()); 
-            System.out.println("SQLState: " + e.getSQLState());
-            System.out.println("VendorError: " + e.getErrorCode());
+            dbcon = DriverManager.getConnection(DB_URL, USER_NAME, DB_PASS);
+            System.out.println("Connected to database");
+        } 
+        catch(SQLException e) 
+        {
+            System.out.println("SQL Exception: " + e.getMessage()); 
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Vendor Error: " + e.getErrorCode());
         }
+        catch(ClassNotFoundException e) 
+        {
+            System.out.println("Invalid class" + e.getMessage());
+        } 
     }
     
-    // Close Database connection
-    public static void disconnect() {
-        try {
-            conn.close();
-            System.out.println("Disconnected From MySQL Database");
-        } catch (SQLException e) {
-            System.out.println("SQLException: " + e.getMessage());
+    // Close database connection
+    public static void disconnectDB() 
+    {
+        try 
+        {
+            dbcon.close();
+            System.out.println("Disconnected from database");
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println("SQL Exception: " + e.getMessage());
         }
     }
-    
-    // Returns database connection
-    public static Connection getConnection() {
-        return conn;
-    }
-
 }

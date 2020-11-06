@@ -58,7 +58,7 @@ public class CustomersController extends MultiController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        table.setItems(data.getCustomers());
+        table.setItems(data.getCustomer_List());
         table.refresh();
         errorLabel.setText("");
     }
@@ -87,7 +87,7 @@ public class CustomersController extends MultiController {
     private void modifyCustomer(MouseEvent event) {
         try {
             selectedCustomer = table.getSelectionModel().getSelectedItem();
-            if (data.getCustomers().isEmpty()) {
+            if (data.getCustomer_List().isEmpty()) {
                 errorLabel.setText("There are no customers to modify");
                 return;
             }
@@ -112,7 +112,7 @@ public class CustomersController extends MultiController {
     @FXML
     private void deleteCustomer(MouseEvent event) {
         Customer selectedCustomer = table.getSelectionModel().getSelectedItem();
-        if (data.getCustomers().isEmpty()) {
+        if (data.getCustomer_List().isEmpty()) {
             errorLabel.setText("There are no customers to delete");
             return;
         }
@@ -120,7 +120,7 @@ public class CustomersController extends MultiController {
             errorLabel.setText("Please select a customer");
             return;
         }
-        for (Appointment a : data.getAppointments()) {
+        for (Appointment a : data.getAppointment_List()) {
             if (a.getCustomerID() == selectedCustomer.getCustomerID()) {
                 errorLabel.setText("Please delete the customer's appointments first");
                 return;
@@ -131,7 +131,7 @@ public class CustomersController extends MultiController {
             return;
 
         data.deleteCustomer(selectedCustomer);
-        table.setItems(data.getCustomers());
+        table.setItems(data.getCustomer_List());
         table.refresh();
         errorLabel.setText("Customer " + selectedCustomer.getName() + " has been deleted");
     }

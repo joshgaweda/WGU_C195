@@ -43,11 +43,11 @@ public class AddCustomerController extends MultiController {
      * @return a unique Customer ID
      */
     private int generateCustomerID() {
-        if (data.getCustomers().isEmpty())
+        if (data.getCustomer_List().isEmpty())
             return 1;
         else {
             int i = 1;
-            for (Customer a : data.getCustomers())
+            for (Customer a : data.getCustomer_List())
                 if (a.getCustomerID() > i)
                     i = a.getCustomerID();
             return i + 1;

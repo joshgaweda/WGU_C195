@@ -242,11 +242,11 @@ public abstract class MultiController implements Initializable {
         comboBox.addAll(startTime, 11, 12, 13, 14, 15, 16, 2);
         comboBox.addAll(endTime, 12, 13, 14, 15, 16, 17, 3);
 
-        for (Customer c : data.getCustomers())
+        for (Customer c : data.getCustomer_List())
             customer.getItems().add(c.getCustomerID());
-        for (User u : data.getUsers())
+        for (User u : data.getUser_List())
             user.getItems().add(u.getUsername());
-        for (Contact c : data.getContacts())
+        for (Contact c : data.getContact_List())
             contact.getItems().add(c.getName());
     }
 
@@ -254,9 +254,9 @@ public abstract class MultiController implements Initializable {
      * Prefills the available options in the ComboBoxes on the Add Customer and Modify Customer screens
      */
     protected void fillCustomerOptions() {
-        for (Division d : data.getDivisions())
+        for (Division d : data.getDivision_List())
             division.getItems().add(d.getName());
-        for (Country c : data.getCountries())
+        for (Country c : data.getCountry_List())
             country.getItems().add(c.getName());
     }
 
@@ -285,7 +285,7 @@ public abstract class MultiController implements Initializable {
     @FXML
     protected void updateDivision(ActionEvent event) {
         ObservableList<String> updateOptions = FXCollections.observableArrayList();
-        for (Division d : data.getDivisions())
+        for (Division d : data.getDivision_List())
             if (country.getValue().equals(d.getCountry()))
                 updateOptions.add(d.getName());
         division.setItems(updateOptions);
@@ -297,7 +297,7 @@ public abstract class MultiController implements Initializable {
      */
     @FXML
     protected void updateCountry(ActionEvent event) {
-        for (Division d : data.getDivisions())
+        for (Division d : data.getDivision_List())
             if (d.getName().equals(division.getValue()))
                 country.setValue(d.getCountry());
     }
@@ -355,7 +355,7 @@ public abstract class MultiController implements Initializable {
             errorLabel.setText("Please select a Customer ID");
             return;
         }
-        for (Appointment a : data.getAppointments()) {
+        for (Appointment a : data.getAppointment_List()) {
             if (customer.getValue() == a.getCustomerID() && start.equals(a.getStart())) {
                 errorLabel.setText("Overlapping appointment");
                 return;
@@ -371,10 +371,10 @@ public abstract class MultiController implements Initializable {
         }
 
         int userID = 0, contactID = 0;
-        for (User u : data.getUsers())
+        for (User u : data.getUser_List())
             if (u.getUsername().equals(user.getValue()))
                 userID = u.getID();
-        for (Contact c : data.getContacts())
+        for (Contact c : data.getContact_List())
             if (c.getName().equals(contact.getValue()))
                 contactID = c.getID();
 
@@ -420,7 +420,7 @@ public abstract class MultiController implements Initializable {
         }
 
         int divisionID = 0;
-        for (Division d : data.getDivisions())
+        for (Division d : data.getDivision_List())
             if (d.getName().equals(division.getValue()))
                 divisionID = d.getID();
 

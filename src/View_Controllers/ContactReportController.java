@@ -114,7 +114,7 @@ public class ContactReportController extends MultiController {
      */
     private void generateTableA() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        data.getAppointments().stream().filter((a) -> (a.getContact().equals("Alpha Aardvark"))).forEachOrdered((a) -> {
+        data.getAppointment_List().stream().filter((a) -> (a.getContact().equals("Alpha Aardvark"))).forEachOrdered((a) -> {
             filterAppointments.add(a);
         });
         tableA.setItems(filterAppointments);
@@ -126,7 +126,7 @@ public class ContactReportController extends MultiController {
      */
     private void generatetableB() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        data.getAppointments().stream().filter((b) -> (b.getContact().equals("Bravo Bobby"))).forEachOrdered((b) -> {
+        data.getAppointment_List().stream().filter((b) -> (b.getContact().equals("Bravo Bobby"))).forEachOrdered((b) -> {
             filterAppointments.add(b);
         });
         tableB.setItems(filterAppointments);
@@ -138,7 +138,7 @@ public class ContactReportController extends MultiController {
      */
     private void generatetableC() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        data.getAppointments().stream().filter((c) -> (c.getContact().equals("Charlie Chase"))).forEachOrdered((c) -> {
+        data.getAppointment_List().stream().filter((c) -> (c.getContact().equals("Charlie Chase"))).forEachOrdered((c) -> {
             filterAppointments.add(c);
         });
         tableC.setItems(filterAppointments);

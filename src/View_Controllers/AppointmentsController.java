@@ -81,7 +81,7 @@ public class AppointmentsController extends MultiController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generateTable(data.getAppointments());
+        generateTable(data.getAppointment_List());
         upcomingAppointment();
     }
 
@@ -90,8 +90,8 @@ public class AppointmentsController extends MultiController {
      */
     private void upcomingAppointment() {
         if (alert == true) {
-            for (Appointment a : data.getAppointments()) {
-                if (data.getCurrentUser().getID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
+            for (Appointment a : data.getAppointment_List()) {
+                if (data.getUser().getID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
                     errorLabel.setText("Appointment " + Integer.toString(a.getAppointmentID()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " starts in less than 15 minutes");
                     return;
                 }
@@ -116,7 +116,7 @@ public class AppointmentsController extends MultiController {
      */
     @FXML
     private void viewAll(MouseEvent event) {
-        generateTable(data.getAppointments());
+        generateTable(data.getAppointment_List());
     }
 
     /**
@@ -126,7 +126,7 @@ public class AppointmentsController extends MultiController {
     @FXML
     private void viewMonth(MouseEvent event) {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointments())
+        for (Appointment a : data.getAppointment_List())
             if (a.getStart().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue() == LocalDate.now().getMonthValue())
                 filterAppointments.add(a);
         generateTable(filterAppointments);
@@ -139,7 +139,7 @@ public class AppointmentsController extends MultiController {
     @FXML
     private void viewWeek(MouseEvent event) {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointments())
+        for (Appointment a : data.getAppointment_List())
             if (!a.getStart().isBefore(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofDays(7))))
                 filterAppointments.add(a);
         generateTable(filterAppointments);
@@ -169,7 +169,7 @@ public class AppointmentsController extends MultiController {
     private void modifyAppointment(MouseEvent event) {
         try {
             selectedAppointment = table.getSelectionModel().getSelectedItem();
-            if (data.getAppointments().isEmpty()) {
+            if (data.getAppointment_List().isEmpty()) {
                 errorLabel.setText("There are no appointments to modify");
                 return;
             }
@@ -194,7 +194,7 @@ public class AppointmentsController extends MultiController {
     @FXML
     private void deleteAppointment(MouseEvent event) {
         Appointment selectedAppointment = table.getSelectionModel().getSelectedItem();
-        if (data.getAppointments().isEmpty()) {
+        if (data.getAppointment_List().isEmpty()) {
             errorLabel.setText("There are no appointments to delete");
             return;
         }
@@ -207,7 +207,7 @@ public class AppointmentsController extends MultiController {
             return;
 
         data.deleteAppointment(selectedAppointment);
-        table.setItems(data.getAppointments());
+        table.setItems(data.getAppointment_List());
         table.refresh();
         errorLabel.setText("Appointment " + Integer.toString(selectedAppointment.getAppointmentID()) + " " + selectedAppointment.getType() + " has been cancelled");
     }
