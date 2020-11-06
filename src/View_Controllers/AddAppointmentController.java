@@ -36,7 +36,7 @@ public class AddAppointmentController extends MultiController {
      */
     private void fillData() {
         id.setText(Integer.toString(generateAppointmentID()));
-        user.setValue(data.getCurrentUser().getUsername());
+        user.setValue(data.getUser().getUsername());
     }
 
     /**
@@ -44,11 +44,11 @@ public class AddAppointmentController extends MultiController {
      * @return a unique Appointment ID
      */
     private int generateAppointmentID() {
-        if (data.getAppointments().isEmpty())
+        if (data.getAppointment_List().isEmpty())
             return 1;
         else {
             int i = 1;
-            for (Appointment a : data.getAppointments())
+            for (Appointment a : data.getAppointment_List())
                 if (a.getAppointmentID() > i)
                     i = a.getAppointmentID();
             return i + 1;

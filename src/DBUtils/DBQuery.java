@@ -1,363 +1,418 @@
 package DBUtils;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import Models.*;
+
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
- * Handles all queries to the database
+ * Handles db queries
  */
-public class DBQuery {
-
-    private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
-    private final ObservableList<User> users = FXCollections.observableArrayList();
-    private final ObservableList<Contact> contacts = FXCollections.observableArrayList();
-    private final ObservableList<Customer> customers = FXCollections.observableArrayList();
-    private final ObservableList<Country> countries = FXCollections.observableArrayList();
-    private final ObservableList<Division> divisions = FXCollections.observableArrayList();
-    private User currentUser;
+public class DBQuery 
+{
+    private final ObservableList<Appointment> appointment_list = FXCollections.observableArrayList();
+    private final ObservableList<User> user_list = FXCollections.observableArrayList();
+    private final ObservableList<Contact> contact_list = FXCollections.observableArrayList();
+    private final ObservableList<Customer> customer_list = FXCollections.observableArrayList();
+    private final ObservableList<Country> country_list = FXCollections.observableArrayList();
+    private final ObservableList<Division> division_list = FXCollections.observableArrayList();
+    private User user;
 
     /**
-     * Calls methods to read all relevant data from the database and store it in ObservableLists
+     * Reads all data from the database
      */
-    public void readData() {
-        readAppointments();
-        readContacts();
-        readUsers();
-        readCustomers();
-        readDivisions();
-        readCountries();
+    public void readAllData() 
+    {
+        readUser_List();
+        readCustomer_List();
+        readDivision_List();
+        readAppointment_List();
+        readContact_List();
+        readCountry_List();
     }
 
     /**
-     * Gets the list of all appointments
-     * @return the list of all appointments
+     * Gets list of appointment_list
+     * @return the list of all appointment_list
      */
-    public ObservableList<Appointment> getAppointments() {
-        return appointments;
+    public ObservableList<Appointment> getAppointment_List() 
+    {
+        return appointment_list;
     }
 
     /**
-     * Reads all relevant data from the appointments table in the database, stores each record in an Appointment object, and stores the Appointment objects in an ObservableList
+     * Reads data from appointment_list table, stores each record in an Appointment object and then in an ObservableList
      */
-    private void readAppointments() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM appointments INNER JOIN contacts ON appointments.contact_id = contacts.contact_id INNER JOIN users ON appointments.user_id = users.user_id");
-            while (resultSet.next()) {
-                int appointmentID = Integer.parseInt(resultSet.getString("appointment_id").trim());
-                String title = resultSet.getString("title").trim();
-                String description = resultSet.getString("description").trim();
-                String location = resultSet.getString("location").trim();
-                String type = resultSet.getString("type").trim();
-                Instant start = resultSet.getTimestamp("start").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
-                Instant end = resultSet.getTimestamp("end").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
-                String username = resultSet.getString("user_name").trim();
-                String contact = resultSet.getString("contact_name").trim();
-                int customerID = Integer.parseInt(resultSet.getString("customer_id").trim());
-                int userID = Integer.parseInt(resultSet.getString("user_id").trim());
-                int contactID = Integer.parseInt(resultSet.getString("contact_id").trim());
-                appointments.add(new Appointment(appointmentID, title, description, location, type, start, end, username, contact, customerID, userID, contactID));
+    private void readAppointment_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM appointments INNER JOIN contacts ON appointments.contact_id = contacts.contact_id INNER JOIN users ON appointments.user_id = users.user_id");
+            while (rs.next())
+            {
+                int appointmentID = Integer.parseInt(rs.getString("appointment_id").trim());
+                String title = rs.getString("title").trim();
+                String description = rs.getString("description").trim();
+                String location = rs.getString("location").trim();
+                String type = rs.getString("type").trim();
+                Instant start = rs.getTimestamp("start").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
+                Instant end = rs.getTimestamp("end").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
+                String username = rs.getString("user_name").trim();
+                String contact = rs.getString("contact_name").trim();
+                int customerID = Integer.parseInt(rs.getString("customer_id").trim());
+                int userID = Integer.parseInt(rs.getString("user_id").trim());
+                int contactID = Integer.parseInt(rs.getString("contact_id").trim());
+                appointment_list.add(new Appointment(appointmentID, title, description, location, type, start, end, username, contact, customerID, userID, contactID));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e)
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Adds a record to the appointments table in the database when a new Appointment object is created
-     * @param appointment the new appointment to add to the database
+     * Adds a record to the appointment_list table when a new Appointment object is created
+     * @param appointment
      */
-    public void addAppointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment) 
+    {
         if (appointment != null)
-            appointments.add(appointment);
-        try {
+            appointment_list.add(appointment);
+        try 
+        {
             String sql = "INSERT INTO appointments (appointment_id, title, description, location, type, start, end, create_date, created_by, last_update, last_updated_by, customer_id, user_id, contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(appointment.getAppointmentID()));
-            preparedStatement.setString(2, appointment.getTitle());
-            preparedStatement.setString(3, appointment.getDescription());
-            preparedStatement.setString(4, appointment.getLocation());
-            preparedStatement.setString(5, appointment.getType());
-            preparedStatement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
-            preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
-            preparedStatement.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setString(9, getCurrentUser().getUsername());
-            preparedStatement.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setString(11, getCurrentUser().getUsername());
-            preparedStatement.setString(12, Integer.toString(appointment.getCustomerID()));
-            preparedStatement.setString(13, Integer.toString(appointment.getUserID()));
-            preparedStatement.setString(14, Integer.toString(appointment.getContactID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, Integer.toString(appointment.getAppointmentID()));
+            ps.setString(2, appointment.getTitle());
+            ps.setString(3, appointment.getDescription());
+            ps.setString(4, appointment.getLocation());
+            ps.setString(5, appointment.getType());
+            ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
+            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
+            ps.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(9, getUser().getUsername());
+            ps.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(11, getUser().getUsername());
+            ps.setString(12, Integer.toString(appointment.getCustomerID()));
+            ps.setString(13, Integer.toString(appointment.getUserID()));
+            ps.setString(14, Integer.toString(appointment.getContactID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e)
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Updates a record in the appointments table in the database when an Appointment object is updated
-     * @param appointment the appointment to be updated in the database
+     * Updates the appointment_list table whenever an Appointment object is updated
+     * @param appointment
      */
-    public void updateAppointment(Appointment appointment) {
-        for (int i = 0; i < appointments.size(); i++) {
-            if (appointments.get(i).getAppointmentID() == appointment.getAppointmentID()) {
-                appointments.set(i, appointment);
+    public void updateAppointment(Appointment appointment) 
+    {
+        for (int i = 0; i < appointment_list.size(); i++) 
+        {
+            if (appointment_list.get(i).getAppointmentID() == appointment.getAppointmentID()) 
+            {
+                appointment_list.set(i, appointment);
                 break;
             }
         }
-        try {
+        try 
+        {
             String sql = "UPDATE appointments SET title = ?, description = ?, location = ?, type = ?, start = ?, end = ?, last_update = ?, last_updated_by = ?, customer_id = ?, user_id = ?, contact_id = ? WHERE appointment_id = ?";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, appointment.getTitle());
-            preparedStatement.setString(2, appointment.getDescription());
-            preparedStatement.setString(3, appointment.getLocation());
-            preparedStatement.setString(4, appointment.getType());
-            preparedStatement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
-            preparedStatement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
-            preparedStatement.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            preparedStatement.setString(8, getCurrentUser().getUsername());
-            preparedStatement.setString(9, Integer.toString(appointment.getCustomerID()));
-            preparedStatement.setString(10, Integer.toString(appointment.getUserID()));
-            preparedStatement.setString(11, Integer.toString(appointment.getContactID()));
-            preparedStatement.setString(12, Integer.toString(appointment.getAppointmentID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, appointment.getTitle());
+            ps.setString(2, appointment.getDescription());
+            ps.setString(3, appointment.getLocation());
+            ps.setString(4, appointment.getType());
+            ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
+            ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
+            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(8, getUser().getUsername());
+            ps.setString(9, Integer.toString(appointment.getCustomerID()));
+            ps.setString(10, Integer.toString(appointment.getUserID()));
+            ps.setString(11, Integer.toString(appointment.getContactID()));
+            ps.setString(12, Integer.toString(appointment.getAppointmentID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Deletes a record in the appointments table in the database when an Appointment object is deleted
-     * @param appointment the appointment to be deleted in the database
+     * Deletes a record in the appointment_list table in the database whenever an Appointment object is deleted
+     * @param appointment
      */
-    public void deleteAppointment(Appointment appointment) {
-        appointments.remove(appointment);
-        try {
+    public void deleteAppointment(Appointment appointment) 
+    {
+        appointment_list.remove(appointment);
+        try 
+        {
             String sql = "DELETE FROM appointments WHERE appointment_id = ? ";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(appointment.getAppointmentID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, Integer.toString(appointment.getAppointmentID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e)
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Gets the list of all users
-     * @return the list of all users
+     * Gets list of all users
+     * @return list of all users
      */
-    public ObservableList<User> getUsers() {
-        return users;
+    public ObservableList<User> getUser_List() 
+    {
+        return user_list;
     }
 
     /**
-     * Reads all relevant data from the users table in the database, stores each record in an User object, and stores the User objects in an ObservableList
+     * Reads from the user_list table, stores each record in an User object, and stores the User objects in an ObservableList
      */
-    public void readUsers() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
-            while (resultSet.next()) {
-                int id = Integer.parseInt(resultSet.getString("user_id").trim());
-                String name = resultSet.getString("user_name").trim();
-                String password = resultSet.getString("password").trim();
-                users.add(new User(id, name, password));
+    public void readUser_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM users");
+            while (rs.next())
+            {
+                int id = Integer.parseInt(rs.getString("user_id").trim());
+                String name = rs.getString("user_name").trim();
+                String password = rs.getString("password").trim();
+                user_list.add(new User(id, name, password));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Gets the list of all contacts
-     * @return the list of all contacts
+     * Gets list of all contacts
+     * @return list of all contacts
      */
-    public ObservableList<Contact> getContacts() {
-        return contacts;
+    public ObservableList<Contact> getContact_List() 
+    {
+        return contact_list;
     }
 
     /**
-     * Reads all relevant data from the contacts table in the database, stores each record in an Contact object, and stores the Contact objects in an ObservableList
+     * Reads data from the contact_list table, stores each record in an Contact object, and stores the Contact objects in an ObservableList
      */
-    public void readContacts() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts");
-            while (resultSet.next()) {
-                int id = Integer.parseInt(resultSet.getString("contact_id").trim());
-                String name = resultSet.getString("contact_name").trim();
-                String email = resultSet.getString("email").trim();
-                contacts.add(new Contact(id, name, email));
+    public void readContact_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM contacts");
+            while (rs.next()) 
+            {
+                int id = Integer.parseInt(rs.getString("contact_id").trim());
+                String name = rs.getString("contact_name").trim();
+                String email = rs.getString("email").trim();
+                contact_list.add(new Contact(id, name, email));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e)
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Gets the list of all customers
-     * @return the list of all customers
+     * Gets list of all customer_list
+     * @return list of all customer_list
      */
-    public ObservableList<Customer> getCustomers() {
-        return customers;
+    public ObservableList<Customer> getCustomer_List() 
+    {
+        return customer_list;
     }
 
     /**
-     * Reads all relevant data from the customers table in the database, stores each record in an Customer object, and stores the Customer objects in an ObservableList
+     * Reads data from the customer_list table in the database, stores each record in an Customer object, and stores the Customer objects in an ObservableList
      */
-    public void readCustomers() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM customers INNER JOIN first_level_divisions ON customers.division_id = first_level_divisions.division_id INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
-            while (resultSet.next()) {
-                int customerID = Integer.parseInt(resultSet.getString("customer_id").trim());
-                String name = resultSet.getString("customer_name").trim();
-                String address = resultSet.getString("address").trim();
-                String postalCode = resultSet.getString("postal_code").trim();
-                String phone = resultSet.getString("phone").trim();
-                String division = resultSet.getString("division").trim();
-                String country = resultSet.getString("country").trim();
-                int divisionID = Integer.parseInt(resultSet.getString("division_id").trim());
-                customers.add(new Customer(customerID, name, address, postalCode, phone, division, country, divisionID));
+    public void readCustomer_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM customers INNER JOIN first_level_divisions ON customers.division_id = first_level_divisions.division_id INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
+            while (rs.next()) 
+            {
+                int customerID = Integer.parseInt(rs.getString("customer_id").trim());
+                String name = rs.getString("customer_name").trim();
+                String address = rs.getString("address").trim();
+                String postalCode = rs.getString("postal_code").trim();
+                String phone = rs.getString("phone").trim();
+                String division = rs.getString("division").trim();
+                String country = rs.getString("country").trim();
+                int divisionID = Integer.parseInt(rs.getString("division_id").trim());
+                customer_list.add(new Customer(customerID, name, address, postalCode, phone, division, country, divisionID));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Adds a record to the customers table in the database when a new Customer object is created
-     * @param customer the new customer to add to the database
+     * Adds an entry to the customer_list table when a new Customer object is created
+     * @param customer
      */
-    public void addCustomer(Customer customer) {
+    public void addCustomer(Customer customer) 
+    {
         if (customer != null)
-            customers.add(customer);
-        try {
+            customer_list.add(customer);
+        try 
+        {
             String sql = "INSERT INTO customers (customer_id, customer_name, address, postal_code, phone, create_date, created_by, last_update, last_updated_by, division_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(customer.getCustomerID()));
-            preparedStatement.setString(2, customer.getName());
-            preparedStatement.setString(3, customer.getAddress());
-            preparedStatement.setString(4, customer.getPostalCode());
-            preparedStatement.setString(5, customer.getPhone());
-            preparedStatement.setString(6, "2020-10-17 07:05:57"); // ADD DATE
-            preparedStatement.setString(7, getCurrentUser().getUsername());
-            preparedStatement.setString(8, "2020-10-17 07:05:57"); // ADD DATE
-            preparedStatement.setString(9, getCurrentUser().getUsername());
-            preparedStatement.setString(10, Integer.toString(customer.getDivisionID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, Integer.toString(customer.getCustomerID()));
+            ps.setString(2, customer.getName());
+            ps.setString(3, customer.getAddress());
+            ps.setString(4, customer.getPostalCode());
+            ps.setString(5, customer.getPhone());
+            ps.setString(6, LocalDateTime.now().toString()); // ADD DATE
+            ps.setString(7, getUser().getUsername());
+            ps.setString(8, LocalDateTime.now().toString()); // ADD DATE
+            ps.setString(9, getUser().getUsername());
+            ps.setString(10, Integer.toString(customer.getDivisionID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Updates a record in the customers table in the database when a Customer object is updated
-     * @param customer the customer to be updated in the database
+     * Updates the customer_list table whenever a Customer object is updated
+     * @param customer 
      */
-    public void updateCustomer(Customer customer) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getCustomerID() == customer.getCustomerID()) {
-                customers.set(i, customer);
+    public void updateCustomer(Customer customer) 
+    {
+        for (int i = 0; i < customer_list.size(); i++) 
+        {
+            if (customer_list.get(i).getCustomerID() == customer.getCustomerID()) 
+            {
+                customer_list.set(i, customer);
                 break;
             }
         }
-        try {
+        try 
+        {
             String sql = "UPDATE customers SET customer_name = ?, address = ?, postal_code = ?, phone = ?, last_update = ?, last_updated_by = ?, division_id = ? WHERE customer_id = ?";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, customer.getName());
-            preparedStatement.setString(2, customer.getAddress());
-            preparedStatement.setString(3, customer.getPostalCode());
-            preparedStatement.setString(4, customer.getPhone());
-            preparedStatement.setString(5, "2020-10-17 07:05:57"); // ADD DATE
-            preparedStatement.setString(6, getCurrentUser().getUsername());
-            preparedStatement.setString(7, Integer.toString(customer.getDivisionID()));
-            preparedStatement.setString(8, Integer.toString(customer.getCustomerID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, customer.getName());
+            ps.setString(2, customer.getAddress());
+            ps.setString(3, customer.getPostalCode());
+            ps.setString(4, customer.getPhone());
+            ps.setString(5, LocalDateTime.now().toString()); 
+            ps.setString(6, getUser().getUsername());
+            ps.setString(7, Integer.toString(customer.getDivisionID()));
+            ps.setString(8, Integer.toString(customer.getCustomerID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Deletes a record in the customers table in the database when a Customer object is deleted
-     * @param customer the customer to be deleted in the database
+     * Deletes entry in the customer_list table when a Customer object is deleted
+     * @param customer 
      */
-    public void deleteCustomer(Customer customer) {
-        customers.remove(customer);
-        try {
+    public void deleteCustomer(Customer customer) 
+    {
+        customer_list.remove(customer);
+        try 
+        {
             String sql = "DELETE FROM customers WHERE customer_id = ? ";
-            PreparedStatement preparedStatement = DBConnection.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(customer.getCustomerID()));
-            preparedStatement.executeUpdate();
+            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            ps.setString(1, Integer.toString(customer.getCustomerID()));
+            ps.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (SQLException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Gets the list of all divisions
-     * @return the list of all divisions
+     * Gets list of all division_list
+     * @return list of all division_list
      */
-    public ObservableList<Division> getDivisions() {
-        return divisions;
+    public ObservableList<Division> getDivision_List() 
+    {
+        return division_list;
     }
 
     /**
-     * Reads all relevant data from the divisions table in the database, stores each record in an Division object, and stores the Division objects in an ObservableList
+     * Reads the division_list table, stores each record in an Division object, and stores the Division objects in an ObservableList
      */
-    public void readDivisions() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM first_level_divisions INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
-            while (resultSet.next()) {
-                int id = Integer.parseInt(resultSet.getString("division_id").trim());
-                String name = resultSet.getString("division").trim();
-                String country = resultSet.getString("country").trim();
-                divisions.add(new Division(id, name, country));
+    public void readDivision_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM first_level_divisions INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
+            while (rs.next()) 
+            {
+                int id = Integer.parseInt(rs.getString("division_id").trim());
+                String name = rs.getString("division").trim();
+                String country = rs.getString("country").trim();
+                division_list.add(new Division(id, name, country));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e) 
+        {
             System.out.println(e);
         }
     }
 
     /**
-     * Gets the list of all countries
-     * @return the list of all countries
+     * Gets list of all country_list
+     * @return list of all country_list
      */
-    public ObservableList<Country> getCountries() {
-        return countries;
+    public ObservableList<Country> getCountry_List() 
+    {
+        return country_list;
     }
 
     /**
-     * Reads all relevant data from the countries table in the database, stores each record in an Country object, and stores the Country objects in an ObservableList
+     * Reads the country_list table, stores each record in an Country object, and stores the Country objects in an ObservableList
      */
-    public void readCountries() {
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM countries");
-            while (resultSet.next()) {
-                int id = Integer.parseInt(resultSet.getString("country_id").trim());
-                String name = resultSet.getString("country").trim();
-                countries.add(new Country(id, name));
+    public void readCountry_List() 
+    {
+        try 
+        {
+            Statement statement = DBConnection.getDBConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM countries");
+            while (rs.next()) 
+            {
+                int id = Integer.parseInt(rs.getString("country_id").trim());
+                String name = rs.getString("country").trim();
+                country_list.add(new Country(id, name));
             }
         }
-        catch (SQLException | NumberFormatException e) {
+        catch (SQLException | NumberFormatException e) 
+        {
             System.out.println(e);
         }
     }
@@ -366,15 +421,17 @@ public class DBQuery {
      * Gets a User object representing the current user
      * @return a User object representing the current user
      */
-    public User getCurrentUser() {
-        return currentUser;
+    public User getUser() 
+    {
+        return user;
     }
 
     /**
      * Sets a User object representing the current user
-     * @param currentUser a User object representing the current user
+     * @param user a User object representing the current user
      */
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public void setUser(User user) 
+    {
+        this.user = user;
     }
 }
