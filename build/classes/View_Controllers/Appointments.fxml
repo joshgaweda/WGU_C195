@@ -23,7 +23,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-      <RadioButton fx:id="allRadio" layoutX="440.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#viewAll" selected="true" text="All">
+      <RadioButton fx:id="allRadio" layoutX="440.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewAll" selected="true" text="All">
          <font>
             <Font size="12.0" />
          </font>
@@ -31,47 +31,47 @@
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="weekRadio" layoutX="300.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#viewWeek" text="Week" toggleGroup="$radio">
+      <RadioButton fx:id="weekRadio" layoutX="300.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewWeek" text="Week" toggleGroup="$radio">
          <font>
             <Font size="12.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="monthRadio" layoutX="370.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#viewMonth" text="Month" toggleGroup="$radio">
+      <RadioButton fx:id="monthRadio" layoutX="370.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewMonth" text="Month" toggleGroup="$radio">
          <font>
             <Font size="12.0" />
          </font>
       </RadioButton>
-      <Button fx:id="addButton" layoutX="499.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#addAppointment" text="Add">
+      <Button fx:id="addButton" layoutX="499.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#addAppointment" text="Add">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="modifyButton" layoutX="543.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#modifyAppointment" text="Modify">
+      <Button fx:id="modifyButton" layoutX="543.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#modifyAppointment" text="Modify">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="601.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#deleteAppointment" text="Delete">
+      <Button fx:id="deleteButton" layoutX="601.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteAppointment" text="Delete">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="customersButton" layoutX="454.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#loadCustomers" text="Customers">
+      <Button fx:id="customersButton" layoutX="454.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#loadCustomers" text="Customers">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="reportsButton" layoutX="532.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#loadReports" text="Reports">
+      <Button fx:id="reportsButton" layoutX="532.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#loadReports" text="Reports">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-        <Button fx:id="logoutButton" layoutX="593.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#logout" text="Log Out">
+        <Button fx:id="logoutButton" layoutX="593.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#logout" text="Log Out">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-      <TableView fx:id="table" layoutX="50.0" layoutY="71.0" onMouseClicked="#clearError" prefHeight="153.0" prefWidth="600.0" style="-fx-font-size: 11;">
+      <TableView fx:id="table" layoutX="50.0" layoutY="72.0" onMouseClicked="#clearError" prefHeight="153.0" prefWidth="600.0" style="-fx-font-size: 11;">
          <columns>
             <TableColumn fx:id="appointmentIDColumn" prefWidth="26.0" style="-fx-alignment: CENTER;" text="ID">
                <cellValueFactory>
@@ -120,7 +120,7 @@
             </TableColumn>
          </columns>
       </TableView>
-        <Label fx:id="errorLabel" layoutX="50.0" layoutY="240.0" text="Error">
+        <Label fx:id="errorLabel" layoutX="50.0" layoutY="241.0" text="Error">
             <font>
                 <Font size="12.0" />
             </font>

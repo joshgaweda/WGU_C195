@@ -124,6 +124,34 @@ public abstract class MultiController implements Initializable {
     protected Customer selectedCustomer;
 
     /**
+    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and  then converts them to an instant value
+    */
+    public interface TimeConv {
+        /**
+         * @param date DatePicker field that allows input of LocalDate
+         * @param time ComboBox field that allows input of LocalTime
+         * @return value based on the DatePicker and ComboBox fields
+         */
+        Instant toInstant(DatePicker date, ComboBox<LocalTime> time);
+    }
+    /**
+    *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
+    */
+    public interface Populate {
+    /**
+     * @param field the ComboBox that will contain the hours
+     * @param h1 the first hour value
+     * @param h2 the second hour value
+     * @param h3 the third hour value
+     * @param h4 the fourth hour value
+     * @param h5 the fifth hour value
+     * @param h6 the sixth hour value
+     * @param h7 the seventh hour value
+     */
+    void addAll(ComboBox<LocalTime> field, int h1, int h2, int h3, int h4, int h5, int h6, int h7);
+}
+    
+    /**
      * Loads the Appointments screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method. Sets a boolean value indicating whether this is the first time the screen is accessed after logging in
      * @param event mouse input when the user clicks the Log In button or Appointments button
      */
