@@ -71,9 +71,9 @@ public class DBQuery
                 appointment_list.add(new Appointment(appointmentID, title, description, location, type, start, end, username, contact, customerID, userID, contactID));
             }
         }
-        catch (SQLException | NumberFormatException e)
+        catch (SQLException | NumberFormatException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -97,17 +97,17 @@ public class DBQuery
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(9, getUser().getUsername());
+            ps.setString(9, getUser().getUser_name());
             ps.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(11, getUser().getUsername());
+            ps.setString(11, getUser().getUser_name());
             ps.setString(12, Integer.toString(appointment.getCustomerID()));
             ps.setString(13, Integer.toString(appointment.getUserID()));
             ps.setString(14, Integer.toString(appointment.getContactID()));
             ps.executeUpdate();
         }
-        catch (SQLException e)
+        catch (SQLException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -136,16 +136,16 @@ public class DBQuery
             ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(8, getUser().getUsername());
+            ps.setString(8, getUser().getUser_name());
             ps.setString(9, Integer.toString(appointment.getCustomerID()));
             ps.setString(10, Integer.toString(appointment.getUserID()));
             ps.setString(11, Integer.toString(appointment.getContactID()));
             ps.setString(12, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -163,9 +163,9 @@ public class DBQuery
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
-        catch (SQLException e)
+        catch (SQLException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -195,9 +195,9 @@ public class DBQuery
                 user_list.add(new User(id, name, password));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -227,9 +227,9 @@ public class DBQuery
                 contact_list.add(new Contact(id, name, email));
             }
         }
-        catch (SQLException | NumberFormatException e)
+        catch (SQLException | NumberFormatException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -264,9 +264,9 @@ public class DBQuery
                 customer_list.add(new Customer(customerID, name, address, postalCode, phone, division, country, divisionID));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -288,15 +288,15 @@ public class DBQuery
             ps.setString(4, customer.getPostalCode());
             ps.setString(5, customer.getPhone());
             ps.setString(6, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(7, getUser().getUsername());
+            ps.setString(7, getUser().getUser_name());
             ps.setString(8, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(9, getUser().getUsername());
+            ps.setString(9, getUser().getUser_name());
             ps.setString(10, Integer.toString(customer.getDivisionID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -323,14 +323,14 @@ public class DBQuery
             ps.setString(3, customer.getPostalCode());
             ps.setString(4, customer.getPhone());
             ps.setString(5, LocalDateTime.now().toString()); 
-            ps.setString(6, getUser().getUsername());
+            ps.setString(6, getUser().getUser_name());
             ps.setString(7, Integer.toString(customer.getDivisionID()));
             ps.setString(8, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -348,9 +348,9 @@ public class DBQuery
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -380,9 +380,9 @@ public class DBQuery
                 division_list.add(new Division(id, name, country));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -411,9 +411,9 @@ public class DBQuery
                 country_list.add(new Country(id, name));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 

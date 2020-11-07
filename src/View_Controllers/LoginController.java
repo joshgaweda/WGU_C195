@@ -71,7 +71,7 @@ public class LoginController extends MultiController {
     @FXML
     private void authenticate(MouseEvent event) {
         for (User u : data.getUser_List()) {
-            if (u.getUsername().equals(username.getText().trim()) && u.getPassword().equals(password.getText().trim())) {
+            if (u.getUser_name().equals(username.getText().trim()) && u.getUser_password().equals(password.getText().trim())) {
                 data.setUser(u);
                 recordLoginAttempt("Successful");
                 loadAppointments(event);

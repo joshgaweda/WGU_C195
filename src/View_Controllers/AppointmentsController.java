@@ -91,7 +91,7 @@ public class AppointmentsController extends MultiController {
     private void upcomingAppointment() {
         if (alert == true) {
             for (Appointment a : data.getAppointment_List()) {
-                if (data.getUser().getID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
+                if (data.getUser().getUser_ID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
                     errorLabel.setText("Appointment " + Integer.toString(a.getAppointmentID()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " starts in less than 15 minutes");
                     return;
                 }

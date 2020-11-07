@@ -5,73 +5,79 @@ package Models;
  */
 public class Division {
 
-    private int id;
-    private String name;
-    private String country;
+    private int div_id;
+    private String div_name;
+    private String div_country;
 
     /**
      * Class constructor
      * @param id the division ID
      * @param name the division name
-     * @param country the associated country name
+     * @param country the country name
      */
-    public Division(int id, String name, String country) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
+    public Division(int id, String name, String country) 
+    {
+        this.div_id = id;
+        this.div_name = name;
+        this.div_country = country;
     }
-
-    /**
-     * Default class constructor
-     */
-    public Division() { }
 
     /**
      * Gets the division ID
      * @return the division ID
      */
-    public int getID() {
-        return id;
+    public int getDiv_ID() 
+    {
+        return div_id;
     }
 
     /**
      * Sets the division ID
      * @param id the division ID
      */
-    public void setID(int id) {
-        this.id = id;
+    public void setDiv_ID(int id) 
+    {
+        this.div_id = id;
     }
 
     /**
      * Gets the division name
      * @return the division name
      */
-    public String getName() {
-        return name;
+    public String getDiv_name() 
+    {
+        return div_name;
     }
 
     /**
-     * Sets the division name
-     * @param name the division name
+     * Sets the division division name
+     * @param div_name the division name
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setDiv_name(String div_name) 
+    {
+        this.div_name = div_name;
     }
 
     /**
      * Gets the associated country name
      * @return the associated country name
      */
-    public String getCountry() {
-        return country;
+    public String getDiv_country() 
+    {
+        return div_country;
     }
 
     /**
      * Sets the associated country name
-     * @param country the associated country name
+     * @param div_country the associated country name
      */
-    public void setCountry(String country) {
-        this.country = country;
+    public void setDiv_country(String div_country) 
+    {
+        this.div_country = div_country;
     }
 
+     /**
+     * Default class constructor
+     */
+    public Division() { }
 }
