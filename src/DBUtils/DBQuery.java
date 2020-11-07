@@ -71,9 +71,9 @@ public class DBQuery
                 appointment_list.add(new Appointment(appointmentID, title, description, location, type, start, end, username, contact, customerID, userID, contactID));
             }
         }
-        catch (SQLException | NumberFormatException e)
+        catch (SQLException | NumberFormatException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -105,9 +105,9 @@ public class DBQuery
             ps.setString(14, Integer.toString(appointment.getContactID()));
             ps.executeUpdate();
         }
-        catch (SQLException e)
+        catch (SQLException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -143,9 +143,9 @@ public class DBQuery
             ps.setString(12, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -163,9 +163,9 @@ public class DBQuery
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
-        catch (SQLException e)
+        catch (SQLException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -195,9 +195,9 @@ public class DBQuery
                 user_list.add(new User(id, name, password));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -227,9 +227,9 @@ public class DBQuery
                 contact_list.add(new Contact(id, name, email));
             }
         }
-        catch (SQLException | NumberFormatException e)
+        catch (SQLException | NumberFormatException exception)
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -264,9 +264,9 @@ public class DBQuery
                 customer_list.add(new Customer(customerID, name, address, postalCode, phone, division, country, divisionID));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -294,9 +294,9 @@ public class DBQuery
             ps.setString(10, Integer.toString(customer.getDivisionID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -328,9 +328,9 @@ public class DBQuery
             ps.setString(8, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -348,9 +348,9 @@ public class DBQuery
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -380,9 +380,9 @@ public class DBQuery
                 division_list.add(new Division(id, name, country));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -411,9 +411,9 @@ public class DBQuery
                 country_list.add(new Country(id, name));
             }
         }
-        catch (SQLException | NumberFormatException e) 
+        catch (SQLException | NumberFormatException exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
