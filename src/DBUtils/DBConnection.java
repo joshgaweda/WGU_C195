@@ -5,55 +5,54 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Open/close the database connection
+ * Open/close db connection
  */
 public class DBConnection 
 {
     private static Connection dbcon;
     private static final String DB_NAME = "WJ06uqW";
-    private static final String DB_URL = "jdbc:mysql://wgudb.ucertify.com/" + DB_NAME;
     private static final String USER_NAME = "U06uqW";
     private static final String DB_PASS = "53688875766";
+    private static final String DB_URL = "jdbc:mysql://wgudb.ucertify.com/" + DB_NAME;
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; 
 
     // Returns database connection
-    public static Connection getDBConnection() 
+    public static Connection get_DB_Connection() 
     {
         return dbcon;
     }
     
-    // Connect to database
-    public static void connectDB() 
+    // Connect to db
+    public static void connect_DB() 
     {
         try
         {
             Class.forName(DRIVER);
             dbcon = DriverManager.getConnection(DB_URL, USER_NAME, DB_PASS);
-            System.out.println("Connected to database");
+            System.out.println("Connected to DB");
         } 
-        catch(SQLException e) 
+        catch(SQLException exception) 
         {
-            System.out.println("SQL Exception: " + e.getMessage()); 
-            System.out.println("SQL State: " + e.getSQLState());
-            System.out.println("Vendor Error: " + e.getErrorCode());
+            System.out.println("SQL Exception: " + exception.getMessage() + " and SQL State: " + exception.getSQLState()); 
+            System.out.println("Error Code: " + exception.getErrorCode());
         }
-        catch(ClassNotFoundException e) 
+        catch(ClassNotFoundException exception) 
         {
-            System.out.println("Invalid class" + e.getMessage());
+            System.out.println(exception.getMessage());
         } 
     }
     
-    // Close database connection
-    public static void disconnectDB() 
+    // Close db connection
+    public static void disconnect_DB() 
     {
         try 
         {
             dbcon.close();
-            System.out.println("Disconnected from database");
+            System.out.println("Disconnected from DB");
         } 
-        catch (SQLException e) 
+        catch (SQLException exception) 
         {
-            System.out.println("SQL Exception: " + e.getMessage());
+            System.out.println("SQL Exception: " + exception.getMessage());
         }
     }
 }

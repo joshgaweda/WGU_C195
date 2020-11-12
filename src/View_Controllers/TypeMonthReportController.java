@@ -68,7 +68,7 @@ public class TypeMonthReportController extends MultiController {
         Count debriefing = new Count("De-Briefing", 0);
         counts.addAll(planning, debriefing);
 
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             for (Count c : counts)
                 if (c.getType().equals(a.getType()))
                     c.setCount(c.getCount() + 1); 
@@ -100,7 +100,7 @@ public class TypeMonthReportController extends MultiController {
         Count dec = new Count(0, "December");
         counts.addAll(jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec);
 
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             for (Count c : counts)
                 if (c.getMonth().equals(a.getStart().atZone(ZoneId.systemDefault()).toLocalDate().getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH)))
                     c.setCount(c.getCount() + 1);

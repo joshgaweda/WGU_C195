@@ -242,11 +242,11 @@ public abstract class MultiController implements Initializable {
         comboBox.addAll(startTime, 11, 12, 13, 14, 15, 16, 2);
         comboBox.addAll(endTime, 12, 13, 14, 15, 16, 17, 3);
 
-        for (Customer c : data.getCustomer_List())
+        for (Customer c : data.get_Customer_List())
             customer.getItems().add(c.getCustomerID());
-        for (User u : data.getUser_List())
+        for (User u : data.get_User_List())
             user.getItems().add(u.getUser_name());
-        for (Contact c : data.getContact_List())
+        for (Contact c : data.get_Contact_List())
             contact.getItems().add(c.getName());
     }
 
@@ -254,9 +254,9 @@ public abstract class MultiController implements Initializable {
      * Prefills the available options in the ComboBoxes on the Add Customer and Modify Customer screens
      */
     protected void fillCustomerOptions() {
-        for (Division d : data.getDivision_List())
+        for (Division d : data.get_Division_List())
             division.getItems().add(d.getDiv_name());
-        for (Country c : data.getCountry_List())
+        for (Country c : data.get_Country_List())
             country.getItems().add(c.getName());
     }
 
@@ -285,7 +285,7 @@ public abstract class MultiController implements Initializable {
     @FXML
     protected void updateDivision(ActionEvent event) {
         ObservableList<String> updateOptions = FXCollections.observableArrayList();
-        for (Division d : data.getDivision_List())
+        for (Division d : data.get_Division_List())
             if (country.getValue().equals(d.getDiv_country()))
                 updateOptions.add(d.getDiv_name());
         division.setItems(updateOptions);
@@ -297,7 +297,7 @@ public abstract class MultiController implements Initializable {
      */
     @FXML
     protected void updateCountry(ActionEvent event) {
-        for (Division d : data.getDivision_List())
+        for (Division d : data.get_Division_List())
             if (d.getDiv_name().equals(division.getValue()))
                 country.setValue(d.getDiv_country());
     }
@@ -355,7 +355,7 @@ public abstract class MultiController implements Initializable {
             errorLabel.setText("Please select a Customer ID");
             return;
         }
-        for (Appointment a : data.getAppointment_List()) {
+        for (Appointment a : data.get_Appointment_List()) {
             if (customer.getValue() == a.getCustomerID() && start.equals(a.getStart())) {
                 errorLabel.setText("Overlapping appointment");
                 return;
@@ -371,19 +371,19 @@ public abstract class MultiController implements Initializable {
         }
 
         int userID = 0, contactID = 0;
-        for (User u : data.getUser_List())
+        for (User u : data.get_User_List())
             if (u.getUser_name().equals(user.getValue()))
                 userID = u.getUser_ID();
-        for (Contact c : data.getContact_List())
+        for (Contact c : data.get_Contact_List())
             if (c.getName().equals(contact.getValue()))
                 contactID = c.getID();
 
         Appointment appointment = new Appointment(Integer.parseInt(id.getText()), title.getText().trim(), description.getText().trim(), location.getValue(), type.getValue(), start, end, user.getValue(), contact.getValue(), customer.getValue(), userID, contactID);
 
         if (event.getSource() == addSaveButton)
-            data.addAppointment(appointment);
+            data.add_Appointment(appointment);
         if (event.getSource() == modifySaveButton)
-            data.updateAppointment(appointment);
+            data.update_Appointment(appointment);
 
         loadAppointments(event);
     }
@@ -420,16 +420,16 @@ public abstract class MultiController implements Initializable {
         }
 
         int divisionID = 0;
-        for (Division d : data.getDivision_List())
+        for (Division d : data.get_Division_List())
             if (d.getDiv_name().equals(division.getValue()))
                 divisionID = d.getDiv_ID();
 
         Customer customer = new Customer(Integer.parseInt(id.getText().trim()), name.getText().trim(), address.getText().trim(), postalCode.getText().trim(), phone.getText().trim(), division.getValue(), country.getValue(), divisionID);
 
         if (event.getSource() == addSaveButton)
-            data.addCustomer(customer);
+            data.add_Customer(customer);
         if (event.getSource() == modifySaveButton)
-            data.updateCustomer(customer);
+            data.update_Customer(customer);
 
         loadCustomers(event);
     }

@@ -41,7 +41,7 @@
             <Font size="12.0" />
          </font>
       </RadioButton>
-      <Button fx:id="addButton" layoutX="499.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#addAppointment" text="Add">
+      <Button fx:id="addButton" layoutX="499.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#add_Appointment" text="Add">
          <font>
             <Font size="12.0" />
          </font>
@@ -51,7 +51,7 @@
             <Font size="12.0" />
          </font>
       </Button>
-      <Button fx:id="deleteButton" layoutX="601.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#deleteAppointment" text="Delete">
+      <Button fx:id="deleteButton" layoutX="601.0" layoutY="35.0" mnemonicParsing="false" onMouseClicked="#delete_Appointment" text="Delete">
          <font>
             <Font size="12.0" />
          </font>
