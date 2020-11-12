@@ -1,4 +1,4 @@
-package DBUtils;
+package DB;
 
 import Models.*;
 
@@ -52,7 +52,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM appointments INNER JOIN contacts ON appointments.contact_id = contacts.contact_id INNER JOIN users ON appointments.user_id = users.user_id");
             while (rs.next())
             {
@@ -88,7 +88,7 @@ public class DBQuery
         try 
         {
             String sql = "INSERT INTO appointments (appointment_id, title, description, location, type, start, end, create_date, created_by, last_update, last_updated_by, customer_id, user_id, contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.setString(2, appointment.getTitle());
             ps.setString(3, appointment.getDescription());
@@ -128,7 +128,7 @@ public class DBQuery
         try 
         {
             String sql = "UPDATE appointments SET title = ?, description = ?, location = ?, type = ?, start = ?, end = ?, last_update = ?, last_updated_by = ?, customer_id = ?, user_id = ?, contact_id = ? WHERE appointment_id = ?";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, appointment.getTitle());
             ps.setString(2, appointment.getDescription());
             ps.setString(3, appointment.getLocation());
@@ -159,7 +159,7 @@ public class DBQuery
         try 
         {
             String sql = "DELETE FROM appointments WHERE appointment_id = ? ";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
@@ -185,7 +185,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM users");
             while (rs.next())
             {
@@ -217,7 +217,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM contacts");
             while (rs.next()) 
             {
@@ -249,7 +249,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM customers INNER JOIN first_level_divisions ON customers.division_id = first_level_divisions.division_id INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
             while (rs.next()) 
             {
@@ -281,7 +281,7 @@ public class DBQuery
         try 
         {
             String sql = "INSERT INTO customers (customer_id, customer_name, address, postal_code, phone, create_date, created_by, last_update, last_updated_by, division_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.setString(2, customer.getName());
             ps.setString(3, customer.getAddress());
@@ -317,7 +317,7 @@ public class DBQuery
         try 
         {
             String sql = "UPDATE customers SET customer_name = ?, address = ?, postal_code = ?, phone = ?, last_update = ?, last_updated_by = ?, division_id = ? WHERE customer_id = ?";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, customer.getName());
             ps.setString(2, customer.getAddress());
             ps.setString(3, customer.getPostalCode());
@@ -344,7 +344,7 @@ public class DBQuery
         try 
         {
             String sql = "DELETE FROM customers WHERE customer_id = ? ";
-            PreparedStatement ps = DBConnection.get_DB_Connection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
@@ -370,7 +370,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM first_level_divisions INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
             while (rs.next()) 
             {
@@ -402,7 +402,7 @@ public class DBQuery
     {
         try 
         {
-            Statement statement = DBConnection.get_DB_Connection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM countries");
             while (rs.next()) 
             {

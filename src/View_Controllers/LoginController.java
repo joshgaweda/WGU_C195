@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import Models.User;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.io.FileWriter;
 import java.io.IOException;

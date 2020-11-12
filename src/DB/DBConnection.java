@@ -1,4 +1,4 @@
-package DBUtils;
+package DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,20 +14,20 @@ public class DBConnection
     private static final String USER_NAME = "U06uqW";
     private static final String DB_PASS = "53688875766";
     private static final String DB_URL = "jdbc:mysql://wgudb.ucertify.com/" + DB_NAME;
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; 
+    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver"; 
 
     // Returns database connection
-    public static Connection get_DB_Connection() 
+    public static Connection ConnectionObject() 
     {
         return dbcon;
     }
     
     // Connect to db
-    public static void connect_DB() 
+    public static void Connect() 
     {
         try
         {
-            Class.forName(DRIVER);
+            Class.forName(DB_DRIVER);
             dbcon = DriverManager.getConnection(DB_URL, USER_NAME, DB_PASS);
             System.out.println("Connected to DB");
         } 
@@ -43,7 +43,7 @@ public class DBConnection
     }
     
     // Close db connection
-    public static void disconnect_DB() 
+    public static void Disconnect() 
     {
         try 
         {

@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import Models.*;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.time.*;
 import java.util.Optional;
@@ -214,7 +214,7 @@ public abstract class MultiController implements Initializable {
      */
     protected void loadScreen(MouseEvent event, String fxml, MultiController controller) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-        ResourceBundle rb = ResourceBundle.getBundle("Properties/rb");
+        ResourceBundle rb = ResourceBundle.getBundle("Properties/language");
         loader.setController(controller);
         loader.setResources(rb);
         Parent root = loader.load();
@@ -439,7 +439,8 @@ public abstract class MultiController implements Initializable {
      * @param id the ID of the appointment or customer to be deleted
      * @return a boolean value indicating whether the user wants to proceed
      */
-    protected boolean confirmationWindow(String id) {
+    protected boolean confirmationWindow(String id) 
+    {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete");
         alert.setContentText("Are you sure you want to delete" + id + "?");
@@ -460,13 +461,15 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks away from the item that caused the message
      */
     @FXML
-    protected void clearError(MouseEvent event) {
+    protected void clearError(MouseEvent event) 
+    {
         errorLabel.setText("");
     }
 /**
     * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and  then converts them to an instant value
     */
-    public interface TimeConv {
+    interface TimeConv 
+    {
         /**
          * @param date DatePicker field that allows input of LocalDate
          * @param time ComboBox field that allows input of LocalTime
@@ -478,7 +481,8 @@ public abstract class MultiController implements Initializable {
     /**
     *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
     */
-    public interface Populate {
+    interface Populate 
+    {
         /**
          * @param field the ComboBox that will contain the hours
          * @param h1 the first hour value

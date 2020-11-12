@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import Models.Appointment;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.time.*;

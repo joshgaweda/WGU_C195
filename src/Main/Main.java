@@ -1,6 +1,6 @@
 package Main;
 
-import DBUtils.*;
+import DB.*;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -23,9 +23,9 @@ public class Main extends Application
      */
     public static void main(String[] args) 
     {
-        DBConnection.connect_DB();
+        DBConnection.Connect();
         launch(args);
-        DBConnection.disconnect_DB();
+        DBConnection.Disconnect();
     }
     
     /**
@@ -38,7 +38,7 @@ public class Main extends Application
     {
         DBQuery dbq = new DBQuery();
         dbq.read_DB_Data();
-        ResourceBundle rb = ResourceBundle.getBundle("Properties/rb", Locale.getDefault());
+        ResourceBundle rb = ResourceBundle.getBundle("Properties/language", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controllers/Login.fxml"));
         View_Controllers.LoginController controller = new View_Controllers.LoginController(dbq);
         loader.setController(controller);

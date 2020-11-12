@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 
 import Models.Appointment;
 import Models.Count;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.time.ZoneId;
