@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import Models.Appointment;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -114,7 +114,7 @@ public class LocationReportController extends MultiController {
      */
     private void generateChicagoTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             if (a.getLocation().equals("Chicago"))
                 filterAppointments.add(a);
         chicagoTable.setItems(filterAppointments);
@@ -126,7 +126,7 @@ public class LocationReportController extends MultiController {
      */
     private void generateTampaTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             if (a.getLocation().equals("Tampa"))
                 filterAppointments.add(a);
         tampaTable.setItems(filterAppointments);
@@ -138,7 +138,7 @@ public class LocationReportController extends MultiController {
      */
     private void generateBellinghamTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             if (a.getLocation().equals("Bellingham"))
                 filterAppointments.add(a);
         bellinghamTable.setItems(filterAppointments);

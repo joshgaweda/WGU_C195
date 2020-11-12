@@ -1,7 +1,7 @@
 package View_Controllers;
 
 import Models.Customer;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,11 +43,11 @@ public class AddCustomerController extends MultiController {
      * @return a unique Customer ID
      */
     private int generateCustomerID() {
-        if (data.getCustomer_List().isEmpty())
+        if (data.get_Customer_List().isEmpty())
             return 1;
         else {
             int i = 1;
-            for (Customer a : data.getCustomer_List())
+            for (Customer a : data.get_Customer_List())
                 if (a.getCustomerID() > i)
                     i = a.getCustomerID();
             return i + 1;

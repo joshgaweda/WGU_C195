@@ -26,7 +26,7 @@
             <Font size="12.0" />
          </font>
       </Button>
-        <Button fx:id="addButton" layoutX="499.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#addCustomer" text="Add">
+        <Button fx:id="addButton" layoutX="499.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#add_Customer" text="Add">
             <font>
                 <Font size="12.0" />
             </font>
@@ -36,7 +36,7 @@
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button fx:id="deleteButton" layoutX="601.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#deleteCustomer" text="Delete">
+        <Button fx:id="deleteButton" layoutX="601.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#delete_Customer" text="Delete">
             <font>
                 <Font size="12.0" />
             </font>

@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import Models.User;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -70,9 +70,9 @@ public class LoginController extends MultiController {
      */
     @FXML
     private void authenticate(MouseEvent event) {
-        for (User u : data.getUser_List()) {
+        for (User u : data.get_User_List()) {
             if (u.getUser_name().equals(username.getText().trim()) && u.getUser_password().equals(password.getText().trim())) {
-                data.setUser(u);
+                data.set_User(u);
                 recordLoginAttempt("Successful");
                 loadAppointments(event);
                 return;

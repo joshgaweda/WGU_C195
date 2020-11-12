@@ -1,4 +1,4 @@
-package DBUtils;
+package DB;
 
 import Models.*;
 
@@ -26,21 +26,21 @@ public class DBQuery
     /**
      * Reads all data from the database
      */
-    public void readAllData() 
+    public void read_DB_Data() 
     {
-        readUser_List();
-        readCustomer_List();
-        readDivision_List();
-        readAppointment_List();
-        readContact_List();
-        readCountry_List();
+        read_Appointment_List();
+        read_Contact_List();
+        read_Country_List();
+        read_Customer_List();
+        read_Division_List();
+        read_User_List();
     }
 
     /**
      * Gets list of appointment_list
      * @return the list of all appointment_list
      */
-    public ObservableList<Appointment> getAppointment_List() 
+    public ObservableList<Appointment> get_Appointment_List() 
     {
         return appointment_list;
     }
@@ -48,11 +48,11 @@ public class DBQuery
     /**
      * Reads data from appointment_list table, stores each record in an Appointment object and then in an ObservableList
      */
-    private void readAppointment_List() 
+    private void read_Appointment_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM appointments INNER JOIN contacts ON appointments.contact_id = contacts.contact_id INNER JOIN users ON appointments.user_id = users.user_id");
             while (rs.next())
             {
@@ -81,14 +81,14 @@ public class DBQuery
      * Adds a record to the appointment_list table when a new Appointment object is created
      * @param appointment
      */
-    public void addAppointment(Appointment appointment) 
+    public void add_Appointment(Appointment appointment) 
     {
         if (appointment != null)
             appointment_list.add(appointment);
         try 
         {
             String sql = "INSERT INTO appointments (appointment_id, title, description, location, type, start, end, create_date, created_by, last_update, last_updated_by, customer_id, user_id, contact_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.setString(2, appointment.getTitle());
             ps.setString(3, appointment.getDescription());
@@ -97,9 +97,9 @@ public class DBQuery
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(9, getUser().getUser_name());
+            ps.setString(9, get_User().getUser_name());
             ps.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(11, getUser().getUser_name());
+            ps.setString(11, get_User().getUser_name());
             ps.setString(12, Integer.toString(appointment.getCustomerID()));
             ps.setString(13, Integer.toString(appointment.getUserID()));
             ps.setString(14, Integer.toString(appointment.getContactID()));
@@ -115,7 +115,7 @@ public class DBQuery
      * Updates the appointment_list table whenever an Appointment object is updated
      * @param appointment
      */
-    public void updateAppointment(Appointment appointment) 
+    public void update_Appointment(Appointment appointment) 
     {
         for (int i = 0; i < appointment_list.size(); i++) 
         {
@@ -128,7 +128,7 @@ public class DBQuery
         try 
         {
             String sql = "UPDATE appointments SET title = ?, description = ?, location = ?, type = ?, start = ?, end = ?, last_update = ?, last_updated_by = ?, customer_id = ?, user_id = ?, contact_id = ? WHERE appointment_id = ?";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, appointment.getTitle());
             ps.setString(2, appointment.getDescription());
             ps.setString(3, appointment.getLocation());
@@ -136,7 +136,7 @@ public class DBQuery
             ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
             ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(8, getUser().getUser_name());
+            ps.setString(8, get_User().getUser_name());
             ps.setString(9, Integer.toString(appointment.getCustomerID()));
             ps.setString(10, Integer.toString(appointment.getUserID()));
             ps.setString(11, Integer.toString(appointment.getContactID()));
@@ -153,13 +153,13 @@ public class DBQuery
      * Deletes a record in the appointment_list table in the database whenever an Appointment object is deleted
      * @param appointment
      */
-    public void deleteAppointment(Appointment appointment) 
+    public void delete_Appointment(Appointment appointment) 
     {
         appointment_list.remove(appointment);
         try 
         {
             String sql = "DELETE FROM appointments WHERE appointment_id = ? ";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(appointment.getAppointmentID()));
             ps.executeUpdate();
         }
@@ -173,7 +173,7 @@ public class DBQuery
      * Gets list of all users
      * @return list of all users
      */
-    public ObservableList<User> getUser_List() 
+    public ObservableList<User> get_User_List() 
     {
         return user_list;
     }
@@ -181,11 +181,11 @@ public class DBQuery
     /**
      * Reads from the user_list table, stores each record in an User object, and stores the User objects in an ObservableList
      */
-    public void readUser_List() 
+    public void read_User_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM users");
             while (rs.next())
             {
@@ -205,7 +205,7 @@ public class DBQuery
      * Gets list of all contacts
      * @return list of all contacts
      */
-    public ObservableList<Contact> getContact_List() 
+    public ObservableList<Contact> get_Contact_List() 
     {
         return contact_list;
     }
@@ -213,11 +213,11 @@ public class DBQuery
     /**
      * Reads data from the contact_list table, stores each record in an Contact object, and stores the Contact objects in an ObservableList
      */
-    public void readContact_List() 
+    public void read_Contact_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM contacts");
             while (rs.next()) 
             {
@@ -237,7 +237,7 @@ public class DBQuery
      * Gets list of all customer_list
      * @return list of all customer_list
      */
-    public ObservableList<Customer> getCustomer_List() 
+    public ObservableList<Customer> get_Customer_List() 
     {
         return customer_list;
     }
@@ -245,11 +245,11 @@ public class DBQuery
     /**
      * Reads data from the customer_list table in the database, stores each record in an Customer object, and stores the Customer objects in an ObservableList
      */
-    public void readCustomer_List() 
+    public void read_Customer_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM customers INNER JOIN first_level_divisions ON customers.division_id = first_level_divisions.division_id INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
             while (rs.next()) 
             {
@@ -274,23 +274,23 @@ public class DBQuery
      * Adds an entry to the customer_list table when a new Customer object is created
      * @param customer
      */
-    public void addCustomer(Customer customer) 
+    public void add_Customer(Customer customer) 
     {
         if (customer != null)
             customer_list.add(customer);
         try 
         {
             String sql = "INSERT INTO customers (customer_id, customer_name, address, postal_code, phone, create_date, created_by, last_update, last_updated_by, division_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.setString(2, customer.getName());
             ps.setString(3, customer.getAddress());
             ps.setString(4, customer.getPostalCode());
             ps.setString(5, customer.getPhone());
             ps.setString(6, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(7, getUser().getUser_name());
+            ps.setString(7, get_User().getUser_name());
             ps.setString(8, LocalDateTime.now().toString()); // ADD DATE
-            ps.setString(9, getUser().getUser_name());
+            ps.setString(9, get_User().getUser_name());
             ps.setString(10, Integer.toString(customer.getDivisionID()));
             ps.executeUpdate();
         }
@@ -304,7 +304,7 @@ public class DBQuery
      * Updates the customer_list table whenever a Customer object is updated
      * @param customer 
      */
-    public void updateCustomer(Customer customer) 
+    public void update_Customer(Customer customer) 
     {
         for (int i = 0; i < customer_list.size(); i++) 
         {
@@ -317,13 +317,13 @@ public class DBQuery
         try 
         {
             String sql = "UPDATE customers SET customer_name = ?, address = ?, postal_code = ?, phone = ?, last_update = ?, last_updated_by = ?, division_id = ? WHERE customer_id = ?";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, customer.getName());
             ps.setString(2, customer.getAddress());
             ps.setString(3, customer.getPostalCode());
             ps.setString(4, customer.getPhone());
             ps.setString(5, LocalDateTime.now().toString()); 
-            ps.setString(6, getUser().getUser_name());
+            ps.setString(6, get_User().getUser_name());
             ps.setString(7, Integer.toString(customer.getDivisionID()));
             ps.setString(8, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
@@ -338,13 +338,13 @@ public class DBQuery
      * Deletes entry in the customer_list table when a Customer object is deleted
      * @param customer 
      */
-    public void deleteCustomer(Customer customer) 
+    public void delete_Customer(Customer customer) 
     {
         customer_list.remove(customer);
         try 
         {
             String sql = "DELETE FROM customers WHERE customer_id = ? ";
-            PreparedStatement ps = DBConnection.getDBConnection().prepareStatement(sql);
+            PreparedStatement ps = DBConnection.ConnectionObject().prepareStatement(sql);
             ps.setString(1, Integer.toString(customer.getCustomerID()));
             ps.executeUpdate();
         }
@@ -358,7 +358,7 @@ public class DBQuery
      * Gets list of all division_list
      * @return list of all division_list
      */
-    public ObservableList<Division> getDivision_List() 
+    public ObservableList<Division> get_Division_List() 
     {
         return division_list;
     }
@@ -366,11 +366,11 @@ public class DBQuery
     /**
      * Reads the division_list table, stores each record in an Division object, and stores the Division objects in an ObservableList
      */
-    public void readDivision_List() 
+    public void read_Division_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM first_level_divisions INNER JOIN countries ON first_level_divisions.country_id = countries.country_id");
             while (rs.next()) 
             {
@@ -390,7 +390,7 @@ public class DBQuery
      * Gets list of all country_list
      * @return list of all country_list
      */
-    public ObservableList<Country> getCountry_List() 
+    public ObservableList<Country> get_Country_List() 
     {
         return country_list;
     }
@@ -398,11 +398,11 @@ public class DBQuery
     /**
      * Reads the country_list table, stores each record in an Country object, and stores the Country objects in an ObservableList
      */
-    public void readCountry_List() 
+    public void read_Country_List() 
     {
         try 
         {
-            Statement statement = DBConnection.getDBConnection().createStatement();
+            Statement statement = DBConnection.ConnectionObject().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM countries");
             while (rs.next()) 
             {
@@ -421,7 +421,7 @@ public class DBQuery
      * Gets a User object representing the current user
      * @return a User object representing the current user
      */
-    public User getUser() 
+    public User get_User() 
     {
         return user;
     }
@@ -430,7 +430,7 @@ public class DBQuery
      * Sets a User object representing the current user
      * @param user a User object representing the current user
      */
-    public void setUser(User user) 
+    public void set_User(User user) 
     {
         this.user = user;
     }

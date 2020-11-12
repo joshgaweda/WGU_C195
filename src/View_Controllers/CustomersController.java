@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 
 import Models.Appointment;
 import Models.Customer;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,7 +58,7 @@ public class CustomersController extends MultiController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        table.setItems(data.getCustomer_List());
+        table.setItems(data.get_Customer_List());
         table.refresh();
         errorLabel.setText("");
     }
@@ -68,7 +68,7 @@ public class CustomersController extends MultiController {
      * @param event mouse input when the user clicks the Add button
      */
     @FXML
-    private void addCustomer(MouseEvent event) {
+    private void add_Customer(MouseEvent event) {
         try {
             String fxml = "/View_Controllers/AddCustomer.fxml";
             AddCustomerController controller = new AddCustomerController(data);
@@ -87,7 +87,7 @@ public class CustomersController extends MultiController {
     private void modifyCustomer(MouseEvent event) {
         try {
             selectedCustomer = table.getSelectionModel().getSelectedItem();
-            if (data.getCustomer_List().isEmpty()) {
+            if (data.get_Customer_List().isEmpty()) {
                 errorLabel.setText("There are no customers to modify");
                 return;
             }
@@ -110,9 +110,9 @@ public class CustomersController extends MultiController {
      * @param event mouse input when the user clicks the Delete button
      */
     @FXML
-    private void deleteCustomer(MouseEvent event) {
+    private void delete_Customer(MouseEvent event) {
         Customer selectedCustomer = table.getSelectionModel().getSelectedItem();
-        if (data.getCustomer_List().isEmpty()) {
+        if (data.get_Customer_List().isEmpty()) {
             errorLabel.setText("There are no customers to delete");
             return;
         }
@@ -120,7 +120,7 @@ public class CustomersController extends MultiController {
             errorLabel.setText("Please select a customer");
             return;
         }
-        for (Appointment a : data.getAppointment_List()) {
+        for (Appointment a : data.get_Appointment_List()) {
             if (a.getCustomerID() == selectedCustomer.getCustomerID()) {
                 errorLabel.setText("Please delete the customer's appointments first");
                 return;
@@ -130,8 +130,8 @@ public class CustomersController extends MultiController {
         if (!confirm)
             return;
 
-        data.deleteCustomer(selectedCustomer);
-        table.setItems(data.getCustomer_List());
+        data.delete_Customer(selectedCustomer);
+        table.setItems(data.get_Customer_List());
         table.refresh();
         errorLabel.setText("Customer " + selectedCustomer.getName() + " has been deleted");
     }

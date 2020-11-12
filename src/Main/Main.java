@@ -1,14 +1,14 @@
 package Main;
 
-import DBUtils.*;
+import DB.*;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,7 +17,17 @@ import javafx.stage.Stage;
  */
 public class Main extends Application 
 {
-
+    /**
+     * Opens/closes the database connection
+     * @param args
+     */
+    public static void main(String[] args) 
+    {
+        DBConnection.Connect();
+        launch(args);
+        DBConnection.Disconnect();
+    }
+    
     /**
      * Loads database and displays the login window
      * @param mainStage
@@ -27,8 +37,8 @@ public class Main extends Application
     public void start(Stage mainStage) throws Exception 
     {
         DBQuery dbq = new DBQuery();
-        dbq.readAllData();
-        ResourceBundle rb = ResourceBundle.getBundle("Properties/rb", Locale.getDefault());
+        dbq.read_DB_Data();
+        ResourceBundle rb = ResourceBundle.getBundle("Properties/language", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controllers/Login.fxml"));
         View_Controllers.LoginController controller = new View_Controllers.LoginController(dbq);
         loader.setController(controller);
@@ -38,16 +48,5 @@ public class Main extends Application
         mainStage.setScene(scene);
         mainStage.setResizable(false);
         mainStage.show();
-    }
-
-    /**
-     * Opens/closes the database connection
-     * @param args
-     */
-    public static void main(String[] args) 
-    {
-        DBConnection.connectDB();
-        launch(args);
-        DBConnection.disconnectDB();
     }
 }

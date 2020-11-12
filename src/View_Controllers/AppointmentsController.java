@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 import Models.Appointment;
-import DBUtils.DBQuery;
+import DB.DBQuery;
 
 import java.net.URL;
 import java.time.*;
@@ -81,7 +81,7 @@ public class AppointmentsController extends MultiController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generateTable(data.getAppointment_List());
+        generateTable(data.get_Appointment_List());
         upcomingAppointment();
     }
 
@@ -90,8 +90,8 @@ public class AppointmentsController extends MultiController {
      */
     private void upcomingAppointment() {
         if (alert == true) {
-            for (Appointment a : data.getAppointment_List()) {
-                if (data.getUser().getUser_ID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
+            for (Appointment a : data.get_Appointment_List()) {
+                if (data.get_User().getUser_ID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
                     errorLabel.setText("Appointment " + Integer.toString(a.getAppointmentID()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " starts in less than 15 minutes");
                     return;
                 }
@@ -116,7 +116,7 @@ public class AppointmentsController extends MultiController {
      */
     @FXML
     private void viewAll(MouseEvent event) {
-        generateTable(data.getAppointment_List());
+        generateTable(data.get_Appointment_List());
     }
 
     /**
@@ -126,7 +126,7 @@ public class AppointmentsController extends MultiController {
     @FXML
     private void viewMonth(MouseEvent event) {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             if (a.getStart().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue() == LocalDate.now().getMonthValue())
                 filterAppointments.add(a);
         generateTable(filterAppointments);
@@ -139,7 +139,7 @@ public class AppointmentsController extends MultiController {
     @FXML
     private void viewWeek(MouseEvent event) {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
-        for (Appointment a : data.getAppointment_List())
+        for (Appointment a : data.get_Appointment_List())
             if (!a.getStart().isBefore(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofDays(7))))
                 filterAppointments.add(a);
         generateTable(filterAppointments);
@@ -150,13 +150,16 @@ public class AppointmentsController extends MultiController {
      * @param event mouse input when the user clicks the Add button
      */
     @FXML
-    private void addAppointment(MouseEvent event) {
-        try {
+    private void add_Appointment(MouseEvent event) 
+    {
+        try 
+        {
             String fxml = "/View_Controllers/AddAppointment.fxml";
             AddAppointmentController controller = new AddAppointmentController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
+        catch (Exception e) 
+        {
             System.out.println(e);
         }
     }
@@ -169,7 +172,7 @@ public class AppointmentsController extends MultiController {
     private void modifyAppointment(MouseEvent event) {
         try {
             selectedAppointment = table.getSelectionModel().getSelectedItem();
-            if (data.getAppointment_List().isEmpty()) {
+            if (data.get_Appointment_List().isEmpty()) {
                 errorLabel.setText("There are no appointments to modify");
                 return;
             }
@@ -192,9 +195,9 @@ public class AppointmentsController extends MultiController {
      * @param event mouse input when the user clicks the Delete button
      */
     @FXML
-    private void deleteAppointment(MouseEvent event) {
+    private void delete_Appointment(MouseEvent event) {
         Appointment selectedAppointment = table.getSelectionModel().getSelectedItem();
-        if (data.getAppointment_List().isEmpty()) {
+        if (data.get_Appointment_List().isEmpty()) {
             errorLabel.setText("There are no appointments to delete");
             return;
         }
@@ -206,8 +209,8 @@ public class AppointmentsController extends MultiController {
         if (!confirm)
             return;
 
-        data.deleteAppointment(selectedAppointment);
-        table.setItems(data.getAppointment_List());
+        data.delete_Appointment(selectedAppointment);
+        table.setItems(data.get_Appointment_List());
         table.refresh();
         errorLabel.setText("Appointment " + Integer.toString(selectedAppointment.getAppointmentID()) + " " + selectedAppointment.getType() + " has been cancelled");
     }
