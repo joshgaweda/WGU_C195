@@ -64,9 +64,11 @@ public class TypeMonthReportController extends MultiController {
     private void generateTypeTable() {
         ObservableList<Count> counts = FXCollections.observableArrayList();
         ObservableList<Count> view = FXCollections.observableArrayList();
-        Count planning = new Count("Planning Session", 0);
-        Count debriefing = new Count("De-Briefing", 0);
-        counts.addAll(planning, debriefing);
+        Count interview = new Count("Interview", 0);
+        Count meeting = new Count("Meeting", 0);
+        Count planning = new Count("Planning", 0);
+        Count lunch = new Count("Lunch", 0);
+        counts.addAll(interview, meeting, planning, lunch);
 
         for (Appointment a : data.get_Appointment_List())
             for (Count c : counts)
