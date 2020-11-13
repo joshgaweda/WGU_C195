@@ -18,7 +18,8 @@ public class ModifyAppointmentController extends MultiController {
      * @param data the complete set of data retrieved from the database by the DBQuery utility
      * @param selectedAppointment the appointment selected by the user that is to be modified
      */
-    public ModifyAppointmentController(DBQuery data, Appointment selectedAppointment) {
+    public ModifyAppointmentController(DBQuery data, Appointment selectedAppointment) 
+    {
         this.data = data;
         this.selectedAppointment = selectedAppointment;
     }
@@ -29,16 +30,18 @@ public class ModifyAppointmentController extends MultiController {
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         fillAppointmentOptions();
         fillData();
         errorLabel.setText("");
     }
 
     /**
-     * Prefills the form fields with the corresponding data from the selected appointment. Displays dates and times in the time zone set by the user's operating system
+     * Prefills the form with the data from the selected appointment. Displays in the time zone set by the user PC
      */
-    private void fillData() {
+    private void fillData() 
+    {
         id.setText(Integer.toString(selectedAppointment.getAppointmentID()));
         title.setText(selectedAppointment.getTitle());
         description.setText(selectedAppointment.getDescription());

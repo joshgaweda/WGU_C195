@@ -74,8 +74,8 @@ public class CustomersController extends MultiController {
             AddCustomerController controller = new AddCustomerController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
@@ -100,8 +100,8 @@ public class CustomersController extends MultiController {
             ModifyCustomerController controller = new ModifyCustomerController(data, selectedCustomer);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 

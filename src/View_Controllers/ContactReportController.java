@@ -105,17 +105,17 @@ public class ContactReportController extends MultiController
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        generateTableA();
-        generatetableB();
-        generatetableC();
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        tableA();
+        tableB();
+        tableC();
     }
 
     /**
      * Generates table A
      */
-    private void generateTableA() 
+    private void tableA() 
     {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         data.get_Appointment_List().stream().filter((a) -> (a.getContact().equals("Amari Andrews"))).forEachOrdered((a) -> {
@@ -128,7 +128,7 @@ public class ContactReportController extends MultiController
     /**
      * Generates table B
      */
-    private void generatetableB() 
+    private void tableB() 
     {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         data.get_Appointment_List().stream().filter((b) -> (b.getContact().equals("Bill Belichick"))).forEachOrdered((b) -> {
@@ -141,7 +141,7 @@ public class ContactReportController extends MultiController
     /**
      * Generates table C
      */
-    private void generatetableC() 
+    private void tableC() 
     {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         data.get_Appointment_List().stream().filter((c) -> (c.getContact().equals("Chris Carson"))).forEachOrdered((c) -> {

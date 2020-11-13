@@ -138,8 +138,8 @@ public abstract class MultiController implements Initializable {
             AppointmentsController controller = new AppointmentsController(data, alert);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
@@ -154,8 +154,8 @@ public abstract class MultiController implements Initializable {
             CustomersController controller = new CustomersController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
@@ -205,8 +205,8 @@ public abstract class MultiController implements Initializable {
             LocationReportController controller = new LocationReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
@@ -231,22 +231,40 @@ public abstract class MultiController implements Initializable {
         stage.show();
     }
 
+        /**
+    *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
+    */
+    interface TimePop 
+    {
+        /**
+         * @param field the ComboBox that will contain the hours
+         * @param h1 the first hour value
+         * @param h2 the second hour value
+         * @param h3 the third hour value
+         * @param h4 the fourth hour value
+         * @param h5 the fifth hour value
+         * @param h6 the sixth hour value
+         * @param h7 the seventh hour value
+         */
+        void addAll(ComboBox<LocalTime> field, int t1, int t2, int t3, int t4, int t5, int t6, int t7, int t8);
+    }
+    
     /**
      * Prefills the available options in the ComboBoxes on the Add Appointment and Modify Appointment screens
      * <p>Lambda Expression: Improves the code by avoiding repetition of the verbose syntax for converting an hour from an integer to a LocalTime</p>
      */
     protected void fillAppointmentOptions() {
         location.getItems().addAll("Atlanta", "Boston", "Corvallis");
-        type.getItems().addAll("Planning Session", "De-Briefing");
+        type.getItems().addAll("Interview", "Meeting", "Planning", "Lunch");
 
-        Populate comboBox = (field, h1, h2, h3, h4, h5, h6, h7) -> {
+        TimePop comboBox = (field, t1, t2, t3, t4, t5, t6, t7, t8) -> {
             ObservableList<Integer> hours = FXCollections.observableArrayList();
-            hours.addAll(h1, h2, h3, h4, h5, h6, h7);
+            hours.addAll(t1, t2, t3, t4, t5, t6, t7, t8);
             for (int h : hours)
                 field.getItems().add(LocalDateTime.of(LocalDate.now(),LocalTime.of(h,0)).toInstant(ZoneOffset.ofHours(0)).atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime());
         };
-        comboBox.addAll(startTime, 11, 12, 13, 14, 15, 16, 2);
-        comboBox.addAll(endTime, 12, 13, 14, 15, 16, 17, 3);
+        comboBox.addAll(startTime, 15, 16, 17, 18, 19, 20, 21, 22);
+        comboBox.addAll(endTime, 16, 17, 18, 19, 20, 21, 22, 23);
 
         for (Customer c : data.get_Customer_List())
             customer.getItems().add(c.getCustomerID());
@@ -308,6 +326,20 @@ public abstract class MultiController implements Initializable {
                 country.setValue(d.getDiv_country());
     }
 
+    
+    /**
+    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and  then converts them to an instant value
+    */
+    interface TimeConv 
+    {
+        /**
+         * @param date DatePicker field that allows input of LocalDate
+         * @param time ComboBox field that allows input of LocalTime
+         * @return value based on the DatePicker and ComboBox fields
+         */
+        Instant toInstant(DatePicker date, ComboBox<LocalTime> time);
+    }
+    
     /**
      * Checks user input for each of the Add Appointment or Modify Appointment screen fields, displays an error message if any of the fields is empty, if the selected date and time are in the past or are outside of business hours (8am-10pm EST), or if a customer has overlapping appointments, then calls a DBQuery method to save the input data to the database, and returns to the appointments screen
      * <p>Lambda Expression (Line 341): This lambda expression reduces code repetition and allows the verbose syntax needed to convert the values of the date and time fields to Instant values to be written only once</p>
@@ -352,7 +384,7 @@ public abstract class MultiController implements Initializable {
             errorLabel.setText("Please select a future Date and Time");
             return;
         }
-        if (start.atZone(ZoneId.of("America/New_York")).toLocalTime().isBefore(LocalTime.of(8,0)) || end.atZone(ZoneId.of("America/New_York")).toLocalTime().isAfter(LocalTime.of(22,0))) {
+        if (start.atZone(ZoneId.of("America/Los_Angeles")).toLocalTime().isBefore(LocalTime.of(7,0)) || end.atZone(ZoneId.of("America/Los_Angeles")).toLocalTime().isAfter(LocalTime.of(21,0))) {
             errorLabel.setText("Select a time during business hours");
             return;
         }
@@ -470,35 +502,5 @@ public abstract class MultiController implements Initializable {
     protected void clearError(MouseEvent event) 
     {
         errorLabel.setText("");
-    }
-/**
-    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and  then converts them to an instant value
-    */
-    interface TimeConv 
-    {
-        /**
-         * @param date DatePicker field that allows input of LocalDate
-         * @param time ComboBox field that allows input of LocalTime
-         * @return value based on the DatePicker and ComboBox fields
-         */
-        Instant toInstant(DatePicker date, ComboBox<LocalTime> time);
-    }
-    
-    /**
-    *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
-    */
-    interface Populate 
-    {
-        /**
-         * @param field the ComboBox that will contain the hours
-         * @param h1 the first hour value
-         * @param h2 the second hour value
-         * @param h3 the third hour value
-         * @param h4 the fourth hour value
-         * @param h5 the fifth hour value
-         * @param h6 the sixth hour value
-         * @param h7 the seventh hour value
-         */
-        void addAll(ComboBox<LocalTime> field, int h1, int h2, int h3, int h4, int h5, int h6, int h7);
     }
 }

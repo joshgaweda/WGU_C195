@@ -159,9 +159,9 @@ public class AppointmentsController extends MultiController {
             AddAppointmentController controller = new AddAppointmentController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) 
+        catch (Exception exception) 
         {
-            System.out.println(e);
+            System.out.println(exception);
         }
     }
 
@@ -186,8 +186,8 @@ public class AppointmentsController extends MultiController {
             ModifyAppointmentController controller = new ModifyAppointmentController(data, selectedAppointment);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 

@@ -47,12 +47,12 @@
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
       </RadioButton>
-      <Button fx:id="appointmentsButton" layoutX="563.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
+      <Button fx:id="appointmentsButton" layoutX="563.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="typeTable" layoutX="50.0" layoutY="71.0" prefHeight="108.0" prefWidth="294.0" style="-fx-font-size: 11;">
+      <TableView fx:id="typeTable" layoutX="50.0" layoutY="71.0" prefHeight="120.0" prefWidth="294.0" style="-fx-font-size: 11;">
          <columns>
             <TableColumn fx:id="typeTableColumn" prefWidth="180.0" style="-fx-alignment: CENTER;" text="Type">
                <cellValueFactory>
@@ -66,7 +66,7 @@
             </TableColumn>
          </columns>
       </TableView>
-      <TableView fx:id="monthTable" layoutX="356.0" layoutY="71.0" prefHeight="108.0" prefWidth="294.0" style="-fx-font-size: 11;">
+      <TableView fx:id="monthTable" layoutX="356.0" layoutY="71.0" prefHeight="120.0" prefWidth="294.0" style="-fx-font-size: 11;">
          <columns>
             <TableColumn fx:id="typeMonthColumn" prefWidth="180.0" style="-fx-alignment: CENTER;" text="Month">
                <cellValueFactory>
