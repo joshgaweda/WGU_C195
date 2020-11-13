@@ -19,7 +19,7 @@ public class Main extends Application
 {
     /**
      * Opens/closes the database connection
-     * @param args
+     * @param args launch arguments
      */
     public static void main(String[] args) 
     {
@@ -30,8 +30,8 @@ public class Main extends Application
     
     /**
      * Loads database and displays the login window
-     * @param mainStage
-     * @throws java.lang.Exception
+     * @param mainStage identifies the Main stage
+     * @throws java.lang.Exception on start
      */
     @Override
     public void start(Stage mainStage) throws Exception 

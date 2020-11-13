@@ -68,6 +68,7 @@ public class AppointmentsController extends MultiController {
     /**
      * Class constructor
      * @param data the complete set of data retrieved from the database by the DBQuery utility
+     * @param alert
      */
     public AppointmentsController(DBQuery data, boolean alert) {
         this.data = data;

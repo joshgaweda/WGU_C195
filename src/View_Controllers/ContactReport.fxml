@@ -85,7 +85,7 @@
             </TableColumn>
          </columns>
       </TableView>
-      <Label layoutX="49.0" layoutY="173.0" text="Alpha Aardvark TableA">
+      <Label layoutX="49.0" layoutY="173.0" text="Amari Andrews TableA">
          <font>
             <Font size="12.0" />
          </font>
@@ -129,7 +129,7 @@
             </TableColumn>
          </columns>
       </TableView>
-      <Label layoutX="50.0" layoutY="305.0" text="Bravo Bobby TableB">
+      <Label layoutX="50.0" layoutY="305.0" text="Bill Belichick TableB">
          <font>
             <Font size="12.0" />
          </font>
@@ -173,7 +173,7 @@
             </TableColumn>
          </columns>
       </TableView>
-      <Label layoutX="50.0" layoutY="437.0" text="Charlie Chase TableC">
+      <Label layoutX="50.0" layoutY="437.0" text="Chris Carson TableC">
          <font>
             <Font size="12.0" />
          </font>

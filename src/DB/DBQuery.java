@@ -79,7 +79,7 @@ public class DBQuery
 
     /**
      * Adds a record to the appointment_list table when a new Appointment object is created
-     * @param appointment
+     * @param appointment is the current appointment
      */
     public void add_Appointment(Appointment appointment) 
     {
@@ -113,7 +113,7 @@ public class DBQuery
 
     /**
      * Updates the appointment_list table whenever an Appointment object is updated
-     * @param appointment
+     * @param appointment is the current appointment
      */
     public void update_Appointment(Appointment appointment) 
     {
@@ -151,7 +151,7 @@ public class DBQuery
 
     /**
      * Deletes a record in the appointment_list table in the database whenever an Appointment object is deleted
-     * @param appointment
+     * @param appointment is the current appointment
      */
     public void delete_Appointment(Appointment appointment) 
     {
@@ -272,7 +272,7 @@ public class DBQuery
 
     /**
      * Adds an entry to the customer_list table when a new Customer object is created
-     * @param customer
+     * @param customer is the current customer
      */
     public void add_Customer(Customer customer) 
     {
@@ -302,7 +302,7 @@ public class DBQuery
 
     /**
      * Updates the customer_list table whenever a Customer object is updated
-     * @param customer 
+     * @param customer is the current customer 
      */
     public void update_Customer(Customer customer) 
     {
@@ -336,7 +336,7 @@ public class DBQuery
 
     /**
      * Deletes entry in the customer_list table when a Customer object is deleted
-     * @param customer 
+     * @param customer is the current customer
      */
     public void delete_Customer(Customer customer) 
     {

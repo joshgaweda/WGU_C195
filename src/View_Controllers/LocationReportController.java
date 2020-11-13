@@ -18,76 +18,76 @@ import java.util.ResourceBundle;
 public class LocationReportController extends MultiController {
 
     @FXML
-    private TableView<Appointment> chicagoTable;
+    private TableView<Appointment> atlantaTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> chicagoIDColumn;
+    private TableColumn<Appointment, Integer> atlantaIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> chicagoTitleColumn;
+    private TableColumn<Appointment, String> atlantaTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> chicagoDescriptionColumn;
+    private TableColumn<Appointment, String> atlantaDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> chicagoTypeColumn;
+    private TableColumn<Appointment, String> atlantaTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> chicagoStartColumn;
+    private TableColumn<Appointment, String> atlantaStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> chicagoEndColumn;
+    private TableColumn<Appointment, String> atlantaEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> chicagoCustomerColumn;
+    private TableColumn<Appointment, Integer> atlantaCustomerColumn;
 
     @FXML
-    private TableView<Appointment> tampaTable;
+    private TableView<Appointment> bostonTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> tampaIDColumn;
+    private TableColumn<Appointment, Integer> bostonIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> tampaTitleColumn;
+    private TableColumn<Appointment, String> bostonTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> tampaDescriptionColumn;
+    private TableColumn<Appointment, String> bostonDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> tampaTypeColumn;
+    private TableColumn<Appointment, String> bostonTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> tampaStartColumn;
+    private TableColumn<Appointment, String> bostonStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> tampaEndColumn;
+    private TableColumn<Appointment, String> bostonEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> tampaCustomerColumn;
+    private TableColumn<Appointment, Integer> bostonCustomerColumn;
 
     @FXML
-    private TableView<Appointment> bellinghamTable;
+    private TableView<Appointment> corvallisTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> bellinghamIDColumn;
+    private TableColumn<Appointment, Integer> corvallisIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bellinghamTitleColumn;
+    private TableColumn<Appointment, String> corvallisTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bellinghamDescriptionColumn;
+    private TableColumn<Appointment, String> corvallisDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bellinghamTypeColumn;
+    private TableColumn<Appointment, String> corvallisTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bellinghamStartColumn;
+    private TableColumn<Appointment, String> corvallisStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bellinghamEndColumn;
+    private TableColumn<Appointment, String> corvallisEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> bellinghamCustomerColumn;
+    private TableColumn<Appointment, Integer> corvallisCustomerColumn;
 
     /**
      * Class constructor
@@ -104,45 +104,45 @@ public class LocationReportController extends MultiController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        generateChicagoTable();
-        generateTampaTable();
-        generateBellinghamTable();
+        generateAtlantaTable();
+        generateBostonTable();
+        generateCorvallisTable();
     }
 
     /**
-     * Generates the Chicago table view. Filters the schedule of appointments to include only those with a Location set to Chicago, populates the table view with that data, then refreshes the table view
+     * Generates the Atlanta table view. Filters the schedule of appointments to include only those with a Location set to Atlanta, populates the table view with that data, then refreshes the table view
      */
-    private void generateChicagoTable() {
+    private void generateAtlantaTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Chicago"))
+            if (a.getLocation().equals("Atlanta"))
                 filterAppointments.add(a);
-        chicagoTable.setItems(filterAppointments);
-        chicagoTable.refresh();
+        atlantaTable.setItems(filterAppointments);
+        atlantaTable.refresh();
     }
 
     /**
-     * Generates the Tampa table view. Filters the schedule of appointments to include only those with a Location set to Tampa, populates the table view with that data, then refreshes the table view
+     * Generates the Boston table view. Filters the schedule of appointments to include only those with a Location set to Boston, populates the table view with that data, then refreshes the table view
      */
-    private void generateTampaTable() {
+    private void generateBostonTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Tampa"))
+            if (a.getLocation().equals("Boston"))
                 filterAppointments.add(a);
-        tampaTable.setItems(filterAppointments);
-        tampaTable.refresh();
+        bostonTable.setItems(filterAppointments);
+        bostonTable.refresh();
     }
 
     /**
-     * Generates the Bellingham table view. Filters the schedule of appointments to include only those with a Location set to Bellingham, populates the table view with that data, then refreshes the table view
+     * Generates the Corvallis table view. Filters the schedule of appointments to include only those with a Location set to Corvallis, populates the table view with that data, then refreshes the table view
      */
-    private void generateBellinghamTable() {
+    private void generateCorvallisTable() {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Bellingham"))
+            if (a.getLocation().equals("Corvallis"))
                 filterAppointments.add(a);
-        bellinghamTable.setItems(filterAppointments);
-        bellinghamTable.refresh();
+        corvallisTable.setItems(filterAppointments);
+        corvallisTable.refresh();
     }
 
 }

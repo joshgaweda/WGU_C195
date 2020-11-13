@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import Models.*;
 import DB.DBQuery;
+import java.io.IOException;
 
 import java.time.*;
 import java.util.Optional;
@@ -169,8 +170,8 @@ public abstract class MultiController implements Initializable {
             TypeMonthReportController controller = new TypeMonthReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
@@ -179,14 +180,17 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
-    protected void loadContactReport(MouseEvent event) {
-        try {
+    protected void loadContactReport(MouseEvent event)
+    {
+        try 
+        {
             String fxml = "/View_Controllers/ContactReport.fxml";
             ContactReportController controller = new ContactReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception e) {
-            System.out.println(e);
+        catch (Exception exception) 
+        {
+            System.out.println(exception);
         }
     }
 
@@ -211,14 +215,16 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks a button
      * @param fxml the address of the fxml document
      * @param controller a new instance of the controller class
+     * @throws java.io.IOException
      */
-    protected void loadScreen(MouseEvent event, String fxml, MultiController controller) throws Exception {
+    protected void loadScreen(MouseEvent event, String fxml, MultiController controller) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         ResourceBundle rb = ResourceBundle.getBundle("Properties/language");
         loader.setController(controller);
         loader.setResources(rb);
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.setResizable(false);
@@ -227,10 +233,10 @@ public abstract class MultiController implements Initializable {
 
     /**
      * Prefills the available options in the ComboBoxes on the Add Appointment and Modify Appointment screens
-     * <p>Lambda Expression (Line 236): This lambda expression improves the code by avoiding repetition of the verbose syntax for converting an hour from an integer to a LocalTime. That syntax renders the built-in getItems().addAll() method for filling ComboBoxes unuseable, since it would be needed for every parameter. Additionally, because lambda expression works for both start times and end times, further reducing code repetition.</p>
+     * <p>Lambda Expression: Improves the code by avoiding repetition of the verbose syntax for converting an hour from an integer to a LocalTime</p>
      */
     protected void fillAppointmentOptions() {
-        location.getItems().addAll("Chicago", "Tampa", "Bellingham");
+        location.getItems().addAll("Atlanta", "Boston", "Corvallis");
         type.getItems().addAll("Planning Session", "De-Briefing");
 
         Populate comboBox = (field, h1, h2, h3, h4, h5, h6, h7) -> {
