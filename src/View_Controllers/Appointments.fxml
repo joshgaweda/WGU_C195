@@ -23,7 +23,7 @@
                 <Font size="18.0" />
             </font>
         </Label>
-      <RadioButton fx:id="allRadio" layoutX="440.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewAll" selected="true" text="All">
+      <RadioButton fx:id="allRadio" layoutX="293.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewAll" selected="true" text="All">
          <font>
             <Font size="12.0" />
          </font>
@@ -31,12 +31,12 @@
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="weekRadio" layoutX="300.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewWeek" text="Week" toggleGroup="$radio">
+      <RadioButton fx:id="weekRadio" layoutX="349.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewWeek" prefHeight="17.0" prefWidth="59.0" text="Week" toggleGroup="$radio">
          <font>
             <Font size="12.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="monthRadio" layoutX="370.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewMonth" text="Month" toggleGroup="$radio">
+      <RadioButton fx:id="monthRadio" layoutX="419.0" layoutY="39.0" mnemonicParsing="false" onMouseClicked="#viewMonth" text="Month" toggleGroup="$radio">
          <font>
             <Font size="12.0" />
          </font>

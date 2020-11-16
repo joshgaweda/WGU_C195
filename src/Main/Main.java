@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class Main extends Application 
 {
     /**
-     * Opens/closes the database connection
+     * Opens/closes the db connection
      * @param args launch arguments
      */
     public static void main(String[] args) 
@@ -29,8 +29,8 @@ public class Main extends Application
     }
     
     /**
-     * Loads database and displays the login window
-     * @param mainStage identifies the Main stage
+     * Loads db and displays the login window
+     * @param mainStage identifies Main stage
      * @throws java.lang.Exception on start
      */
     @Override

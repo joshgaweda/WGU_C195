@@ -16,10 +16,8 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * Controls the Appointments by Type & Month Report screen
- */
-public class TypeMonthReportController extends MultiController {
+public class TypeMonthReportController extends MultiController 
+{
 
     @FXML
     private TableView<Count> typeTable;
@@ -43,7 +41,8 @@ public class TypeMonthReportController extends MultiController {
      * Class constructor
      * @param data the complete set of data retrieved from the database by the DBQuery utility
      */
-    public TypeMonthReportController(DBQuery data) {
+    public TypeMonthReportController(DBQuery data) 
+    {
         this.data = data;
     }
 
@@ -53,7 +52,8 @@ public class TypeMonthReportController extends MultiController {
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         generateTypeTable();
         generateMonthTable();
     }
@@ -61,7 +61,8 @@ public class TypeMonthReportController extends MultiController {
     /**
      * Generates the Type table view. Calculates the number of appointments for each type, populates the table view with that data, then refreshes the table view
      */
-    private void generateTypeTable() {
+    private void generateTypeTable()
+    {
         ObservableList<Count> counts = FXCollections.observableArrayList();
         ObservableList<Count> view = FXCollections.observableArrayList();
         Count interview = new Count("Interview", 0);
@@ -85,7 +86,8 @@ public class TypeMonthReportController extends MultiController {
     /**
      * Generates the Month table view. Calculates the number of appointments for each month, populates the table view with that data, then refreshes the table view
      */
-    private void generateMonthTable() {
+    private void generateMonthTable() 
+    {
         ObservableList<Count> counts = FXCollections.observableArrayList();
         ObservableList<Count> view = FXCollections.observableArrayList();
         Count jan = new Count(0, "January");

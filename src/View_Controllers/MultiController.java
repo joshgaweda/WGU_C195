@@ -25,7 +25,8 @@ import java.util.TimeZone;
 /**
  * An abstract class that contains variables and methods used by various other controllers
  */
-public abstract class MultiController implements Initializable {
+public abstract class MultiController implements Initializable 
+{
 
     @FXML
     protected TextField id;
@@ -129,8 +130,10 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Log In button or Appointments button
      */
     @FXML
-    protected void loadAppointments(MouseEvent event) {
-        try {
+    protected void loadAppointments(MouseEvent event) 
+    {
+        try 
+        {
             boolean alert = false;
             if (event.getSource() == loginButton)
                 alert = true;
@@ -138,7 +141,8 @@ public abstract class MultiController implements Initializable {
             AppointmentsController controller = new AppointmentsController(data, alert);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) {
+        catch (Exception exception) 
+        {
             System.out.println(exception);
         }
     }
@@ -148,13 +152,16 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
-    protected void loadCustomers(MouseEvent event) {
-        try {
+    protected void loadCustomers(MouseEvent event)
+    {
+        try 
+        {
             String fxml = "/View_Controllers/Customers.fxml";
             CustomersController controller = new CustomersController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) {
+        catch (Exception exception) 
+        {
             System.out.println(exception);
         }
     }
@@ -164,13 +171,16 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
-    protected void loadReports(MouseEvent event) {
-        try {
+    protected void loadReports(MouseEvent event) 
+    {
+        try 
+        {
             String fxml = "/View_Controllers/TypeMonthReport.fxml";
             TypeMonthReportController controller = new TypeMonthReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) {
+        catch (IOException exception) 
+        {
             System.out.println(exception);
         }
     }
@@ -188,7 +198,7 @@ public abstract class MultiController implements Initializable {
             ContactReportController controller = new ContactReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) 
+        catch (IOException exception) 
         {
             System.out.println(exception);
         }
@@ -199,13 +209,16 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
-    protected void loadLocationReport(MouseEvent event) {
-        try {
+    protected void loadLocationReport(MouseEvent event) 
+    {
+        try 
+        {
             String fxml = "/View_Controllers/LocationReport.fxml";
             LocationReportController controller = new LocationReportController(data);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) {
+        catch (IOException exception) 
+        {
             System.out.println(exception);
         }
     }
@@ -215,7 +228,7 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks a button
      * @param fxml the address of the fxml document
      * @param controller a new instance of the controller class
-     * @throws java.io.IOException
+     * @throws java.io.IOException .
      */
     protected void loadScreen(MouseEvent event, String fxml, MultiController controller) throws IOException
     {
@@ -231,40 +244,33 @@ public abstract class MultiController implements Initializable {
         stage.show();
     }
 
-        /**
+    /**
     *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
     */
     interface TimePop 
     {
-        /**
-         * @param field the ComboBox that will contain the hours
-         * @param h1 the first hour value
-         * @param h2 the second hour value
-         * @param h3 the third hour value
-         * @param h4 the fourth hour value
-         * @param h5 the fifth hour value
-         * @param h6 the sixth hour value
-         * @param h7 the seventh hour value
-         */
-        void addAll(ComboBox<LocalTime> field, int t1, int t2, int t3, int t4, int t5, int t6, int t7, int t8);
+        void addAll(ComboBox<LocalTime> field, int t1, int t2, int t3, int t4, int t5, int t6, int t7, 
+                int t8, int t9, int t10, int t11, int t12, int t13, int t14, int t15, int t16, int t17, int t18, int t19,
+                int t20, int t21, int t22, int t23, int t24);
     }
     
     /**
      * Prefills the available options in the ComboBoxes on the Add Appointment and Modify Appointment screens
      * <p>Lambda Expression: Improves the code by avoiding repetition of the verbose syntax for converting an hour from an integer to a LocalTime</p>
      */
-    protected void fillAppointmentOptions() {
+    protected void fillAppointmentOptions() 
+    {
         location.getItems().addAll("Atlanta", "Boston", "Corvallis");
         type.getItems().addAll("Interview", "Meeting", "Planning", "Lunch");
 
-        TimePop comboBox = (field, t1, t2, t3, t4, t5, t6, t7, t8) -> {
+        TimePop comboBox = (field, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24) -> {
             ObservableList<Integer> hours = FXCollections.observableArrayList();
-            hours.addAll(t1, t2, t3, t4, t5, t6, t7, t8);
+            hours.addAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24);
             for (int h : hours)
                 field.getItems().add(LocalDateTime.of(LocalDate.now(),LocalTime.of(h,0)).toInstant(ZoneOffset.ofHours(0)).atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime());
         };
-        comboBox.addAll(startTime, 15, 16, 17, 18, 19, 20, 21, 22);
-        comboBox.addAll(endTime, 16, 17, 18, 19, 20, 21, 22, 23);
+        comboBox.addAll(startTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 17, 18, 19, 20, 21, 22, 23);
+        comboBox.addAll(endTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
 
         for (Customer c : data.get_Customer_List())
             customer.getItems().add(c.getCustomerID());
@@ -277,7 +283,8 @@ public abstract class MultiController implements Initializable {
     /**
      * Prefills the available options in the ComboBoxes on the Add Customer and Modify Customer screens
      */
-    protected void fillCustomerOptions() {
+    protected void fillCustomerOptions() 
+    {
         for (Division d : data.get_Division_List())
             division.getItems().add(d.getDiv_name());
         for (Country c : data.get_Country_List())
@@ -289,7 +296,8 @@ public abstract class MultiController implements Initializable {
      * @param event an action event when the user makes a selection from the endTime ComboBox
      */
     @FXML
-    protected void updateStartTime(ActionEvent event) {
+    protected void updateStartTime(ActionEvent event) 
+    {
         startTime.setValue(endTime.getValue().minusHours(1));
     }
 
@@ -298,7 +306,8 @@ public abstract class MultiController implements Initializable {
      * @param event an action event when the user makes a selection from the startTime ComboBox
      */
     @FXML
-    protected void updateEndTime(ActionEvent event) {
+    protected void updateEndTime(ActionEvent event) 
+    {
         endTime.setValue(startTime.getValue().plusHours(1));
     }
 
@@ -307,7 +316,8 @@ public abstract class MultiController implements Initializable {
      * @param event an action event when the user makes a selection from the Country ComboBox
      */
     @FXML
-    protected void updateDivision(ActionEvent event) {
+    protected void updateDivision(ActionEvent event) 
+    {
         ObservableList<String> updateOptions = FXCollections.observableArrayList();
         for (Division d : data.get_Division_List())
             if (country.getValue().equals(d.getDiv_country()))
@@ -320,23 +330,18 @@ public abstract class MultiController implements Initializable {
      * @param event an action event when the user makes a selection from the Division ComboBox
      */
     @FXML
-    protected void updateCountry(ActionEvent event) {
+    protected void updateCountry(ActionEvent event) 
+    {
         for (Division d : data.get_Division_List())
             if (d.getDiv_name().equals(division.getValue()))
                 country.setValue(d.getDiv_country());
     }
-
     
     /**
-    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and  then converts them to an instant value
+    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and then converts them to an instant value
     */
     interface TimeConv 
     {
-        /**
-         * @param date DatePicker field that allows input of LocalDate
-         * @param time ComboBox field that allows input of LocalTime
-         * @return value based on the DatePicker and ComboBox fields
-         */
         Instant toInstant(DatePicker date, ComboBox<LocalTime> time);
     }
     
@@ -346,65 +351,81 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Save button
      */
     @FXML
-    protected void saveAppointment(MouseEvent event) {
-        if (title.getText().trim().isEmpty()) {
+    protected void saveAppointment(MouseEvent event) 
+    {
+        if (title.getText().trim().isEmpty()) 
+        {
             errorLabel.setText("Please enter a Title");
             return;
         }
-        if (description.getText().trim().isEmpty()) {
-            errorLabel.setText("Please enter a Description");
+        if (description.getText().trim().isEmpty()) 
+        {
+            errorLabel.setText("Please enter Description");
             return;
         }
-        if (location.getSelectionModel().isEmpty()) {
-            errorLabel.setText("Please select a Location");
+        if (location.getSelectionModel().isEmpty()) 
+        {
+            errorLabel.setText("Please select Location");
             return;
         }
-        if (type.getSelectionModel().isEmpty()) {
-            errorLabel.setText("Please select a Type");
+        if (type.getSelectionModel().isEmpty()) 
+        {
+            errorLabel.setText("Please select Type");
             return;
         }
-        if (date.getValue() == null) {
-            errorLabel.setText("Please enter a Date");
+        if (date.getValue() == null)
+        {
+            errorLabel.setText("Please enter Date");
             return;
         }
-        if (startTime.getValue() == null) {
-            errorLabel.setText("Please enter a Start Time");
+        if (startTime.getValue() == null) 
+        {
+            errorLabel.setText("Please enter Start Time");
             return;
         }
-        if (endTime.getValue() == null) {
-            errorLabel.setText("Please enter an End Time");
+        if (endTime.getValue() == null) 
+        {
+            errorLabel.setText("Please enter End Time");
             return;
         }
 
         TimeConv dateTime = (date, time) -> ZonedDateTime.of(date.getValue(), time.getValue(), ZoneId.of(TimeZone.getDefault().getID())).toInstant();
+        String tz = "America/New_York";
         Instant start = dateTime.toInstant(date, startTime);
         Instant end = dateTime.toInstant(date, endTime);
 
-        if (start.isBefore(Instant.now())) {
-            errorLabel.setText("Please select a future Date and Time");
+        if (start.isBefore(Instant.now())) 
+        {
+            errorLabel.setText("Please select future Date and Time");
             return;
         }
-        if (start.atZone(ZoneId.of("America/Los_Angeles")).toLocalTime().isBefore(LocalTime.of(7,0)) || end.atZone(ZoneId.of("America/Los_Angeles")).toLocalTime().isAfter(LocalTime.of(21,0))) {
+        if (start.atZone(ZoneId.of(tz)).toLocalTime().isBefore(LocalTime.of(8,0)) || end.atZone(ZoneId.of(tz)).toLocalTime().isAfter(LocalTime.of(21,0))) 
+        {
             errorLabel.setText("Select a time during business hours");
             return;
         }
 
-        if (customer.getSelectionModel().isEmpty()) {
+        if (customer.getSelectionModel().isEmpty()) 
+        {
             errorLabel.setText("Please select a Customer ID");
             return;
         }
-        for (Appointment a : data.get_Appointment_List()) {
-            if (customer.getValue() == a.getCustomerID() && start.equals(a.getStart())) {
+        for (Appointment a : data.get_Appointment_List()) 
+        {
+            if (customer.getValue() == a.getCustomerID() && start.equals(a.getStart())) 
+            {
                 errorLabel.setText("Overlapping appointment");
                 return;
             }
         }
-        if (user.getSelectionModel().isEmpty()) {
-            errorLabel.setText("Please select a User");
+        if (contact.getSelectionModel().isEmpty()) 
+        {
+            errorLabel.setText("Please select a Contact");
             return;
         }
-        if (contact.getSelectionModel().isEmpty()) {
-            errorLabel.setText("Please select a Contact");
+        if (user.getSelectionModel().isEmpty()) 
+        {
+            errorLabel.setText("Please select a User");
             return;
         }
 
@@ -431,28 +452,35 @@ public abstract class MultiController implements Initializable {
      * @param event mouse input when the user clicks the Save button
      */
     @FXML
-    protected void saveCustomer(MouseEvent event) {
-        if (name.getText().trim().isEmpty()) {
+    protected void saveCustomer(MouseEvent event)
+    {
+        if (name.getText().trim().isEmpty())
+        {
             errorLabel.setText("Please enter a Name");
             return;
         }
-        if (address.getText().trim().isEmpty()) {
+        if (address.getText().trim().isEmpty()) 
+        {
             errorLabel.setText("Please enter an Address");
             return;
         }
-        if (postalCode.getText().trim().isEmpty()) {
+        if (postalCode.getText().trim().isEmpty()) 
+        {
             errorLabel.setText("Please enter a Postal Code");
             return;
         }
-        if (phone.getText().trim().isEmpty()) {
+        if (phone.getText().trim().isEmpty()) 
+        {
             errorLabel.setText("Please enter a Phone Number");
             return;
         }
-        if (division.getSelectionModel().isEmpty()) {
+        if (division.getSelectionModel().isEmpty()) 
+        {
             errorLabel.setText("Please select a Division");
             return;
         }
-        if (country.getSelectionModel().isEmpty()) {
+        if (country.getSelectionModel().isEmpty()) 
+        {
             errorLabel.setText("Please select a Country");
             return;
         }
@@ -486,10 +514,12 @@ public abstract class MultiController implements Initializable {
         alert.setGraphic(null);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
+        if (result.get() == ButtonType.OK) 
+        {
             return true;
         }
-        else {
+        else 
+        {
             return false;
         }
     }

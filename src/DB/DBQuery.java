@@ -37,8 +37,26 @@ public class DBQuery
     }
 
     /**
-     * Gets list of appointment_list
-     * @return the list of all appointment_list
+     * Gets a User object representing the current user
+     * @return a User object representing the current user
+     */
+    public User get_User() 
+    {
+        return user;
+    }
+
+    /**
+     * Sets a User object representing the current user
+     * @param user a User object representing the current user
+     */
+    public void set_User(User user) 
+    {
+        this.user = user;
+    }
+    
+    /**
+     * Gets list of appointments
+     * @return the list of all appointments
      */
     public ObservableList<Appointment> get_Appointment_List() 
     {
@@ -46,7 +64,7 @@ public class DBQuery
     }
 
     /**
-     * Reads data from appointment_list table, stores each record in an Appointment object and then in an ObservableList
+     * Reads data from appointment_list, stores each record in an Appointment object and then in an ObservableList
      */
     private void read_Appointment_List() 
     {
@@ -78,7 +96,7 @@ public class DBQuery
     }
 
     /**
-     * Adds a record to the appointment_list table when a new Appointment object is created
+     * Adds a record to appointment_list when a new Appointment object is created
      * @param appointment is the current appointment
      */
     public void add_Appointment(Appointment appointment) 
@@ -355,8 +373,8 @@ public class DBQuery
     }
 
     /**
-     * Gets list of all division_list
-     * @return list of all division_list
+     * Gets list of all first level division
+     * @return list of all first level division
      */
     public ObservableList<Division> get_Division_List() 
     {
@@ -387,8 +405,8 @@ public class DBQuery
     }
 
     /**
-     * Gets list of all country_list
-     * @return list of all country_list
+     * Gets list of all countries
+     * @return list of all counties
      */
     public ObservableList<Country> get_Country_List() 
     {
@@ -396,7 +414,7 @@ public class DBQuery
     }
 
     /**
-     * Reads the country_list table, stores each record in an Country object, and stores the Country objects in an ObservableList
+     * Reads the country_list table and stores each record in an Country object.  Country objects are stored in an ObservableList
      */
     public void read_Country_List() 
     {
@@ -415,23 +433,5 @@ public class DBQuery
         {
             System.out.println(exception);
         }
-    }
-
-    /**
-     * Gets a User object representing the current user
-     * @return a User object representing the current user
-     */
-    public User get_User() 
-    {
-        return user;
-    }
-
-    /**
-     * Sets a User object representing the current user
-     * @param user a User object representing the current user
-     */
-    public void set_User(User user) 
-    {
-        this.user = user;
     }
 }
