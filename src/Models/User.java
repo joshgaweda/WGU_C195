@@ -1,9 +1,10 @@
 package Models;
 
 /**
- * Creates User objects that represent the users of the program
+ * Creates User objects that represent the users in the db
  */
-public class User {
+public class User 
+{
 
     private int id;
     private String username;
@@ -25,7 +26,8 @@ public class User {
     /**
      * Default class constructor
      */
-    public User() { }
+    public User() 
+    {}
 
     /**
      * Gets the user ID
@@ -37,7 +39,7 @@ public class User {
     }
 
     /**
-     * Sets the user ID
+     * Sets user ID
      * @param id the user ID
      */
     public void setUser_ID(int id) 
@@ -46,8 +48,8 @@ public class User {
     }
 
     /**
-     * Gets the username
-     * @return the username
+     * Gets username
+     * @return username
      */
     public String getUsername() 
     {
@@ -55,8 +57,8 @@ public class User {
     }
 
     /**
-     * Sets the users name
-     * @param username the username
+     * Sets users name
+     * @param username username
      */
     public void setUsername(String username) 
     {
@@ -64,8 +66,8 @@ public class User {
     }
 
     /**
-     * Gets the password
-     * @return the password
+     * Gets password
+     * @return password
      */
     public String getPassword()
     {

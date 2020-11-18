@@ -19,12 +19,12 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button fx:id="addSaveButton" layoutX="250.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#saveCustomer" text="Save">
+        <Button fx:id="addSaveButton" layoutX="148.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#saveCustomer" text="Save">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button fx:id="cancelButton" layoutX="298.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#loadCustomers" text="Cancel">
+        <Button fx:id="cancelButton" layoutX="195.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#loadCustomers" text="Cancel">
             <font>
                 <Font size="12.0" />
             </font>
@@ -79,19 +79,19 @@
                 <Font size="12.0" />
             </font>
         </TextField>
-        <Label layoutX="50.0" layoutY="230.0" text="Division">
+        <Label layoutX="50.0" layoutY="230.0" text="Country">
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
-        <ComboBox fx:id="division" layoutX="150.0" layoutY="226.0" onAction="#updateCountry" onMouseClicked="#clearError" prefWidth="200.0" style="-fx-font-size: 12;" />
-        <Label layoutX="50.0" layoutY="261.0" text="Country">
+        <ComboBox fx:id="country" layoutX="150.0" layoutY="226.0" onAction="#updateDivision" onMouseClicked="#clearError" prefWidth="200.0" style="-fx-font-size: 12;" />
+        <Label layoutX="50.0" layoutY="261.0" text="Division">
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
-        <ComboBox fx:id="country" layoutX="150.0" layoutY="257.0" onAction="#updateDivision" onMouseClicked="#clearError" prefWidth="200.0" style="-fx-font-size: 12;" />
-        <Label fx:id="errorLabel" layoutX="50.0" layoutY="304.0" text="Error">
+        <ComboBox fx:id="division" layoutX="150.0" layoutY="257.0" onAction="#updateCountry" onMouseClicked="#clearError" prefWidth="200.0" style="-fx-font-size: 12;" />
+        <Label fx:id="errorLabel" layoutX="295.0" layoutY="304.0" text="Error">
             <font>
                 <Font size="12.0" />
             </font>

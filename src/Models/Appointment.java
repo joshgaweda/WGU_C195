@@ -7,30 +7,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 /**
- * Creates Appointment objects
+ * Creates Appointment objects that represent appointments in the db
  */
 public class Appointment 
 {
 
     private int appointmentID;
+    private int customerID;
+    private int userID;
+    private int contactID;
     private String title;
     private String description;
     private String location;
     private String type;
-    private Instant start;
-    private Instant end;
     private String username;
     private String contact;
-    private int customerID;
-    private int userID;
-    private int contactID;
+    private Instant start;
+    private Instant end;
     private LocalTime startTime;
     private LocalTime endTime;
     private String startFormatted;
     private String endFormatted;
 
     /**
-     * Class constructor. Stores the appointment start and end times in UTC, as times in the time zone set by the user's operating system, and as Strings representing both date and time in the time zone set by the user's operating system
+     * Class constructor. Stores appointment start/end times in the time zone set by the user OS. Displayed in UTC format.
      * @param appointmentID the appointment ID
      * @param title the appointment title
      * @param description the appointment description
@@ -40,8 +40,8 @@ public class Appointment
      * @param end the appointment end date and time in UTC
      * @param username the username of the user that created the appointment
      * @param contact the company contact associated with the appointment
-     * @param customerID the customer ID of the customer associated with the appointment
-     * @param userID the user ID of the user that created the appointment
+     * @param customerID the customer ID for the appointment
+     * @param userID the ID of the current user.
      * @param contactID the contact ID of the company contact associated with the appointment
      */
     public Appointment(int appointmentID, String title, String description, String location, String type, Instant start, Instant end, String username, String contact, int customerID, int userID, int contactID) 
@@ -68,7 +68,8 @@ public class Appointment
      * Gets the appointment ID
      * @return the appointment ID
      */
-    public int getAppointmentID() {
+    public int getAppointmentID() 
+    {
         return appointmentID;
     }
 
@@ -76,7 +77,8 @@ public class Appointment
      * Sets the appointment ID
      * @param appointmentID the appointment ID
      */
-    public void setAppointmentID(int appointmentID) {
+    public void setAppointmentID(int appointmentID) 
+    {
         this.appointmentID = appointmentID;
     }
 
@@ -84,7 +86,8 @@ public class Appointment
      * Gets the appointment title
      * @return the appointment title
      */
-    public String getTitle() {
+    public String getTitle() 
+    {
         return title;
     }
 
@@ -92,7 +95,8 @@ public class Appointment
      * Sets the appointment title
      * @param title the appointment title
      */
-    public void setTitle(String title) {
+    public void setTitle(String title) 
+    {
         this.title = title;
     }
 
@@ -100,7 +104,8 @@ public class Appointment
      * Gets the appointment description
      * @return the appointment description
      */
-    public String getDescription() {
+    public String getDescription() 
+    {
         return description;
     }
 
@@ -108,7 +113,8 @@ public class Appointment
      * Sets the appointment description
      * @param description the appointment description
      */
-    public void setDescription(String description) {
+    public void setDescription(String description) 
+    {
         this.description = description;
     }
 
@@ -116,7 +122,8 @@ public class Appointment
      * Gets the appointment location
      * @return the appointment location
      */
-    public String getLocation() {
+    public String getLocation() 
+    {
         return location;
     }
 
@@ -124,7 +131,8 @@ public class Appointment
      * Sets the appointment location
      * @param location the appointment location
      */
-    public void setLocation(String location) {
+    public void setLocation(String location) 
+    {
         this.location = location;
     }
 
@@ -132,7 +140,8 @@ public class Appointment
      * Gets the appointment type
      * @return the appointment type
      */
-    public String getType() {
+    public String getType()
+    {
         return type;
     }
 
@@ -140,7 +149,8 @@ public class Appointment
      * Sets the appointment type
      * @param type the appointment type
      */
-    public void setType(String type) {
+    public void setType(String type) 
+    {
         this.type = type;
     }
 
@@ -148,7 +158,8 @@ public class Appointment
      * Gets the appointment start date and time in UTC
      * @return the appointment start date and time in UTC
      */
-    public Instant getStart() {
+    public Instant getStart()
+    {
         return start;
     }
 
@@ -156,7 +167,8 @@ public class Appointment
      * Sets the appointment start date and time in UTC
      * @param start the appointment start date and time in UTC
      */
-    public void setStart(Instant start) {
+    public void setStart(Instant start) 
+    {
         this.start = start;
     }
 
@@ -164,7 +176,8 @@ public class Appointment
      * Gets the appointment end date and time in UTC
      * @return the appointment end date and time in UTC
      */
-    public Instant getEnd() {
+    public Instant getEnd() 
+    {
         return end;
     }
 
@@ -172,7 +185,8 @@ public class Appointment
      * Sets the appointment end date and time in UTC
      * @param end the appointment end date and time in UTC
      */
-    public void setEnd(Instant end) {
+    public void setEnd(Instant end) 
+    {
         this.end = end;
     }
 
@@ -180,7 +194,8 @@ public class Appointment
      * Gets the username of the user that created the appointment
      * @return the username of the user that created the appointment
      */
-    public String getUsername() {
+    public String getUsername() 
+    {
         return username;
     }
 
@@ -188,7 +203,8 @@ public class Appointment
      * Sets the username of the user that created the appointment
      * @param username the username of the user that created the appointment
      */
-    public void setUsername(String username) {
+    public void setUsername(String username) 
+    {
         this.username = username;
     }
 
@@ -196,23 +212,26 @@ public class Appointment
      * Gets the company contact associated with the appointment
      * @return the company contact associated with the appointment
      */
-    public String getContact() {
+    public String getContact() 
+    {
         return contact;
     }
 
     /**
-     * Sets the company contact associated with the appointment
-     * @param contact the company contact associated with the appointment
+     * Sets the company contact of the appointment
+     * @param contact the company contact of the appointment
      */
-    public void setContact(String contact) {
+    public void setContact(String contact)
+    {
         this.contact = contact;
     }
 
     /**
-     * Gets the customer ID of the customer associated with the appointment
-     * @return the customer ID of the customer associated with the appointment
+     * Gets the customer ID of the customer of the appointment
+     * @return the customer ID of the customer of the appointment
      */
-    public int getCustomerID() {
+    public int getCustomerID() 
+    {
         return customerID;
     }
 
@@ -220,7 +239,8 @@ public class Appointment
      * Sets the customer ID of the customer associated with the appointment
      * @param customerID the customer ID of the customer associated with the appointment
      */
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(int customerID) 
+    {
         this.customerID = customerID;
     }
 
@@ -228,7 +248,8 @@ public class Appointment
      * Gets the user ID of the user that created the appointment
      * @return the user ID of the user that created the appointment
      */
-    public int getUserID() {
+    public int getUserID() 
+    {
         return userID;
     }
 
@@ -236,7 +257,8 @@ public class Appointment
      * Sets the user ID of the user that created the appointment
      * @param user the user ID of the user that created the appointment
      */
-    public void setUserID(int user) {
+    public void setUserID(int user) 
+    {
         this.userID = userID;
     }
 
@@ -244,7 +266,8 @@ public class Appointment
      * Gets the contact ID of the company contact associated with the appointment
      * @return the contact ID of the company contact associated with the appointment
      */
-    public int getContactID() {
+    public int getContactID()
+    {
         return contactID;
     }
 
@@ -252,7 +275,8 @@ public class Appointment
      * Sets the contact ID of the company contact associated with the appointment
      * @param contactID the contact ID of the company contact associated with the appointment
      */
-    public void setContactID(int contactID) {
+    public void setContactID(int contactID)
+    {
         this.contactID = contactID;
     }
 
@@ -260,7 +284,8 @@ public class Appointment
      * Gets the start time in the time zone set by the user's operating system
      * @return the start time in the time zone set by the user's operating system
      */
-    public LocalTime getStartTime() {
+    public LocalTime getStartTime() 
+    {
         return startTime;
     }
 
@@ -268,7 +293,8 @@ public class Appointment
      * Sets the start time in the time zone set by the user's operating system
      * @param startTime the start time in the time zone set by the user's operating system
      */
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(LocalTime startTime) 
+    {
         this.startTime = startTime;
     }
 
@@ -276,7 +302,8 @@ public class Appointment
      * Gets the end time in the time zone set by the user's operating system
      * @return the end time in the time zone set by the user's operating system
      */
-    public LocalTime getEndTime() {
+    public LocalTime getEndTime() 
+    {
         return endTime;
     }
 
@@ -284,7 +311,8 @@ public class Appointment
      * Sets the end time in the time zone set by the user's operating system
      * @param endTime the end time in the time zone set by the user's operating system
      */
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(LocalTime endTime) 
+    {
         this.endTime = endTime;
     }
 
@@ -292,7 +320,8 @@ public class Appointment
      * Gets the formatted start date and time in the time zone set by the user's operating system
      * @return the formatted start date and time in the time zone set by the user's operating system
      */
-    public String getStartFormatted() {
+    public String getStartFormatted() 
+    {
         startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.of(TimeZone.getDefault().getID())));
         return startFormatted;
     }
@@ -301,7 +330,8 @@ public class Appointment
      * Sets the formatted start date and time in the time zone set by the user's operating system
      * @param startFormatted the formatted start date and time in the time zone set by the user's operating system
      */
-    public void setStartFormatted(String startFormatted) {
+    public void setStartFormatted(String startFormatted) 
+    {
         this.startFormatted = startFormatted;
     }
 
@@ -309,7 +339,8 @@ public class Appointment
      * Gets the formatted end date and time in the time zone set by the user's operating system
      * @return the formatted end date and time in the time zone set by the user's operating system
      */
-    public String getEndFormatted() {
+    public String getEndFormatted() 
+    {
         endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.of(TimeZone.getDefault().getID())));
         return endFormatted;
     }
@@ -318,7 +349,8 @@ public class Appointment
      * Sets the formatted end date and time in the time zone set by the user's operating system
      * @param endFormatted the formatted end date and time in the time zone set by the user's operating system
      */
-    public void setEndFormatted(String endFormatted) {
+    public void setEndFormatted(String endFormatted) 
+    {
         this.endFormatted = endFormatted;
     }
 

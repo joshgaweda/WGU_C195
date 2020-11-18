@@ -47,7 +47,7 @@ public class TypeMonthReportController extends MultiController
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the MultiController class
      * @param url The location used to resolve relative paths for the root object, or null if the location is not known
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
@@ -59,7 +59,7 @@ public class TypeMonthReportController extends MultiController
     }
 
     /**
-     * Generates the Type table view. Calculates the number of appointments for each type, populates the table view with that data, then refreshes the table view
+     * Generates the Type table view. Calculates the number of appointments for each type and populates the table with the information
      */
     private void generateTypeTable()
     {
@@ -84,7 +84,7 @@ public class TypeMonthReportController extends MultiController
     }
 
     /**
-     * Generates the Month table view. Calculates the number of appointments for each month, populates the table view with that data, then refreshes the table view
+     * Generates the Month table view. Calculates number of appointments for each month and populates the table with that information
      */
     private void generateMonthTable() 
     {

@@ -1,9 +1,10 @@
 package Models;
 
 /**
- * Creates Contact objects that represent the company's contacts
+ * Creates Contact objects that represent contacts in the db
  */
-public class Contact {
+public class Contact 
+{
 
     private int id;
     private String name;
@@ -15,7 +16,8 @@ public class Contact {
      * @param name the contact name
      * @param email the contact email address
      */
-    public Contact(int id, String name, String email) {
+    public Contact(int id, String name, String email)
+    {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -24,13 +26,15 @@ public class Contact {
     /**
      * Default class constructor
      */
-    public Contact() { }
+    public Contact() 
+    { }
 
     /**
      * Gets the contact ID
      * @return the contact ID
      */
-    public int getID() {
+    public int getID() 
+    {
         return id;
     }
 
@@ -38,7 +42,8 @@ public class Contact {
      * Sets the contact ID
      * @param id the contact ID
      */
-    public void setID(int id) {
+    public void setID(int id) 
+    {
         this.id = id;
     }
 
@@ -46,7 +51,8 @@ public class Contact {
      * Gets the contact name
      * @return the contact name
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -54,7 +60,8 @@ public class Contact {
      * Sets the contact name
      * @param name the contact name
      */
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
@@ -62,7 +69,8 @@ public class Contact {
      * Gets the contact email address
      * @return the contact email address
      */
-    public String getEmail() {
+    public String getEmail() 
+    {
         return email;
     }
 
@@ -70,7 +78,8 @@ public class Contact {
      * Sets the contact email address
      * @param email the contact email address
      */
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 

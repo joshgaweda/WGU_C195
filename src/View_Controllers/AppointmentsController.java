@@ -19,10 +19,23 @@ import java.util.TimeZone;
 /**
  * Controls the Appointments screen
  */
-public class AppointmentsController extends MultiController {
+public class AppointmentsController extends MultiController 
+{
 
     @FXML
     private TableView<Appointment> table;
+
+    @FXML
+    private RadioButton weekRadio;
+
+    @FXML
+    private RadioButton monthRadio;
+
+    @FXML
+    private RadioButton allRadio;
+
+    @FXML
+    private Button customersButton;
 
     @FXML
     private TableColumn<Appointment, Integer> appointmentIDColumn;
@@ -51,37 +64,27 @@ public class AppointmentsController extends MultiController {
     @FXML
     private TableColumn<Appointment, Integer> customerIDColumn;
 
-    @FXML
-    private RadioButton weekRadio;
-
-    @FXML
-    private RadioButton monthRadio;
-
-    @FXML
-    private RadioButton allRadio;
-
-    @FXML
-    private Button customersButton;
-
-    private boolean alert;
+    private boolean free;
 
     /**
      * Class constructor
      * @param data the complete set of data retrieved from the database by the DBQuery utility
-     * @param alert for appointments
+     * @param free for appointments
      */
-    public AppointmentsController(DBQuery data, boolean alert) {
+    public AppointmentsController(DBQuery data, boolean free)
+    {
         this.data = data;
-        this.alert = alert;
+        this.free = free;
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the MultiController class
      * @param url The location used to resolve relative paths for the root object, or null if the location is not known
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         generateTable(data.get_Appointment_List());
         upcomingAppointment();
     }
@@ -89,9 +92,11 @@ public class AppointmentsController extends MultiController {
     /**
      * Displays a message when there is an appointment associated with the current user that starts within 15 minutes of the user's login. Otherwise displays a message indicating there are no upcoming appointments
      */
-    private void upcomingAppointment() {
-        if (alert == true) {
-            for (Appointment a : data.get_Appointment_List()) {
+    private void upcomingAppointment() 
+    {
+        if (free == true) {
+            for (Appointment a : data.get_Appointment_List()) 
+            {
                 if (data.get_User().getUser_ID() == a.getUserID() && a.getStart().isAfter(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofMinutes(15)))) {
                     errorLabel.setText("Appointment " + Integer.toString(a.getAppointmentID()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(a.getStart().atZone(ZoneId.of(TimeZone.getDefault().getID()))) + " starts in less than 15 minutes");
                     return;
@@ -102,10 +107,11 @@ public class AppointmentsController extends MultiController {
     }
 
     /**
-     * Generates the table view and populates it with data from the view ObservableList, refreshes the table view, and clears any error messages
-     * @param view an ObservableList containing the data to be displayed in the table
+     * Generates the table view and populates it with data from the ObservableList 'view', refreshes and clears error notifications
+     * @param view an ObservableList containing data displayed in the table
      */
-    private void generateTable(ObservableList<Appointment> view) {
+    private void generateTable(ObservableList<Appointment> view) 
+    {
         table.setItems(view);
         table.refresh();
         errorLabel.setText("");
@@ -116,7 +122,8 @@ public class AppointmentsController extends MultiController {
      * @param event mouse input when the user selects the All radio button
      */
     @FXML
-    private void viewAll(MouseEvent event) {
+    private void viewAll(MouseEvent event) 
+    {
         generateTable(data.get_Appointment_List());
     }
 
@@ -125,7 +132,8 @@ public class AppointmentsController extends MultiController {
      * @param event mouse input when the user selects the Month radio button
      */
     @FXML
-    private void viewMonth(MouseEvent event) {
+    private void viewMonth(MouseEvent event) 
+    {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
             if (a.getStart().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue() == LocalDate.now().getMonthValue())
@@ -134,11 +142,12 @@ public class AppointmentsController extends MultiController {
     }
 
     /**
-     * Filters the appointments to display only appointments in the upcoming 7 days in the table view
-     * @param event mouse input when the user selects the Month radio button
+     * Filters appointments to display only the next 7 days in the table view
+     * @param event mouse input when user clicks the Month radio button
      */
     @FXML
-    private void viewWeek(MouseEvent event) {
+    private void viewWeek(MouseEvent event) 
+    {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
             if (!a.getStart().isBefore(Instant.now()) && a.getStart().isBefore(Instant.now().plus(Duration.ofDays(7))))
@@ -166,18 +175,22 @@ public class AppointmentsController extends MultiController {
     }
 
     /**
-     * Launches the Modify Appointment screen. Checks that the schedule of appointments is not empty and that an appointment is currently selected
+     * Launches the Modify Appointment screen and checks to make sure the schedule is not empty
      * @param event mouse input when the user clicks the Modify button
      */
     @FXML
-    private void modifyAppointment(MouseEvent event) {
-        try {
+    private void modifyAppointment(MouseEvent event)
+    {
+        try 
+        {
             selectedAppointment = table.getSelectionModel().getSelectedItem();
-            if (data.get_Appointment_List().isEmpty()) {
+            if (data.get_Appointment_List().isEmpty()) 
+            {
                 errorLabel.setText("There are no appointments to modify");
                 return;
             }
-            else if (selectedAppointment == null) {
+            else if (selectedAppointment == null) 
+            {
                 errorLabel.setText("Please select an appointment");
                 return;
             }
@@ -186,23 +199,27 @@ public class AppointmentsController extends MultiController {
             ModifyAppointmentController controller = new ModifyAppointmentController(data, selectedAppointment);
             loadScreen(event, fxml, controller);
         }
-        catch (Exception exception) {
+        catch (Exception exception) 
+        {
             System.out.println(exception);
         }
     }
 
     /**
-     * Deletes an appointment from the schedule. Checks that the schedule is not empty and that an appointment is currently selected. Asks the user to confirm the deletion. Displays a message upon successful deletion
+     * Deletes an appointment from the schedule. Checks to make sure the schedule is not empty and asks user to confirm deletion. Displays a message upon successful deletion
      * @param event mouse input when the user clicks the Delete button
      */
     @FXML
-    private void delete_Appointment(MouseEvent event) {
+    private void delete_Appointment(MouseEvent event)
+    {
         Appointment selectedAppointment = table.getSelectionModel().getSelectedItem();
-        if (data.get_Appointment_List().isEmpty()) {
+        if (data.get_Appointment_List().isEmpty()) 
+        {
             errorLabel.setText("There are no appointments to delete");
             return;
         }
-        else if (selectedAppointment == null) {
+        else if (selectedAppointment == null) 
+        {
             errorLabel.setText("Please select an appointment");
             return;
         }
@@ -217,11 +234,12 @@ public class AppointmentsController extends MultiController {
     }
 
     /**
-     * Exits the program
+     * Exits the application
      * @param event mouse input when the user clicks the Log Out button
      */
     @FXML
-    private void logout(MouseEvent event) {
+    private void logout(MouseEvent event) 
+    {
         Platform.exit();
     }
 

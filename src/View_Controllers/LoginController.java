@@ -18,6 +18,9 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+/**
+ * Controls the login window
+ */
 public class LoginController extends MultiController {
 
     @FXML
@@ -41,7 +44,7 @@ public class LoginController extends MultiController {
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the MultiController class
      * @param url location used to resolve relative paths for the root object or null if the location is not known
      * @param rb resources used to localize the root object or null if the root object was not localized
      */
