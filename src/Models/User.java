@@ -5,21 +5,21 @@ package Models;
  */
 public class User {
 
-    private int user_id;
-    private String user_name;
-    private String user_password;
+    private int id;
+    private String username;
+    private String password;
 
     /**
      * Class constructor
      * @param id the user ID
-     * @param username the user_name
-     * @param password the user_password
+     * @param username the username
+     * @param password the password
      */
     public User(int id, String username, String password)
     {
-        this.user_id = id;
-        this.user_name = username;
-        this.user_password = password;
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
     /**
@@ -33,7 +33,7 @@ public class User {
      */
     public int getUser_ID()
     {
-        return user_id;
+        return id;
     }
 
     /**
@@ -42,42 +42,42 @@ public class User {
      */
     public void setUser_ID(int id) 
     {
-        this.user_id = id;
+        this.id = id;
     }
 
     /**
-     * Gets the user_name
-     * @return the user_name
+     * Gets the username
+     * @return the username
      */
-    public String getUser_name() 
+    public String getUsername() 
     {
-        return user_name;
+        return username;
     }
 
     /**
      * Sets the users name
-     * @param user_name the user_name
+     * @param username the username
      */
-    public void setUser_name(String user_name) 
+    public void setUsername(String username) 
     {
-        this.user_name = user_name;
+        this.username = username;
     }
 
     /**
-     * Gets the user_password
-     * @return the user_password
+     * Gets the password
+     * @return the password
      */
-    public String getUser_password()
+    public String getPassword()
     {
-        return user_password;
+        return password;
     }
 
     /**
      * Sets the users password
-     * @param user_password the user password
+     * @param password the user password
      */
-    public void setUser_password(String user_password) 
+    public void setPassword(String password) 
     {
-        this.user_password = user_password;
+        this.password = password;
     }
 }

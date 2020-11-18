@@ -16,14 +16,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="251.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="251.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label layoutX="62.0" layoutY="30.0" text="Reports">
+        <Label layoutX="145.0" layoutY="20.0" text="Reports">
             <font>
-                <Font size="18.0" />
+                <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-      <RadioButton fx:id="typeMonthRadio" layoutX="161.0" layoutY="40.0" mnemonicParsing="false" selected="true" text="Appointments by Type &amp; Month">
+      <RadioButton fx:id="typeMonthRadio" layoutX="339.0" layoutY="32.0" mnemonicParsing="false" selected="true" text="Appointments by Type &amp; Month">
          <toggleGroup>
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
@@ -31,7 +31,7 @@
             <Font size="12.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="contactRadio" layoutX="363.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#loadContactReport" text="Contact Schedules">
+      <RadioButton fx:id="contactRadio" layoutX="581.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#loadContactReport" text="Contact Schedules">
          <font>
             <Font size="12.0" />
          </font>
@@ -39,7 +39,7 @@
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="locationRadio" layoutX="497.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#loadLocationReport" text="Appointments by Location">
+      <RadioButton fx:id="locationRadio" layoutX="754.0" layoutY="32.0" mnemonicParsing="false" onMouseClicked="#loadLocationReport" text="Appointments by Location">
          <font>
             <Font size="12.0" />
          </font>
@@ -47,42 +47,42 @@
             <ToggleGroup fx:id="radio" />
          </toggleGroup>
       </RadioButton>
-      <Button fx:id="appointmentsButton" layoutX="563.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
+      <Button fx:id="appointmentsButton" layoutX="32.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="typeTable" layoutX="50.0" layoutY="71.0" prefHeight="120.0" prefWidth="294.0" style="-fx-font-size: 11;">
+      <TableView fx:id="typeTable" layoutX="483.0" layoutY="60.0" prefHeight="134.0" prefWidth="442.0" style="-fx-font-size: 11;">
          <columns>
-            <TableColumn fx:id="typeTableColumn" prefWidth="180.0" style="-fx-alignment: CENTER;" text="Type">
+            <TableColumn fx:id="typeTableColumn" prefWidth="227.0" style="-fx-alignment: CENTER;" text="Type">
                <cellValueFactory>
                   <PropertyValueFactory property="type" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="typeAppointmentsColumn" minWidth="0.0" prefWidth="112.0" style="-fx-alignment: CENTER;" text="Appointments">
+            <TableColumn fx:id="typeAppointmentsColumn" minWidth="0.0" prefWidth="188.0" style="-fx-alignment: CENTER;" text="Appointments">
                <cellValueFactory>
                   <PropertyValueFactory property="count" />
                </cellValueFactory>
             </TableColumn>
          </columns>
       </TableView>
-      <TableView fx:id="monthTable" layoutX="356.0" layoutY="71.0" prefHeight="120.0" prefWidth="294.0" style="-fx-font-size: 11;">
+      <TableView fx:id="monthTable" layoutX="33.0" layoutY="60.0" prefHeight="134.0" prefWidth="442.0" style="-fx-font-size: 11;">
          <columns>
-            <TableColumn fx:id="typeMonthColumn" prefWidth="180.0" style="-fx-alignment: CENTER;" text="Month">
+            <TableColumn fx:id="typeMonthColumn" prefWidth="205.0" style="-fx-alignment: CENTER;" text="Month">
                <cellValueFactory>
                   <PropertyValueFactory property="month" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="typeMonthAppointmentsColumn" minWidth="0.0" prefWidth="112.0" style="-fx-alignment: CENTER;" text="Appointments">
+            <TableColumn fx:id="typeMonthAppointmentsColumn" minWidth="0.0" prefWidth="224.0" style="-fx-alignment: CENTER;" text="Appointments">
                <cellValueFactory>
                   <PropertyValueFactory property="count" />
                </cellValueFactory>
             </TableColumn>
          </columns>
       </TableView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" stroke="#241abb" strokeType="INSIDE" width="700.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" layoutY="234.0" stroke="#241abb" strokeType="INSIDE" width="700.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" stroke="#241abb" strokeType="INSIDE" width="965.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" layoutY="234.0" stroke="#241abb" strokeType="INSIDE" width="965.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="238.0" layoutY="1.0" stroke="#241abb" strokeType="INSIDE" width="17.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="238.0" layoutX="683.0" layoutY="6.0" stroke="#241abb" strokeType="INSIDE" width="17.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="238.0" layoutX="948.0" layoutY="7.0" stroke="#241abb" strokeType="INSIDE" width="17.0" />
     </children>
 </AnchorPane>

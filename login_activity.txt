@@ -48,3 +48,13 @@ Log in attempt by test at 14:10 on 11-16-2020 was Successful
 Log in attempt by test at 14:16 on 11-16-2020 was Successful
 Log in attempt by test at 14:17 on 11-16-2020 was Successful
 Log in attempt by test at 14:22 on 11-16-2020 was Successful
+Log in attempt by test at 15:52 on 11-17-2020 was Successful
+Log in attempt by test at 16:00 on 11-17-2020 was Successful
+Log in attempt by test at 16:03 on 11-17-2020 was Successful
+Log in attempt by test at 16:33 on 11-17-2020 was Successful
+Log in attempt by test at 16:34 on 11-17-2020 was Successful
+Log in attempt by test at 16:42 on 11-17-2020 was Unsuccessful
+Log in attempt by test at 16:42 on 11-17-2020 was Successful
+Log in attempt by test at 16:45 on 11-17-2020 was Successful
+Log in attempt by test at 16:46 on 11-17-2020 was Successful
+Log in attempt by test at 16:47 on 11-17-2020 was Successful

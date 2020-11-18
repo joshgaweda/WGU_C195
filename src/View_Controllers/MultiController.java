@@ -247,7 +247,7 @@ public abstract class MultiController implements Initializable
     /**
     *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
     */
-    interface TimePop 
+    @FunctionalInterface public interface TimePop 
     {
         void addAll(ComboBox<LocalTime> field, int t1, int t2, int t3, int t4, int t5, int t6, int t7, 
                 int t8, int t9, int t10, int t11, int t12, int t13, int t14, int t15, int t16, int t17, int t18, int t19,
@@ -269,13 +269,13 @@ public abstract class MultiController implements Initializable
             for (int h : hours)
                 field.getItems().add(LocalDateTime.of(LocalDate.now(),LocalTime.of(h,0)).toInstant(ZoneOffset.ofHours(0)).atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime());
         };
-        comboBox.addAll(startTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 17, 18, 19, 20, 21, 22, 23);
+        comboBox.addAll(startTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
         comboBox.addAll(endTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
 
         for (Customer c : data.get_Customer_List())
             customer.getItems().add(c.getCustomerID());
         for (User u : data.get_User_List())
-            user.getItems().add(u.getUser_name());
+            user.getItems().add(u.getUsername());
         for (Contact c : data.get_Contact_List())
             contact.getItems().add(c.getName());
     }
@@ -286,7 +286,7 @@ public abstract class MultiController implements Initializable
     protected void fillCustomerOptions() 
     {
         for (Division d : data.get_Division_List())
-            division.getItems().add(d.getDiv_name());
+            division.getItems().add(d.getName());
         for (Country c : data.get_Country_List())
             country.getItems().add(c.getName());
     }
@@ -320,8 +320,8 @@ public abstract class MultiController implements Initializable
     {
         ObservableList<String> updateOptions = FXCollections.observableArrayList();
         for (Division d : data.get_Division_List())
-            if (country.getValue().equals(d.getDiv_country()))
-                updateOptions.add(d.getDiv_name());
+            if (country.getValue().equals(d.getCountry()))
+                updateOptions.add(d.getName());
         division.setItems(updateOptions);
     }
 
@@ -333,14 +333,14 @@ public abstract class MultiController implements Initializable
     protected void updateCountry(ActionEvent event) 
     {
         for (Division d : data.get_Division_List())
-            if (d.getDiv_name().equals(division.getValue()))
-                country.setValue(d.getDiv_country());
+            if (d.getName().equals(division.getValue()))
+                country.setValue(d.getCountry());
     }
     
     /**
-    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and then converts them to an instant value
+    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and then converts them to an Instant value
     */
-    interface TimeConv 
+    @FunctionalInterface public interface TimeConv 
     {
         Instant toInstant(DatePicker date, ComboBox<LocalTime> time);
     }
@@ -431,7 +431,7 @@ public abstract class MultiController implements Initializable
 
         int userID = 0, contactID = 0;
         for (User u : data.get_User_List())
-            if (u.getUser_name().equals(user.getValue()))
+            if (u.getUsername().equals(user.getValue()))
                 userID = u.getUser_ID();
         for (Contact c : data.get_Contact_List())
             if (c.getName().equals(contact.getValue()))
@@ -487,7 +487,7 @@ public abstract class MultiController implements Initializable
 
         int divisionID = 0;
         for (Division d : data.get_Division_List())
-            if (d.getDiv_name().equals(division.getValue()))
+            if (d.getName().equals(division.getValue()))
                 divisionID = d.getDiv_ID();
 
         Customer customer = new Customer(Integer.parseInt(id.getText().trim()), name.getText().trim(), address.getText().trim(), postalCode.getText().trim(), phone.getText().trim(), division.getValue(), country.getValue(), divisionID);
@@ -501,18 +501,17 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Displays a confirmation prompt before deleting an item
-     * @param id the ID of the appointment or customer to be deleted
-     * @return a boolean value indicating whether the user wants to proceed
+     * Displays confirmation window before deleting item
+     * @param id of the custom/appointment being deleted
+     * @return boolean value of true if the user wants to proceed and false if not
      */
     protected boolean confirmationWindow(String id) 
     {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete");
         alert.setContentText("Are you sure you want to delete" + id + "?");
-        alert.setHeaderText(null);
         alert.setGraphic(null);
-
+        alert.setHeaderText(null);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) 
         {
