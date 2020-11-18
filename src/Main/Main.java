@@ -36,11 +36,11 @@ public class Main extends Application
     @Override
     public void start(Stage mainStage) throws Exception 
     {
-        DBQuery dbq = new DBQuery();
-        dbq.read_DB_Data();
+        DBQuery data = new DBQuery();
+        data.read_DB_Data();
         ResourceBundle rb = ResourceBundle.getBundle("Properties/language", Locale.getDefault());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View_Controllers/Login.fxml"));
-        View_Controllers.LoginController controller = new View_Controllers.LoginController(dbq);
+        View_Controllers.LoginController controller = new View_Controllers.LoginController(data);
         loader.setController(controller);
         loader.setResources(rb);
         Parent parent = loader.load();

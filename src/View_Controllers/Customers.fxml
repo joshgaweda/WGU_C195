@@ -14,80 +14,80 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="301.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="301.0" prefWidth="1065.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label layoutX="103.0" layoutY="35.0" text="Customers">
+        <Label layoutX="352.0" layoutY="28.0" text="Customers">
             <font>
-                <Font size="18.0" />
+                <Font name="System Bold" size="24.0" />
             </font>
         </Label>
-      <Button fx:id="appointmentsButton" layoutX="563.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
+      <Button fx:id="appointmentsButton" layoutX="50.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#loadAppointments" text="Appointments">
          <font>
             <Font size="12.0" />
          </font>
       </Button>
-        <Button fx:id="addButton" layoutX="499.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#add_Customer" text="Add">
+        <Button fx:id="addButton" layoutX="833.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#add_Customer" text="Add">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button fx:id="modifyButton" layoutX="543.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#modifyCustomer" text="Modify">
+        <Button fx:id="modifyButton" layoutX="888.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#modifyCustomer" text="Modify">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-        <Button fx:id="deleteButton" layoutX="601.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#delete_Customer" text="Delete">
+        <Button fx:id="deleteButton" layoutX="955.0" layoutY="33.0" mnemonicParsing="false" onMouseClicked="#delete_Customer" text="Delete">
             <font>
                 <Font size="12.0" />
             </font>
         </Button>
-        <TableView fx:id="table" layoutX="50.0" layoutY="71.0" onMouseClicked="#clearError" prefHeight="153.0" prefWidth="600.0" style="-fx-font-size: 11;">
+        <TableView fx:id="table" layoutX="50.0" layoutY="71.0" onMouseClicked="#clearError" prefHeight="153.0" prefWidth="968.0" style="-fx-font-size: 11;">
             <columns>
                 <TableColumn fx:id="customerIDColumn" prefWidth="26.0" style="-fx-alignment: CENTER;" text="ID">
                     <cellValueFactory>
                         <PropertyValueFactory property="customerID" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="nameColumn" prefWidth="98.0" style="-fx-alignment: CENTER;" text="Name">
+                <TableColumn fx:id="nameColumn" prefWidth="140.0" style="-fx-alignment: CENTER;" text="Name">
                     <cellValueFactory>
                         <PropertyValueFactory property="name" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="addressColumn" prefWidth="128.0" style="-fx-alignment: CENTER;" text="Address">
+                <TableColumn fx:id="addressColumn" prefWidth="210.0" style="-fx-alignment: CENTER;" text="Address">
                     <cellValueFactory>
                         <PropertyValueFactory property="address" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="postalCodeColumn" prefWidth="65.0" style="-fx-alignment: CENTER;" text="Postal Code">
+                <TableColumn fx:id="postalCodeColumn" prefWidth="106.0" style="-fx-alignment: CENTER;" text="Postal Code">
                     <cellValueFactory>
                         <PropertyValueFactory property="postalCode" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="phoneColumn" prefWidth="98.0" style="-fx-alignment: CENTER;" text="Phone">
+                <TableColumn fx:id="phoneColumn" prefWidth="140.0" style="-fx-alignment: CENTER;" text="Phone">
                     <cellValueFactory>
                         <PropertyValueFactory property="phone" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="divisionColumn" prefWidth="128.0" style="-fx-alignment: CENTER;" text="Division">
+                <TableColumn fx:id="divisionColumn" prefWidth="157.0" style="-fx-alignment: CENTER;" text="Division">
                     <cellValueFactory>
                         <PropertyValueFactory property="division" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="countryColumn" minWidth="9.0" prefWidth="55.0" style="-fx-alignment: CENTER;" text="Country">
+                <TableColumn fx:id="countryColumn" minWidth="9.0" prefWidth="188.0" style="-fx-alignment: CENTER;" text="Country">
                     <cellValueFactory>
                         <PropertyValueFactory property="country" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>
         </TableView>
-        <Label fx:id="errorLabel" layoutX="50.0" layoutY="240.0" text="Error">
+        <Label fx:id="errorLabel" layoutX="956.0" layoutY="242.0" text="Error">
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" stroke="#241abb" strokeType="INSIDE" width="700.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" layoutY="284.0" stroke="#241abb" strokeType="INSIDE" width="700.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" stroke="#241abb" strokeType="INSIDE" width="1065.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="17.0" layoutY="284.0" stroke="#241abb" strokeType="INSIDE" width="1065.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="289.0" layoutY="5.0" stroke="#241abb" strokeType="INSIDE" width="18.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="289.0" layoutX="682.0" layoutY="9.0" stroke="#241abb" strokeType="INSIDE" width="18.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#241abb" height="289.0" layoutX="1047.0" layoutY="3.0" stroke="#241abb" strokeType="INSIDE" width="18.0" />
     </children>
 </AnchorPane>

@@ -5,9 +5,9 @@ package Models;
  */
 public class Division {
 
-    private int div_id;
-    private String div_name;
-    private String div_country;
+    private int id;
+    private String name;
+    private String country;
 
     /**
      * Class constructor
@@ -17,9 +17,9 @@ public class Division {
      */
     public Division(int id, String name, String country) 
     {
-        this.div_id = id;
-        this.div_name = name;
-        this.div_country = country;
+        this.id = id;
+        this.name = name;
+        this.country = country;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Division {
      */
     public int getDiv_ID() 
     {
-        return div_id;
+        return id;
     }
 
     /**
@@ -37,43 +37,43 @@ public class Division {
      */
     public void setDiv_ID(int id) 
     {
-        this.div_id = id;
+        this.id = id;
     }
 
     /**
      * Gets the division name
      * @return the division name
      */
-    public String getDiv_name() 
+    public String getName() 
     {
-        return div_name;
+        return name;
     }
 
     /**
      * Sets the division division name
-     * @param div_name the division name
+     * @param name the division name
      */
-    public void setDiv_name(String div_name) 
+    public void setName(String name) 
     {
-        this.div_name = div_name;
+        this.name = name;
     }
 
     /**
      * Gets the associated country name
      * @return the associated country name
      */
-    public String getDiv_country() 
+    public String getCountry() 
     {
-        return div_country;
+        return country;
     }
 
     /**
      * Sets the associated country name
-     * @param div_country the associated country name
+     * @param country the associated country name
      */
-    public void setDiv_country(String div_country) 
+    public void setCountry(String country) 
     {
-        this.div_country = div_country;
+        this.country = country;
     }
 
      /**

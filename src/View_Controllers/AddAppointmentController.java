@@ -36,7 +36,7 @@ public class AddAppointmentController extends MultiController {
      */
     private void fillData() {
         id.setText(Integer.toString(generateAppointmentID()));
-        user.setValue(data.get_User().getUser_name());
+        user.setValue(data.get_User().getUsername());
     }
 
     /**

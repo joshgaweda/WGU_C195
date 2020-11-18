@@ -18,9 +18,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-/**
- * Controls the Log In screen
- */
 public class LoginController extends MultiController {
 
     @FXML
@@ -36,27 +33,30 @@ public class LoginController extends MultiController {
 
     /**
      * Class constructor
-     * @param data the complete set of data retrieved from the database by the DBQuery utility
+     * @param data the complete set of data retrieved from the db by DBQuery 
      */
-    public LoginController(DBQuery data) {
+    public LoginController(DBQuery data) 
+    {
         this.data = data;
     }
 
     /**
      * Initializes the controller class
-     * @param url The location used to resolve relative paths for the root object, or null if the location is not known
-     * @param rb The resources used to localize the root object, or null if the root object was not localized
+     * @param url location used to resolve relative paths for the root object or null if the location is not known
+     * @param rb resources used to localize the root object or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         this.rb = rb;
-        detectLocale();
+        findLocation();
     }
 
     /**
-     * Detects the language and time zone set by the user's operating system. Displays all text on the Log In screen in either English or French. Displays the user's current time zone
+     * Displays user's time zone in UTC and detect users language to be displayed throughout application.
      */
-    private void detectLocale() {
+    private void findLocation() 
+    {
         loginLabel.setText(rb.getString("login"));
         username.setPromptText(rb.getString("username"));
         password.setPromptText(rb.getString("password"));
@@ -65,35 +65,43 @@ public class LoginController extends MultiController {
     }
 
     /**
-     * Authenticates the login attempt against user login information stored in the database. If the attempt is successful, sets the current user, records the login attempt, and loads the Appointments screen. If the attempt is unsuccessful, displays an error message in the language set by the user's operating system, and records the login attempt
+     * Authenticate login attempt. If successful, sets the current user, records the login attempt, and loads the Appointments screen. If unsuccessful, will display 
+     * an error message in the language set by the user's OS, and record the login event in the log.
      * @param event mouse input when the user clicks the Log In button
      */
     @FXML
-    private void authenticate(MouseEvent event) {
-        for (User u : data.get_User_List()) {
-            if (u.getUser_name().equals(username.getText().trim()) && u.getUser_password().equals(password.getText().trim())) {
+    private void authenticate(MouseEvent event) 
+    {
+        for (User u : data.get_User_List()) 
+        {
+            if (u.getUsername().equals(username.getText().trim()) && u.getPassword().equals(password.getText().trim())) 
+            {
                 data.set_User(u);
-                recordLoginAttempt("Successful");
+                log("Successful");
                 loadAppointments(event);
                 return;
             }
         }
         errorLabel.setText(rb.getString("error"));
-        recordLoginAttempt("Unsuccessful");
+        log("Unsuccessful");
     }
 
     /**
-     * Records all user log-in attempts, date and time stamps, and whether each attempt was successful in a file named login_activity.txt. Appends each new record to the existing file and saves to the root folder of the program. Records dates and times in the time zone set by the user's operating system
-     * @param successful a String indicating whether the login attempt was successful or unsuccessful
+     * Records all log-in attempts along with the date/time, and whether the attempt was a success in a file named login_activity.txt. 
+     * Appends new records to the existing file and saves to the root folder of the application. Records time based on the time zone set by the users OS
+     * @param successful Indicates whether the login attempt was successful or not
      */
-    private void recordLoginAttempt(String successful) {
-        try {
-            FileWriter myWriter = new FileWriter("login_activity.txt", true);
-            myWriter.write("Log in attempt by " + username.getText().trim() + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " was " + successful + "\n");
-            myWriter.close();
+    private void log(String successful) 
+    {
+        try 
+        {
+            FileWriter writer = new FileWriter("login_activity.txt", true);
+            writer.write("Log in attempt by " + username.getText().trim() + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " was " + successful + "\n");
+            writer.close();
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (IOException exception) 
+        {
+            exception.printStackTrace();
         }
     }
 
