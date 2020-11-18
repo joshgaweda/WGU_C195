@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 /**
- * An abstract class that contains variables and methods used by various other controllers
+ * Contains variables and methods used by all other Controllers
  */
 public abstract class MultiController implements Initializable 
 {
@@ -80,6 +80,21 @@ public abstract class MultiController implements Initializable
     protected ComboBox<String> country;
 
     @FXML
+    protected Label errorLabel;
+
+    @FXML
+    protected ToggleGroup radio;
+
+    @FXML
+    protected RadioButton typeMonthRadio;
+
+    @FXML
+    protected RadioButton contactRadio;
+
+    @FXML
+    protected RadioButton locationRadio;
+    
+    @FXML
     protected Button loginButton;
 
     @FXML
@@ -106,27 +121,12 @@ public abstract class MultiController implements Initializable
     @FXML
     protected Button modifySaveButton;
 
-    @FXML
-    protected Label errorLabel;
-
-    @FXML
-    protected ToggleGroup radio;
-
-    @FXML
-    protected RadioButton typeMonthRadio;
-
-    @FXML
-    protected RadioButton contactRadio;
-
-    @FXML
-    protected RadioButton locationRadio;
-
     protected DBQuery data;
     protected Appointment selectedAppointment;
     protected Customer selectedCustomer;
     
     /**
-     * Loads the Appointments screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method. Sets a boolean value indicating whether this is the first time the screen is accessed after logging in
+     * Loads the Appointments screen. Sends fxml file address and an instance of the MultiController class to the loadScreen() function. 
      * @param event mouse input when the user clicks the Log In button or Appointments button
      */
     @FXML
@@ -134,11 +134,11 @@ public abstract class MultiController implements Initializable
     {
         try 
         {
-            boolean alert = false;
+            boolean used = false;
             if (event.getSource() == loginButton)
-                alert = true;
+                used = true;
             String fxml = "/View_Controllers/Appointments.fxml";
-            AppointmentsController controller = new AppointmentsController(data, alert);
+            AppointmentsController controller = new AppointmentsController(data, used);
             loadScreen(event, fxml, controller);
         }
         catch (Exception exception) 
@@ -148,7 +148,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Loads the Customers screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method
+     * Loads the Customers screen. Sends fxml file address and an instance of the MultiController class to the loadScreen() function.
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
@@ -167,7 +167,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Loads the TypeMonthReport screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method
+     * Loads the TypeMonthReport screen. Sends fxml file address and an instance of the MultiController class to the loadScreen() function.
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
@@ -186,7 +186,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Loads the ContactReport screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method
+     * Loads the ContactReport screen. Sends fxml file address and an instance of the MultiController class to the loadScreen() function.
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
@@ -205,7 +205,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Loads the LocationReport screen. Passes the address of the fxml file and a new instance of the controller class to the loadScreen() method
+     * Loads the LocationReport screen. Sends fxml file address and an instance of the MultiController class to the loadScreen() function.
      * @param event mouse input when the user clicks the Customers button
      */
     @FXML
@@ -224,10 +224,10 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Loads a new screen. Receives details about which screen to load from the classes above
+     * Loads a new screen.
      * @param event mouse input when the user clicks a button
      * @param fxml the address of the fxml document
-     * @param controller a new instance of the controller class
+     * @param controller a new instance of the MultiController class
      * @throws java.io.IOException .
      */
     protected void loadScreen(MouseEvent event, String fxml, MultiController controller) throws IOException
@@ -245,7 +245,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-    *Lambda expression to convert hours from int to LocalTime and provide them to a ComboBox field
+    *Lambda expression to convert hours from int to LocalTime and use in a ComboBox field
     */
     @FunctionalInterface public interface TimePop 
     {
@@ -258,7 +258,7 @@ public abstract class MultiController implements Initializable
      * Prefills the available options in the ComboBoxes on the Add Appointment and Modify Appointment screens
      * <p>Lambda Expression: Improves the code by avoiding repetition of the verbose syntax for converting an hour from an integer to a LocalTime</p>
      */
-    protected void fillAppointmentOptions() 
+    protected void popAppointmentOptions() 
     {
         location.getItems().addAll("Atlanta", "Boston", "Corvallis");
         type.getItems().addAll("Interview", "Meeting", "Planning", "Lunch");
@@ -283,7 +283,7 @@ public abstract class MultiController implements Initializable
     /**
      * Prefills the available options in the ComboBoxes on the Add Customer and Modify Customer screens
      */
-    protected void fillCustomerOptions() 
+    protected void popCustomerOptions() 
     {
         for (Division d : data.get_Division_List())
             division.getItems().add(d.getName());
@@ -312,7 +312,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Automatically updates the Division ComboBox values to only those associated with the selected Country
+     * Automatically updates the Division ComboBox with the value of the selected Country
      * @param event an action event when the user makes a selection from the Country ComboBox
      */
     @FXML
@@ -338,7 +338,8 @@ public abstract class MultiController implements Initializable
     }
     
     /**
-    * Lambda expression interface that retrieves values from DatePicker and ComboBox fields and then converts them to an Instant value
+    * Lambda expression interface that gets values from DatePicker and ComboBox fields and then converts them to an Instant value. 
+    * Used in saveAppointment()
     */
     @FunctionalInterface public interface TimeConv 
     {
@@ -346,8 +347,9 @@ public abstract class MultiController implements Initializable
     }
     
     /**
-     * Checks user input for each of the Add Appointment or Modify Appointment screen fields, displays an error message if any of the fields is empty, if the selected date and time are in the past or are outside of business hours (8am-10pm EST), or if a customer has overlapping appointments, then calls a DBQuery method to save the input data to the database, and returns to the appointments screen
-     * <p>Lambda Expression (Line 341): This lambda expression reduces code repetition and allows the verbose syntax needed to convert the values of the date and time fields to Instant values to be written only once</p>
+     * Checks user input for the Add Appointment or Modify Appointment screen fields.  Will display error if any of the fields are empty.
+     * If selected date and time are already past, already exist, or are outside of business hours (8am-10pm EST), then calls DBQuery to save the input data to the db
+     * <p>Lambda Expression (Line 344): Reduces code repetition and allows the syntax required for converting date/time fields to Instant values to be written once</p>
      * @param event mouse input when the user clicks the Save button
      */
     @FXML
@@ -448,7 +450,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-     * Checks user input for each of the Add Customer or Modify Customer screen fields, displays an error message if any of the fields is empty, calls a DBQuery method to save the input data to the database, and returns to the appointments screen
+     * Checks user input for Add Customer or Modify Customer screen fields.  Displays error if any of the fields are empty and calls DBQuery to save the input to the db.
      * @param event mouse input when the user clicks the Save button
      */
     @FXML
@@ -488,7 +490,7 @@ public abstract class MultiController implements Initializable
         int divisionID = 0;
         for (Division d : data.get_Division_List())
             if (d.getName().equals(division.getValue()))
-                divisionID = d.getDiv_ID();
+                divisionID = d.getDivId();
 
         Customer customer = new Customer(Integer.parseInt(id.getText().trim()), name.getText().trim(), address.getText().trim(), postalCode.getText().trim(), phone.getText().trim(), division.getValue(), country.getValue(), divisionID);
 

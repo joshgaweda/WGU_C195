@@ -9,24 +9,27 @@ import java.util.ResourceBundle;
 /**
  * Controls the Add Customer screen
  */
-public class AddCustomerController extends MultiController {
+public class AddCustomerController extends MultiController
+{
 
     /**
      * Class constructor
      * @param data the complete set of data retrieved from the database by the DBQuery utility
      */
-    public AddCustomerController(DBQuery data) {
+    public AddCustomerController(DBQuery data) 
+    {
         this.data = data;
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the MultiController class
      * @param url The location used to resolve relative paths for the root object, or null if the location is not known
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        fillCustomerOptions();
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        popCustomerOptions();
         fillData();
         errorLabel.setText("");
     }
@@ -34,7 +37,8 @@ public class AddCustomerController extends MultiController {
     /**
      * Prefills the ID field with the Customer ID of the selected customer
      */
-    private void fillData() {
+    private void fillData() 
+    {
         id.setText(Integer.toString(generateCustomerID()));
     }
 
@@ -42,10 +46,12 @@ public class AddCustomerController extends MultiController {
      * Generates a unique Customer ID. Finds the largest existing Customer ID and adds 1
      * @return a unique Customer ID
      */
-    private int generateCustomerID() {
+    private int generateCustomerID() 
+    {
         if (data.get_Customer_List().isEmpty())
             return 1;
-        else {
+        else 
+        {
             int i = 1;
             for (Customer a : data.get_Customer_List())
                 if (a.getCustomerID() > i)

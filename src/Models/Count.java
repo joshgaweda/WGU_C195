@@ -3,18 +3,20 @@ package Models;
 /**
  * Creates Count objects used to count the number of appointments associated with each type and month
  */
-public class Count {
+public class Count 
+{
 
     private String type;
     private int count;
     private String month;
 
     /**
-     * Class constructor used when counting appointments associated with each type
+     * Class constructor for counting appointments
      * @param type the appointment type
      * @param count the number of appointments associated with the Type
      */
-    public Count(String type, int count) {
+    public Count(String type, int count) 
+    {
         this.type = type;
         this.count = count;
         month = "";
@@ -25,7 +27,8 @@ public class Count {
      * @param count the number of appointments that begin in the month
      * @param month the month
      */
-    public Count(int count, String month) {
+    public Count(int count, String month)
+    {
         type = "";
         this.count = count;
         this.month = month;
@@ -35,7 +38,8 @@ public class Count {
      * Gets the appointment type
      * @return the appointment type
      */
-    public String getType() {
+    public String getType() 
+    {
         return type;
     }
 
@@ -43,7 +47,8 @@ public class Count {
      * Sets the appointment type
      * @param type the appointment type
      */
-    public void setType(String type) {
+    public void setType(String type)
+    {
         this.type = type;
     }
 
@@ -51,7 +56,8 @@ public class Count {
      * Gets the number of appointments associated with the type or month
      * @return the number of appointments associated with the type or month
      */
-    public int getCount() {
+    public int getCount()
+    {
         return count;
     }
 
@@ -59,7 +65,8 @@ public class Count {
      * Sets the number of appointments associated with the type or month
      * @param count the number of appointments associated with the type or month
      */
-    public void setCount(int count) {
+    public void setCount(int count) 
+    {
         this.count = count;
     }
 
@@ -67,7 +74,8 @@ public class Count {
      * Gets the month
      * @return the month
      */
-    public String getMonth() {
+    public String getMonth() 
+    {
         return month;
     }
 
@@ -75,7 +83,8 @@ public class Count {
      * Sets the month
      * @param month the month
      */
-    public void setMonth(String month) {
+    public void setMonth(String month)
+    {
         this.month = month;
     }
 

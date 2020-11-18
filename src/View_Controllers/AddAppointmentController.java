@@ -20,13 +20,13 @@ public class AddAppointmentController extends MultiController {
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the MultiController class
      * @param url The location used to resolve relative paths for the root object, or null if the location is not known
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fillAppointmentOptions();
+        popAppointmentOptions();
         fillData();
         errorLabel.setText("");
     }

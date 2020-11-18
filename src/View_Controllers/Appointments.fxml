@@ -108,12 +108,12 @@
                   <PropertyValueFactory property="startFormatted" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="endColumn" minWidth="9.0" prefWidth="138.0" style="-fx-alignment: CENTER;" text="End">
+            <TableColumn fx:id="endColumn" minWidth="9.0" prefWidth="116.0" style="-fx-alignment: CENTER;" text="End">
                <cellValueFactory>
                   <PropertyValueFactory property="endFormatted" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="customerIDColumn" minWidth="0.0" prefWidth="74.0" style="-fx-alignment: CENTER;" text="Customer ID">
+            <TableColumn fx:id="customerIDColumn" minWidth="0.0" prefWidth="97.0" style="-fx-alignment: CENTER;" text="Customer ID">
                <cellValueFactory>
                   <PropertyValueFactory property="customerID" />
                </cellValueFactory>

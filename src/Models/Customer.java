@@ -1,10 +1,10 @@
 package Models;
 
 /**
- * Creates Customer objects that represent the company's customers
+ * Creates Customer objects that represent customers in the db
  */
-public class Customer {
-
+public class Customer 
+{
     private int customerID;
     private String name;
     private String address;
@@ -14,6 +14,7 @@ public class Customer {
     private String country;
     private int divisionID;
 
+    
     /**
      * Class constructor
      * @param customerID the customer ID
@@ -25,6 +26,7 @@ public class Customer {
      * @param country the country where the customer lives
      * @param divisionID the division ID
      */
+    
     public Customer(int customerID, String name, String address, String postalCode, String phone, String division, String country, int divisionID) {
         this.customerID = customerID;
         this.name = name;
@@ -36,16 +38,20 @@ public class Customer {
         this.divisionID = divisionID;
     }
 
+    
     /**
      * Default class constructor
      */
-    public Customer() { }
+    public Customer() 
+    {}
 
+    
     /**
      * Gets the customer ID
      * @return the customer ID
      */
-    public int getCustomerID() {
+    public int getCustomerID() 
+    {
         return customerID;
     }
 
@@ -53,7 +59,8 @@ public class Customer {
      * Sets the customer ID
      * @param customerID the customer ID
      */
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(int customerID) 
+    {
         this.customerID = customerID;
     }
 
@@ -61,7 +68,8 @@ public class Customer {
      * Gets the customer's name
      * @return the customer's name
      */
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
 
@@ -69,7 +77,8 @@ public class Customer {
      * Sets the customer's name
      * @param name the customer's name
      */
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
@@ -77,7 +86,8 @@ public class Customer {
      * Gets the customer's address
      * @return the customer's address
      */
-    public String getAddress() {
+    public String getAddress()
+    {
         return address;
     }
 
@@ -85,7 +95,8 @@ public class Customer {
      * Sets the customer's address
      * @param address the customer's address
      */
-    public void setAddress(String address) {
+    public void setAddress(String address)
+    {
         this.address = address;
     }
 
@@ -93,7 +104,8 @@ public class Customer {
      * Gets the customer's postal code
      * @return the customer's postal code
      */
-    public String getPostalCode() {
+    public String getPostalCode() 
+    {
         return postalCode;
     }
 
@@ -101,7 +113,8 @@ public class Customer {
      * Sets the customer's postal code
      * @param postalCode the customer's postal code
      */
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(String postalCode)
+    {
         this.postalCode = postalCode;
     }
 
@@ -109,7 +122,8 @@ public class Customer {
      * Gets the customer's phone number
      * @return the customer's phone number
      */
-    public String getPhone() {
+    public String getPhone() 
+    {
         return phone;
     }
 
@@ -117,7 +131,8 @@ public class Customer {
      * Sets the customer's phone number
      * @param phone the customer's phone number
      */
-    public void setPhone(String phone) {
+    public void setPhone(String phone)
+    {
         this.phone = phone;
     }
 
@@ -125,7 +140,8 @@ public class Customer {
      * Gets the first level division where the customer lives
      * @return the first level division where the customer lives
      */
-    public String getDivision() {
+    public String getDivision() 
+    {
         return division;
     }
 
@@ -133,7 +149,8 @@ public class Customer {
      * Sets the first level division where the customer lives
      * @param division the first level division where the customer lives
      */
-    public void setDivision(String division) {
+    public void setDivision(String division) 
+    {
         this.division = division;
     }
 
@@ -141,7 +158,8 @@ public class Customer {
      * Gets the country where the customer lives
      * @return the country where the customer lives
      */
-    public String getCountry() {
+    public String getCountry() 
+    {
         return country;
     }
 
@@ -149,7 +167,8 @@ public class Customer {
      * Sets the country where the customer lives
      * @param country the country where the customer lives
      */
-    public void setCountry(String country) {
+    public void setCountry(String country) 
+    {
         this.country = country;
     }
 
@@ -157,7 +176,8 @@ public class Customer {
      * Gets the division ID
      * @return the division ID
      */
-    public int getDivisionID() {
+    public int getDivisionID() 
+    {
         return divisionID;
     }
 
@@ -165,7 +185,8 @@ public class Customer {
      * Sets the division ID
      * @param divisionID the division ID
      */
-    public void setDivisionID(int divisionID) {
+    public void setDivisionID(int divisionID) 
+    {
         this.divisionID = divisionID;
     }
 

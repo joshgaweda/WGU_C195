@@ -1,9 +1,10 @@
 package Models;
 
 /**
- * Creates Division objects that represent first level divisions where the customers live
+ * Creates Division objects that represent customer first level divisions in the db
  */
-public class Division {
+public class Division 
+{
 
     private int id;
     private String name;
@@ -23,10 +24,16 @@ public class Division {
     }
 
     /**
+     * Default class constructor
+     */
+    public Division() 
+    {}
+    
+    /**
      * Gets the division ID
      * @return the division ID
      */
-    public int getDiv_ID() 
+    public int getDivId() 
     {
         return id;
     }
@@ -35,7 +42,7 @@ public class Division {
      * Sets the division ID
      * @param id the division ID
      */
-    public void setDiv_ID(int id) 
+    public void setDivId(int id) 
     {
         this.id = id;
     }
@@ -75,9 +82,4 @@ public class Division {
     {
         this.country = country;
     }
-
-     /**
-     * Default class constructor
-     */
-    public Division() { }
 }

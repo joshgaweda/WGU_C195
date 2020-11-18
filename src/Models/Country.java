@@ -3,8 +3,8 @@ package Models;
 /**
  * Creates Country objects that represent the countries where the customers live
  */
-public class Country {
-
+public class Country 
+{
     private int id;
     private String name;
 
@@ -13,7 +13,8 @@ public class Country {
      * @param id the country ID
      * @param name the country name
      */
-    public Country(int id, String name) {
+    public Country(int id, String name) 
+    {
         this.id = id;
         this.name = name;
     }
@@ -21,37 +22,42 @@ public class Country {
     /**
      * Default class constructor
      */
-    public Country() { }
+    public Country() 
+    { }
 
     /**
      * Gets the country ID
      * @return the country ID
      */
-    public int getID() {
+    public int getID() 
+    {
         return id;
     }
 
     /**
-     * Sets the country ID
+     * Sets country ID
      * @param id the country ID
      */
-    public void setID(int id) {
+    public void setID(int id) 
+    {
         this.id = id;
     }
 
     /**
-     * Gets the country name
-     * @return the country name
+     * Gets country name
+     * @return country name
      */
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
 
     /**
-     * Sets the country name
-     * @param name the country name
+     * Sets  country name
+     * @param name country name
      */
-    public void setName(String name) {
+    public void setName(String name) 
+    {
         this.name = name;
     }
 
