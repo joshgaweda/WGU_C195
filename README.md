@@ -15,6 +15,6 @@
 
 To add an appointment click the add button and complete all forms.  Appointments must be schedule inside of bussiness hours (8am-10pm EST)
 
-The additional report that I included filters appointments by their location.
+The additional report I included filters appointments by their location.
 
 
