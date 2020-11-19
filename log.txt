@@ -1,0 +1,8 @@
+Log in attempt by test at 16:46 on 11-18-2020 was Successful
+Log in attempt by test at 16:48 on 11-18-2020 was Successful
+Log in attempt by test at 16:49 on 11-18-2020 was Successful
+Log in attempt by test at 16:54 on 11-18-2020 was Successful
+Log in attempt by test at 16:55 on 11-18-2020 was Successful
+Log in attempt by test at 17:00 on 11-18-2020 was Successful
+Log in attempt by test at 17:01 on 11-18-2020 was Successful
+Log in attempt by test at 17:03 on 11-18-2020 was Successful
