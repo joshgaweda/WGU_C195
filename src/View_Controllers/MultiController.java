@@ -247,7 +247,7 @@ public abstract class MultiController implements Initializable
     }
 
     /**
-    *Lambda expression to convert hours from int to LocalTime and use in a ComboBox field
+    *Lambda expression interface. Converts hours from int to LocalTime and use in a ComboBox field
     */
     @FunctionalInterface public interface TimePop 
     {
@@ -340,7 +340,7 @@ public abstract class MultiController implements Initializable
     }
     
     /**
-    * Lambda expression interface that gets values from DatePicker and ComboBox fields and then converts them to an Instant value. 
+    * Lambda expression interface. Gets values from DatePicker and ComboBox fields and then converts them to an Instant value. 
     * Used in saveAppointment()
     */
     @FunctionalInterface public interface TimeConv 
