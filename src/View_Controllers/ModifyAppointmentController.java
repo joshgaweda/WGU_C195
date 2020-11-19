@@ -15,8 +15,8 @@ public class ModifyAppointmentController extends MultiController {
 
     /**
      * Class constructor
-     * @param data the complete set of data retrieved from the database by the DBQuery utility
-     * @param selectedAppointment the appointment selected by the user that is to be modified
+     * @param data all data retrieved from the database by DBQuery
+     * @param selectedAppointment the appointment being modified 
      */
     public ModifyAppointmentController(DBQuery data, Appointment selectedAppointment) 
     {
@@ -38,7 +38,7 @@ public class ModifyAppointmentController extends MultiController {
     }
 
     /**
-     * Prefills the form with the data from the selected appointment. Displays in the time zone set by the user PC
+     * Prefills the form with the selected appointment. Displays in the time zone set by the user PC
      */
     private void fillData() 
     {

@@ -39,7 +39,7 @@ public class TypeMonthReportController extends MultiController
 
     /**
      * Class constructor
-     * @param data the complete set of data retrieved from the database by the DBQuery utility
+     * @param data all data retrieved from the database by DBQuery
      */
     public TypeMonthReportController(DBQuery data) 
     {
@@ -59,7 +59,7 @@ public class TypeMonthReportController extends MultiController
     }
 
     /**
-     * Generates the Type table view. Calculates the number of appointments for each type and populates the table with the information
+     * Generates the Type table view. Calculates the number of appointments for each type and populates the table with those values
      */
     private void generateTypeTable()
     {
@@ -84,7 +84,7 @@ public class TypeMonthReportController extends MultiController
     }
 
     /**
-     * Generates the Month table view. Calculates number of appointments for each month and populates the table with that information
+     * Generates the Month table view. Calculates number of appointments for each month and populates the table with those values
      */
     private void generateMonthTable() 
     {
