@@ -68,12 +68,13 @@ public class LoginController extends MultiController {
     }
 
     /**
-     * Authenticate login attempt. If successful, sets the current user, records the login attempt, and loads the Appointments screen. If unsuccessful, will display 
-     * an error message in the language set by the user's OS, and record the login event in the log.
+     * Check username and password. If credentials are correct the Appointments screen will load. 
+     * If incorrect credentials are used, will display 
+     * an error message in the language set by the user's OS
      * @param event mouse input when the user clicks the Log In button
      */
     @FXML
-    private void authenticate(MouseEvent event) 
+    private void checkCreds(MouseEvent event) 
     {
         for (User u : data.get_User_List()) 
         {
@@ -90,15 +91,15 @@ public class LoginController extends MultiController {
     }
 
     /**
-     * Records all log-in attempts along with the date/time, and whether the attempt was a success in a file named login_activity.txt. 
-     * Appends new records to the existing file and saves to the root folder of the application. Records time based on the time zone set by the users OS
+     * Records log-in attempts along with the date/time, and whether the attempt was successful in a file named log.txt. 
+     * Appends new records to the existing log file and saves to the application root folder with a time stamp.
      * @param successful Indicates whether the login attempt was successful or not
      */
     private void log(String successful) 
     {
         try 
         {
-            FileWriter writer = new FileWriter("login_activity.txt", true);
+            FileWriter writer = new FileWriter("log.txt", true);
             writer.write("Log in attempt by " + username.getText().trim() + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " was " + successful + "\n");
             writer.close();
         }
