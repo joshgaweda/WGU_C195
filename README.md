@@ -1,28 +1,20 @@
 # C195
-Create a README.txt file that includes the following information:
 
-•  GUI Based Desktop Scheduling Application
+•  GUI Based Scheduling Application
         Author: Joshua Gaweda
         email: jgaweda@wgu.edu
         application version: 0.1.0
                 11/25/2020
 
-•  IDE including version number (e.g., IntelliJ Community 2020.01), full JDK of version 11 used (e.g., Java SE 11.0.4), and JavaFX version compatible with JDK 11 (e.g. JavaFX-SDK-11.0.2)
-        IDE:  NetBeans 8.2
-        JDK:  JDK 1.8(8.0.22)
+•  IDE used was NetBeans 8.2 and JDK 1.8(8.0.22)
 
 
-•  Description of how to run program
+•  How to run:  Once you start the application executable and are at the login screen you may enter 'test' for the username and password to open the primary sheduling area of the application. 
 
-•  Description of the additional report of your choice you ran in part A3f
-            f.  Write code that generates accurate information in each of the following reports and will display the reports in the user interface:
+-To add a customer click the Customer button on the top right of the window and complete all the forms.
+
+To add an appointment click the add button and complete all forms.  Appointments must be schedule inside of bussiness hours (8am-10pm EST)
+
+The additional report that I included filters appointments by their location.
 
 
-            Note: You do not need to save and print the reports to a file or provide a screenshot.
-
-
-            •  the total number of customer appointments by type and month
-
-            •  a schedule for each contact in your organization that includes appointment ID, title, type and description, start date and time, end date and time, and customer ID
-
-            •  an additional report of your choice that is different from the two other required reports in this prompt and from the user log-in date and time stamp that will be tracked in part C
