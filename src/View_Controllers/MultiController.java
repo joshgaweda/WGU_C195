@@ -122,7 +122,9 @@ public abstract class MultiController implements Initializable
     protected Button modifySaveButton;
 
     protected DBQuery data;
+    
     protected Appointment selectedAppointment;
+    
     protected Customer selectedCustomer;
     
     /**

@@ -80,7 +80,7 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <Label fx:id="errorLabel" layoutX="956.0" layoutY="242.0" text="Error">
+        <Label fx:id="errorLabel" layoutX="833.0" layoutY="242.0" text="Error">
             <font>
                 <Font size="12.0" />
             </font>
