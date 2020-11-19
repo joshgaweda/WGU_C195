@@ -100,7 +100,7 @@ public class LoginController extends MultiController {
         try 
         {
             FileWriter writer = new FileWriter("log.txt", true);
-            writer.write("Log in attempt by " + username.getText().trim() + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " was " + successful + "\n");
+            writer.write("Log in attempt with username '" + username.getText().trim() + "'" + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " was " + successful + "\n");
             writer.close();
         }
         catch (IOException exception) 
