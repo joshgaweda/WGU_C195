@@ -13,8 +13,8 @@ public class ModifyCustomerController extends MultiController {
 
     /**
      * Class constructor
-     * @param data the complete set of data retrieved from the database by the DBQuery utility
-     * @param selectedCustomer the customer selected by the user that is to be modified
+     * @param data all data retrieved from the database by DBQuery
+     * @param selectedCustomer the user that is to be modified
      */
     public ModifyCustomerController(DBQuery data, Customer selectedCustomer) {
         this.data = data;
@@ -34,7 +34,7 @@ public class ModifyCustomerController extends MultiController {
     }
 
     /**
-     * Prefills the form fields with the corresponding data from the selected customer
+     * Prefills the forms with the selected customer
      */
     private void fillData() {
         id.setText(Integer.toString(selectedCustomer.getCustomerID()));
