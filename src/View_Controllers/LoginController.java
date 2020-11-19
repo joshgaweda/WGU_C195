@@ -91,7 +91,7 @@ public class LoginController extends MultiController {
     }
 
     /**
-     * Records log-in attempts along with the date/time, and whether the attempt was successful in a file named log.txt. 
+     * Records log-in attempts along with the date/time, and whether the attempt was successful in a file named login_activity.txt. 
      * Appends new records to the existing log file and saves to the application root folder with a time stamp.
      * @param successful Indicates whether the login attempt was successful or not
      */
@@ -99,7 +99,7 @@ public class LoginController extends MultiController {
     {
         try 
         {
-            FileWriter writer = new FileWriter("log.txt", true);
+            FileWriter writer = new FileWriter("login_activity.txt", true);
             writer.write("Log in attempt with username '" + username.getText().trim() + "'" + " on " + DateTimeFormatter.ofPattern("MM-dd-yyyy").format(LocalDateTime.now()) + " at " + DateTimeFormatter.ofPattern("HH:mm").format(LocalDateTime.now()) + " was " + successful + "\n");
             writer.close();
         }

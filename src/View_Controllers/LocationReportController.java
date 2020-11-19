@@ -18,76 +18,100 @@ import java.util.ResourceBundle;
 public class LocationReportController extends MultiController {
 
     @FXML
-    private TableView<Appointment> atlantaTable;
+    private TableView<Appointment> phoenixTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> atlantaIDColumn;
+    private TableColumn<Appointment, Integer> phoenixIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> atlantaTitleColumn;
+    private TableColumn<Appointment, String> phoenixTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> atlantaDescriptionColumn;
+    private TableColumn<Appointment, String> phoenixDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> atlantaTypeColumn;
+    private TableColumn<Appointment, String> phoenixTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> atlantaStartColumn;
+    private TableColumn<Appointment, String> phoenixStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> atlantaEndColumn;
+    private TableColumn<Appointment, String> phoenixEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> atlantaCustomerColumn;
+    private TableColumn<Appointment, Integer> phoenixCustomerColumn;
 
     @FXML
-    private TableView<Appointment> bostonTable;
+    private TableView<Appointment> whitePlainsTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> bostonIDColumn;
+    private TableColumn<Appointment, Integer> whitePlainsIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bostonTitleColumn;
+    private TableColumn<Appointment, String> whitePlainsTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bostonDescriptionColumn;
+    private TableColumn<Appointment, String> whitePlainsDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bostonTypeColumn;
+    private TableColumn<Appointment, String> whitePlainsTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bostonStartColumn;
+    private TableColumn<Appointment, String> whitePlainsStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> bostonEndColumn;
+    private TableColumn<Appointment, String> whitePlainsEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> bostonCustomerColumn;
+    private TableColumn<Appointment, Integer> whitePlainsCustomerColumn;
 
     @FXML
-    private TableView<Appointment> corvallisTable;
+    private TableView<Appointment> montrealTable;
 
     @FXML
-    private TableColumn<Appointment, Integer> corvallisIDColumn;
+    private TableColumn<Appointment, Integer> montrealIDColumn;
 
     @FXML
-    private TableColumn<Appointment, String> corvallisTitleColumn;
+    private TableColumn<Appointment, String> montrealTitleColumn;
 
     @FXML
-    private TableColumn<Appointment, String> corvallisDescriptionColumn;
+    private TableColumn<Appointment, String> montrealDescriptionColumn;
 
     @FXML
-    private TableColumn<Appointment, String> corvallisTypeColumn;
+    private TableColumn<Appointment, String> montrealTypeColumn;
 
     @FXML
-    private TableColumn<Appointment, String> corvallisStartColumn;
+    private TableColumn<Appointment, String> montrealStartColumn;
 
     @FXML
-    private TableColumn<Appointment, String> corvallisEndColumn;
+    private TableColumn<Appointment, String> montrealEndColumn;
 
     @FXML
-    private TableColumn<Appointment, Integer> corvallisCustomerColumn;
+    private TableColumn<Appointment, Integer> montrealCustomerColumn;
+    
+    @FXML
+    private TableView<Appointment> londonTable;
+
+    @FXML
+    private TableColumn<Appointment, Integer> londonIDColumn;
+
+    @FXML
+    private TableColumn<Appointment, String> londonTitleColumn;
+
+    @FXML
+    private TableColumn<Appointment, String> londonDescriptionColumn;
+
+    @FXML
+    private TableColumn<Appointment, String> londonTypeColumn;
+
+    @FXML
+    private TableColumn<Appointment, String> londonStartColumn;
+
+    @FXML
+    private TableColumn<Appointment, String> londonEndColumn;
+
+    @FXML
+    private TableColumn<Appointment, Integer> londonCustomerColumn;
 
     /**
      * Class constructor
@@ -103,46 +127,64 @@ public class LocationReportController extends MultiController {
      * @param rb The resources used to localize the root object, or null if the root object was not localized
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        generateAtlantaTable();
-        generateBostonTable();
-        generateCorvallisTable();
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        generatePhoenixTable();
+        generateWhitePlainsTable();
+        generateMontrealTable();
+        generateLondonTable();
     }
 
     /**
-     * Generates the Atlanta table view. Filters the schedule of appointments to include only those with a Location set to Atlanta, populates the table view with that data, then refreshes the table view
+     * Generates the Phoenix table view. Filters the schedule of appointments to include only those with a Location set to Phoenix
      */
-    private void generateAtlantaTable() {
+    private void generatePhoenixTable() 
+    {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Atlanta"))
+            if (a.getLocation().equals("Phoenix"))
                 filterAppointments.add(a);
-        atlantaTable.setItems(filterAppointments);
-        atlantaTable.refresh();
+        phoenixTable.setItems(filterAppointments);
+        phoenixTable.refresh();
     }
 
     /**
-     * Generates the Boston table view. Filters the schedule of appointments to include only those with a Location set to Boston, populates the table view with that data, then refreshes the table view
+     * Generates the WhitePlains table view. Filters the schedule of appointments to include only those with a Location set to WhitePlains
      */
-    private void generateBostonTable() {
+    private void generateWhitePlainsTable() 
+    {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Boston"))
+            if (a.getLocation().equals("White Plains"))
                 filterAppointments.add(a);
-        bostonTable.setItems(filterAppointments);
-        bostonTable.refresh();
+        whitePlainsTable.setItems(filterAppointments);
+        whitePlainsTable.refresh();
     }
 
     /**
-     * Generates the Corvallis table view. Filters the schedule of appointments to include only those with a Location set to Corvallis, populates the table view with that data, then refreshes the table view
+     * Generates the Montreal table view. Filters the schedule of appointments to include only those with a Location set to Montreal
      */
-    private void generateCorvallisTable() {
+    private void generateMontrealTable() 
+    {
         ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
         for (Appointment a : data.get_Appointment_List())
-            if (a.getLocation().equals("Corvallis"))
+            if (a.getLocation().equals("Montreal"))
                 filterAppointments.add(a);
-        corvallisTable.setItems(filterAppointments);
-        corvallisTable.refresh();
+        montrealTable.setItems(filterAppointments);
+        montrealTable.refresh();
     }
 
+    /**
+     * Generates the London table view. Filters the schedule of appointments to include only those with a Location set to London
+     */
+    private void generateLondonTable() 
+    {
+        ObservableList<Appointment> filterAppointments = FXCollections.observableArrayList();
+        for (Appointment a : data.get_Appointment_List())
+            if (a.getLocation().equals("London"))
+                filterAppointments.add(a);
+        londonTable.setItems(filterAppointments);
+        londonTable.refresh();
+    }
+    
 }
