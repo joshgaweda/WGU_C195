@@ -268,8 +268,8 @@ public abstract class MultiController implements Initializable
         TimePop comboBox = (field, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24) -> {
             ObservableList<Integer> hours = FXCollections.observableArrayList();
             hours.addAll(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24);
-            for (int h : hours)
-                field.getItems().add(LocalDateTime.of(LocalDate.now(),LocalTime.of(h,0)).toInstant(ZoneOffset.ofHours(0)).atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime());
+            for (int t : hours)
+                field.getItems().add(t,LocalTime.of(t,0));//.toInstant(ZoneOffset.ofHours(0)).atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime());
         };
         comboBox.addAll(startTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
         comboBox.addAll(endTime, 0, 1, 2, 3 ,4 ,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);

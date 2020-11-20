@@ -3,6 +3,7 @@ package Models;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
@@ -58,10 +59,10 @@ public class Appointment
         this.customerID = customerID;
         this.userID = userID;
         this.contactID = contactID;
-        startTime = start.atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime();
-        endTime = end.atZone(ZoneId.of(TimeZone.getDefault().getID())).toLocalTime();
-        startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.of(TimeZone.getDefault().getID())));
-        endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.of(TimeZone.getDefault().getID())));
+        startTime = start.atZone(ZoneId.systemDefault()).toLocalTime();
+        endTime = end.atZone(ZoneId.systemDefault()).toLocalTime();
+        startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.systemDefault()));
+        endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.systemDefault()));
     }
 
     /**
@@ -160,7 +161,7 @@ public class Appointment
      */
     public Instant getStart()
     {
-        return start;
+        return start.atOffset(ZoneOffset.UTC).toInstant();
     }
 
     /**
@@ -169,7 +170,7 @@ public class Appointment
      */
     public void setStart(Instant start) 
     {
-        this.start = start;
+        this.start = start.atOffset(ZoneOffset.UTC).toInstant();
     }
 
     /**
@@ -178,7 +179,7 @@ public class Appointment
      */
     public Instant getEnd() 
     {
-        return end;
+        return end.atOffset(ZoneOffset.UTC).toInstant();
     }
 
     /**
@@ -187,7 +188,7 @@ public class Appointment
      */
     public void setEnd(Instant end) 
     {
-        this.end = end;
+        this.end = end.atOffset(ZoneOffset.UTC).toInstant();
     }
 
     /**
@@ -293,9 +294,9 @@ public class Appointment
      * Sets the start time in the time zone set by the user's operating system
      * @param startTime the start time in the time zone set by the user's operating system
      */
-    public void setStartTime(LocalTime startTime) 
+    public void setStartTime(Instant startTime) 
     {
-        this.startTime = startTime;
+        this.startTime = LocalTime.from(start.atZone(ZoneId.systemDefault()));
     }
 
     /**
@@ -322,7 +323,7 @@ public class Appointment
      */
     public String getStartFormatted() 
     {
-        startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.of(TimeZone.getDefault().getID())));
+        startFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(start.atZone(ZoneId.systemDefault()));
         return startFormatted;
     }
 
@@ -341,7 +342,7 @@ public class Appointment
      */
     public String getEndFormatted() 
     {
-        endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.of(TimeZone.getDefault().getID())));
+        endFormatted = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm").format(end.atZone(ZoneId.systemDefault()));
         return endFormatted;
     }
 

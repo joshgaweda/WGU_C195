@@ -5,6 +5,7 @@ import Models.*;
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 import javafx.collections.FXCollections;
@@ -79,8 +80,8 @@ public class DBQuery
                 String description = rs.getString("description").trim();
                 String location = rs.getString("location").trim();
                 String type = rs.getString("type").trim();
-                Instant start = rs.getTimestamp("start").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
-                Instant end = rs.getTimestamp("end").toLocalDateTime().toInstant(ZoneOffset.ofHours(0));
+                Instant start = rs.getTimestamp("start").toLocalDateTime().atZone(ZoneId.systemDefault()).toInstant();
+                Instant end = rs.getTimestamp("end").toLocalDateTime().atZone(ZoneId.systemDefault()).toInstant();
                 String username = rs.getString("user_name").trim();
                 String contact = rs.getString("contact_name").trim();
                 int customerID = Integer.parseInt(rs.getString("customer_id").trim());
@@ -112,8 +113,8 @@ public class DBQuery
             ps.setString(3, appointment.getDescription());
             ps.setString(4, appointment.getLocation());
             ps.setString(5, appointment.getType());
-            ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getStart(), ZoneOffset.ofHours(0))));
-            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.ofInstant(appointment.getEnd(), ZoneOffset.ofHours(0))));
+            ps.setTimestamp(6, Timestamp.from(appointment.getStart())); 
+            ps.setTimestamp(7, Timestamp.from(appointment.getEnd()));
             ps.setTimestamp(8, Timestamp.valueOf(LocalDateTime.now()));
             ps.setString(9, get_User().getUsername());
             ps.setTimestamp(10, Timestamp.valueOf(LocalDateTime.now()));
