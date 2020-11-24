@@ -1,10 +1,6 @@
 # C195
 
 •  GUI Based Scheduling Application
-        Author: Joshua Gaweda
-        email: jgaweda@wgu.edu
-        application version: 1.0.0
-                11/25/2020
 
 •  IDE used was NetBeans 8.2 and JDK 1.8(8.0.22)
 
